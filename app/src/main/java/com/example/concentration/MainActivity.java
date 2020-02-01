@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         button04.setOnClickListener(onButtonsClick);
     }
 
-
-
     public void updateViewFromModel() {
         for (int i = 0; i < numberOfCards; i++) {
             Card card = game.cards[i];
@@ -72,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     functionForPressedButton(button04, card);
                     break;
             }
-
         }
     }
 
