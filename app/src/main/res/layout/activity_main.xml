@@ -4,8 +4,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@color/colorPrimaryDark"
     tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="90dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="256dp"
+        android:backgroundTint="@color/buttonsColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button09"
+        android:layout_width="90dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="256dp"
+        android:backgroundTint="@color/buttonsColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="90dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="104dp"
+        android:backgroundTint="@color/buttonsColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button05"
+        android:layout_width="90dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="136dp"
+        android:backgroundTint="@color/buttonsColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button07"
+        android:layout_width="90dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="104dp"
+        android:backgroundTint="@color/buttonsColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button08"
+        android:layout_width="90dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/buttonsColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="90dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/buttonsColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button06"
+        android:layout_width="90dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="136dp"
+        android:backgroundTint="@color/buttonsColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button03"
@@ -60,11 +156,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="Flips: 0"
+        android:text="@string/flips"
         android:textColor="@color/buttonsColor"
-        android:textSize="40dp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@mipmap/settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/flipsCountView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
