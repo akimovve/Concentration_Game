@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,10 +18,13 @@ import com.example.concentration.SettingsMenu.Settings;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
     int numberOfCards = 12;
+    int delay = 3500;
     Concentration game = new Concentration((numberOfCards + 1) / 2);
     private TextView flipsCountView;
     private Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10, button11, button12;
@@ -47,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
         button11 = findViewById(R.id.button11);
         button12 = findViewById(R.id.button12);
 
+        appearanceOfCards();
+        for (int i = 0; i < numberOfCards; i++) {
+            openRandomCard(delay);
+            delay += 1000;
+        }
+
+
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
 
         OnClickListener onButtonsClick = new OnClickListener() {
             @SuppressLint("SetTextI18n")
@@ -102,26 +111,62 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void appearanceOfCards() {
+        Button but = button01;
+        int secDelay = 500;
+        for (int i = 0; i < numberOfCards; i++) {
+            switch (i) {
+                case 0: { but = button01; break; }
+                case 1: { but = button02; break; }
+                case 2: { but = button03; break; }
+                case 3: { but = button04; break; }
+                case 4: { but = button05; break; }
+                case 5: { but = button06; break; }
+                case 6: { but = button07; break; }
+                case 7: { but = button08; break; }
+                case 8: { but = button09; break; }
+                case 9: { but = button10; break; }
+                case 10: { but = button11; break; }
+                case 11: { but = button12; break; }
+            }
+            final Button finalBut = but;
+            but.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finalBut.setVisibility(View.VISIBLE);
+                }
+            }, secDelay);
+            secDelay += 200;
+        }
+    }
+
+    public void openRandomCard(int secDelay) {
+        final int randomButtonIndex = (int)(Math.random()*(numberOfCards - 1));
+        Button but = returnButton(randomButtonIndex);
+        final Button finalBut = but;
+        but.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finalBut.setTextSize(60);
+                finalBut.setText(emoji(game.cards.get(randomButtonIndex)));
+                finalBut.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
+            }
+        }, secDelay);
+        secDelay += 400;
+        but.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finalBut.setTextSize(60);
+                finalBut.setText("");
+                finalBut.getBackground().setColorFilter(getResources().getColor(R.color.buttonsColor), PorterDuff.Mode.MULTIPLY);
+            }
+        }, secDelay);
+    }
+
     public void updateViewFromModel() {
         for (int i = 0; i < numberOfCards; i++) {
             Card card = game.cards.get(i);
-            Button chosenButton = button01;
-            switch (i) {
-                case 0: { chosenButton = button01; break; }
-                case 1: { chosenButton = button02; break; }
-                case 2: { chosenButton = button03; break; }
-                case 3: { chosenButton = button04; break; }
-                case 4: { chosenButton = button05; break; }
-                case 5: { chosenButton = button06; break; }
-                case 6: { chosenButton = button07; break; }
-                case 7: { chosenButton = button08; break; }
-                case 8: { chosenButton = button09; break; }
-                case 9: { chosenButton = button10; break; }
-                case 10: { chosenButton = button11; break; }
-                case 11: { chosenButton = button12; break; }
-
-            }
-            functionForPressedButton(chosenButton, card);
+            functionForPressedButton(returnButton(i), card);
         }
     }
 
@@ -140,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
     String[] emojiChoices = {"🎃","👻","🎉","🐶","🐧","🏀","🏎","💎","🥑","🦇","🍎","🍏","🐧","🦅","🌏","☃️","🏁","💵","📱"};
 
@@ -163,5 +207,25 @@ public class MainActivity extends AppCompatActivity {
         } else {
             return "?";
         }
+    }
+
+    public Button returnButton(int index) {
+        Button chosenButton = button01;
+        switch (index) {
+            case 0: { chosenButton = button01; break; }
+            case 1: { chosenButton = button02; break; }
+            case 2: { chosenButton = button03; break; }
+            case 3: { chosenButton = button04; break; }
+            case 4: { chosenButton = button05; break; }
+            case 5: { chosenButton = button06; break; }
+            case 6: { chosenButton = button07; break; }
+            case 7: { chosenButton = button08; break; }
+            case 8: { chosenButton = button09; break; }
+            case 9: { chosenButton = button10; break; }
+            case 10: { chosenButton = button11; break; }
+            case 11: { chosenButton = button12; break; }
+
+        }
+        return chosenButton;
     }
 }

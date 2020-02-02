@@ -5,4 +5,5 @@
     <string name="new_game">NEW GAME</string>
     <string name="resume_buttontitle">RESUME</string>
     <string name="pause_buttontitle">PAUSE</string>
+    <string name="default_delay">400</string>
 </resources>
