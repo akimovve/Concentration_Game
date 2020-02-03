@@ -13,23 +13,25 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.concentration.Info.Information;
 import com.example.concentration.Menu.Menu;
 import com.example.concentration.SettingsMenu.Settings;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    int numberOfCards = 12;
-    int delay = 3500;
+    final int numberOfCards = 16;
+    int flipCount = 0;
+
+    Information info = new Information();
+
     Concentration game = new Concentration((numberOfCards + 1) / 2);
     private TextView flipsCountView;
-    private Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10, button11, button12;
-    private Button settingsButton;
-    int flipCount = 0;
+    private Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10, button11, button12, button13, button14, button15, button16;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         flipsCountView = findViewById(R.id.flipsCountView);
-        settingsButton = findViewById(R.id.settingsButton);
+        Button settingsButton = findViewById(R.id.settingsButton);
         button01 = findViewById(R.id.button01);
         button02 = findViewById(R.id.button02);
         button03 = findViewById(R.id.button03);
@@ -50,13 +52,15 @@ public class MainActivity extends AppCompatActivity {
         button10 = findViewById(R.id.button10);
         button11 = findViewById(R.id.button11);
         button12 = findViewById(R.id.button12);
+        button13 = findViewById(R.id.button13);
+        button14 = findViewById(R.id.button14);
+        button15 = findViewById(R.id.button15);
+        button16 = findViewById(R.id.button16);
 
-        appearanceOfCards();
-        for (int i = 0; i < numberOfCards; i++) {
-            openRandomCard(delay);
-            delay += 1000;
-        }
-
+        setClick(false,1);
+        appearanceOfCards(); // cards start to appear one by one
+        openCardsRandomly(); // cards start opening randomly
+        setClick(true, info.delayBetweenAppearance);
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,22 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 if (game.checkForAllMatchedCards()) {
                     flipCount += 1;
                     flipsCountView.setText("Flips: " + flipCount);
-                    int cardNumber = 0;
-                    switch (v.getId()) {
-                        case R.id.button01: { cardNumber = 0; break; }
-                        case R.id.button02: { cardNumber = 1; break; }
-                        case R.id.button03: { cardNumber = 2; break; }
-                        case R.id.button04: { cardNumber = 3; break; }
-                        case R.id.button05: { cardNumber = 4; break; }
-                        case R.id.button06: { cardNumber = 5; break; }
-                        case R.id.button07: { cardNumber = 6; break; }
-                        case R.id.button08: { cardNumber = 7; break; }
-                        case R.id.button09: { cardNumber = 8; break; }
-                        case R.id.button10: { cardNumber = 9; break; }
-                        case R.id.button11: { cardNumber = 10; break; }
-                        case R.id.button12: { cardNumber = 11; break; }
-                    }
-                    game.chooseCard(cardNumber);
+                    game.chooseCard(getIndex(v.getId()));
                     updateViewFromModel();
                 } else {
                     Intent intent = new Intent(MainActivity.this, Menu.class);
@@ -96,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+
         button01.setOnClickListener(onButtonsClick);
         button02.setOnClickListener(onButtonsClick);
         button03.setOnClickListener(onButtonsClick);
@@ -108,65 +98,111 @@ public class MainActivity extends AppCompatActivity {
         button10.setOnClickListener(onButtonsClick);
         button11.setOnClickListener(onButtonsClick);
         button12.setOnClickListener(onButtonsClick);
-
+        button13.setOnClickListener(onButtonsClick);
+        button14.setOnClickListener(onButtonsClick);
+        button15.setOnClickListener(onButtonsClick);
+        button16.setOnClickListener(onButtonsClick);
     }
 
     public void appearanceOfCards() {
-        Button but = button01;
-        int secDelay = 500;
         for (int i = 0; i < numberOfCards; i++) {
-            switch (i) {
-                case 0: { but = button01; break; }
-                case 1: { but = button02; break; }
-                case 2: { but = button03; break; }
-                case 3: { but = button04; break; }
-                case 4: { but = button05; break; }
-                case 5: { but = button06; break; }
-                case 6: { but = button07; break; }
-                case 7: { but = button08; break; }
-                case 8: { but = button09; break; }
-                case 9: { but = button10; break; }
-                case 10: { but = button11; break; }
-                case 11: { but = button12; break; }
-            }
-            final Button finalBut = but;
+            final Button but = pressedButton(i);
             but.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    finalBut.setVisibility(View.VISIBLE);
+                    but.setVisibility(View.VISIBLE);
                 }
-            }, secDelay);
-            secDelay += 200;
+            }, info.delayBetweenAppearance);
+            info.delayBetweenAppearance += 200;
         }
     }
 
-    public void openRandomCard(int secDelay) {
-        final int randomButtonIndex = (int)(Math.random()*(numberOfCards - 1));
-        Button but = returnButton(randomButtonIndex);
-        final Button finalBut = but;
-        but.postDelayed(new Runnable() {
+    public void openCardsRandomly() {
+        @SuppressLint("UseSparseArrays")
+        Map<Integer, Boolean> checkTheRepeat = new HashMap<>();
+        for (int k = 0; k < numberOfCards; k++) {
+            checkTheRepeat.put(k, false);
+        }
+
+        ArrayList<Integer> randArrOfFirstIndexes = new ArrayList<>();
+        for (int i = 0; i < numberOfCards; i++) {
+            randArrOfFirstIndexes.add(i);
+        }
+        Collections.shuffle(randArrOfFirstIndexes);
+
+
+        int[] secondRandArray = new int[(int) (Math.random() * (numberOfCards / 3) + (numberOfCards / 3))]; // random size [(numberOfCards / 4);(numberOfCards/2)]
+        for (int i = 0; i < secondRandArray.length; i++) {
+            int randomIndexOfFirstArray;
+            do {
+                randomIndexOfFirstArray = (int) (Math.random() * numberOfCards);
+
+            } while (checkTheRepeat.get(randomIndexOfFirstArray));
+            secondRandArray[i] = randArrOfFirstIndexes.get(randomIndexOfFirstArray);
+            checkTheRepeat.put(randomIndexOfFirstArray,true);
+        }
+
+        for (int value : secondRandArray) {
+            randArrOfFirstIndexes.add(value);
+        }
+        Collections.shuffle(randArrOfFirstIndexes);
+        outPutRandomly(randArrOfFirstIndexes);
+    }
+
+    public void outPutRandomly(ArrayList<Integer> array) {
+        for (int rIndex = 0; rIndex < array.size(); rIndex++) {
+
+            final int randomButtonIndex = array.get(rIndex);
+            final Button finalBut = pressedButton(randomButtonIndex);
+            finalBut.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finalBut.setTextSize(60);
+                    finalBut.setText(emoji(game.cards.get(randomButtonIndex)));
+                    finalBut.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
+                }
+            }, info.delayBetweenAppearance);
+            info.delayBetweenAppearance += 400; // time the card is being opened
+            finalBut.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finalBut.setTextSize(60);
+                    finalBut.setText("");
+                    finalBut.getBackground().setColorFilter(getResources().getColor(R.color.buttonsColor), PorterDuff.Mode.MULTIPLY);
+                }
+            }, info.delayBetweenAppearance);
+            info.delayBetweenAppearance += 500; // time between closed and next opened card
+        }
+    }
+
+    public void setClick(final Boolean fl, int delay) {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                finalBut.setTextSize(60);
-                finalBut.setText(emoji(game.cards.get(randomButtonIndex)));
-                finalBut.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
+                button01.setClickable(fl);
+                button02.setClickable(fl);
+                button03.setClickable(fl);
+                button04.setClickable(fl);
+                button05.setClickable(fl);
+                button06.setClickable(fl);
+                button07.setClickable(fl);
+                button08.setClickable(fl);
+                button09.setClickable(fl);
+                button10.setClickable(fl);
+                button11.setClickable(fl);
+                button12.setClickable(fl);
+                button13.setClickable(fl);
+                button14.setClickable(fl);
+                button15.setClickable(fl);
+                button16.setClickable(fl);
             }
-        }, secDelay);
-        secDelay += 400;
-        but.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finalBut.setTextSize(60);
-                finalBut.setText("");
-                finalBut.getBackground().setColorFilter(getResources().getColor(R.color.buttonsColor), PorterDuff.Mode.MULTIPLY);
-            }
-        }, secDelay);
+        },delay);
     }
 
     public void updateViewFromModel() {
         for (int i = 0; i < numberOfCards; i++) {
             Card card = game.cards.get(i);
-            functionForPressedButton(returnButton(i), card);
+            functionForPressedButton(pressedButton(i), card);
         }
     }
 
@@ -209,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public Button returnButton(int index) {
+    public Button pressedButton(int index) {
         Button chosenButton = button01;
         switch (index) {
             case 0: { chosenButton = button01; break; }
@@ -224,8 +260,17 @@ public class MainActivity extends AppCompatActivity {
             case 9: { chosenButton = button10; break; }
             case 10: { chosenButton = button11; break; }
             case 11: { chosenButton = button12; break; }
+            case 12: { chosenButton = button13; break; }
+            case 13: { chosenButton = button14; break; }
+            case 14: { chosenButton = button15; break; }
+            case 15: { chosenButton = button16; break; }
 
         }
         return chosenButton;
+    }
+
+    @SuppressLint("ResourceType")
+    public int getIndex(int index) {
+        return index-2131296290;
     }
 }

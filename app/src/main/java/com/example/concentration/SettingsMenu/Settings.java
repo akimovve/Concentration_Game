@@ -16,8 +16,6 @@ import com.example.concentration.R;
 public class Settings extends AppCompatActivity {
 
     Button resumeButton, newGameButton;
-    TextView delayTextView;
-    SeekBar delayOfShowSlider;
 
 
     @Override
@@ -27,22 +25,6 @@ public class Settings extends AppCompatActivity {
 
         resumeButton = findViewById(R.id.resumeButton);
         newGameButton = findViewById(R.id.newGameButton);
-        delayTextView = findViewById(R.id.delayTextView);
-        delayOfShowSlider = findViewById(R.id.delayOfShowSlider);
-
-        delayOfShowSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                delayTextView.setText(String.valueOf(progress));
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override

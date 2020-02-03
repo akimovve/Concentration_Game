@@ -9,6 +9,20 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/resumeButton"
+        android:layout_width="205dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="208dp"
+        android:background="@color/buttonsColor"
+        android:fontFamily="@font/pixel_font"
+        android:text="@string/resume_buttontitle"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
         android:id="@+id/newGameButton"
         android:layout_width="205dp"
         android:layout_height="70dp"
@@ -20,24 +34,10 @@
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resumeButton"
         app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/resumeButton"
-        android:layout_width="205dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="136dp"
-        android:background="@color/buttonsColor"
-        android:fontFamily="@font/pixel_font"
-        android:text="@string/resume_buttontitle"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
@@ -51,41 +51,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <SeekBar
-        android:id="@+id/delayOfShowSlider"
-        android:layout_width="159dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimaryDark"
-        android:max="1000"
-        android:min="100"
-
-        android:progress="400"
-        android:progressTint="@color/buttonsColor"
-        android:thumbTint="@color/buttonsColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.408"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGameButton"
-        app:layout_constraintVertical_bias="0.01" />
-
-    <TextView
-        android:id="@+id/delayTextView"
-        android:layout_width="106dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/pixel_font"
-        android:gravity="center"
-        android:text="@string/default_delay"
-        android:textColor="@color/buttonsColor"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/delayOfShowSlider"
-        app:layout_constraintTop_toBottomOf="@+id/newGameButton"
-        app:layout_constraintVertical_bias="0.007" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
