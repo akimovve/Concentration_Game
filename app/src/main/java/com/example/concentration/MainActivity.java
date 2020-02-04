@@ -70,16 +70,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         OnClickListener onButtonsClick = new OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                if (game.checkForAllMatchedCards()) {
-                    flipCount += 1;
-                    flipsCountView.setText("Flips: " + flipCount);
-                    game.chooseCard(getIndex(v.getId()));
-                    updateViewFromModel();
-                } else {
+                flipCount += 1;
+                flipsCountView.setText("Flips: " + flipCount);
+                game.chooseCard(getIndex(v.getId()));
+                updateViewFromModel();
+                if (!game.checkForAllMatchedCards()) {
                     Intent intent = new Intent(MainActivity.this, Menu.class);
                     startActivity(intent);
                 }
