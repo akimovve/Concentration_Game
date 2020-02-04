@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/levelUpColor"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/levelPassedTextView"
+        android:layout_width="match_parent"
+        android:layout_height="389dp"
+        android:fontFamily="@font/pixel_font"
+        android:gravity="center"
+        android:text="Level passed!"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="46sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="101dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/restartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="@font/pixel_font"
+            android:minWidth="100dip"
+            android:text="Restart"
+            android:textColor="@color/levelUpColor"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="@font/pixel_font"
+            android:minWidth="100dip"
+            android:text="Next"
+            android:textColor="@color/levelUpColor"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

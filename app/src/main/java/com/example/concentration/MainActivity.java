@@ -3,6 +3,7 @@ package com.example.concentration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -10,10 +11,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.concentration.Info.Information;
+import com.example.concentration.Levels.LevelUp;
 import com.example.concentration.Menu.Menu;
 import com.example.concentration.SettingsMenu.Settings;
 
@@ -24,7 +28,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    final int numberOfCards = 16;
+    final int numberOfCards = 12;
     int flipCount = 0;
 
     Information info = new Information();
@@ -52,15 +56,18 @@ public class MainActivity extends AppCompatActivity {
         button10 = findViewById(R.id.button10);
         button11 = findViewById(R.id.button11);
         button12 = findViewById(R.id.button12);
-        button13 = findViewById(R.id.button13);
+        /*button13 = findViewById(R.id.button13);
         button14 = findViewById(R.id.button14);
         button15 = findViewById(R.id.button15);
         button16 = findViewById(R.id.button16);
 
+         */
+
+
         setClick(false,1);
         appearanceOfCards(); // cards start to appear one by one
         openCardsRandomly(); // cards start opening randomly
-        setClick(true, info.delayBetweenAppearance);
+        setClick(true, info.delayForFirstAppearance);
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +87,10 @@ public class MainActivity extends AppCompatActivity {
                 game.chooseCard(getIndex(v.getId()));
                 updateViewFromModel();
                 if (!game.checkForAllMatchedCards()) {
-                    Intent intent = new Intent(MainActivity.this, Menu.class);
+
+                    Intent intent = new Intent(MainActivity.this, LevelUp.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 }
             }
         };
@@ -98,10 +107,12 @@ public class MainActivity extends AppCompatActivity {
         button10.setOnClickListener(onButtonsClick);
         button11.setOnClickListener(onButtonsClick);
         button12.setOnClickListener(onButtonsClick);
-        button13.setOnClickListener(onButtonsClick);
+        /*button13.setOnClickListener(onButtonsClick);
         button14.setOnClickListener(onButtonsClick);
         button15.setOnClickListener(onButtonsClick);
         button16.setOnClickListener(onButtonsClick);
+
+         */
     }
 
     public void appearanceOfCards() {
@@ -112,8 +123,8 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     but.setVisibility(View.VISIBLE);
                 }
-            }, info.delayBetweenAppearance);
-            info.delayBetweenAppearance += 200;
+            }, info.delayForFirstAppearance);
+            info.delayForFirstAppearance += info.delayBetweenAppearance;
         }
     }
 
@@ -129,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
             randArrOfFirstIndexes.add(i);
         }
         Collections.shuffle(randArrOfFirstIndexes);
-
 
         int[] secondRandArray = new int[(int) (Math.random() * (numberOfCards / 3) + (numberOfCards / 3))]; // random size [(numberOfCards / 4);(numberOfCards/2)]
         for (int i = 0; i < secondRandArray.length; i++) {
@@ -151,27 +161,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void outPutRandomly(ArrayList<Integer> array) {
         for (int rIndex = 0; rIndex < array.size(); rIndex++) {
-
             final int randomButtonIndex = array.get(rIndex);
             final Button finalBut = pressedButton(randomButtonIndex);
+            finalBut.setTextSize(60);
             finalBut.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    finalBut.setTextSize(60);
                     finalBut.setText(emoji(game.cards.get(randomButtonIndex)));
                     finalBut.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
                 }
-            }, info.delayBetweenAppearance);
-            info.delayBetweenAppearance += 400; // time the card is being opened
+            }, info.delayForFirstAppearance);
+            info.delayForFirstAppearance += info.timeCardIsOpen; // time the card is being opened
             finalBut.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    finalBut.setTextSize(60);
                     finalBut.setText("");
                     finalBut.getBackground().setColorFilter(getResources().getColor(R.color.buttonsColor), PorterDuff.Mode.MULTIPLY);
                 }
-            }, info.delayBetweenAppearance);
-            info.delayBetweenAppearance += 500; // time between closed and next opened card
+            }, info.delayForFirstAppearance);
+            info.delayForFirstAppearance += info.timeCardIsClose; // time between closed and next opened card
         }
     }
 
@@ -191,10 +199,12 @@ public class MainActivity extends AppCompatActivity {
                 button10.setClickable(fl);
                 button11.setClickable(fl);
                 button12.setClickable(fl);
-                button13.setClickable(fl);
+                /*button13.setClickable(fl);
                 button14.setClickable(fl);
                 button15.setClickable(fl);
                 button16.setClickable(fl);
+
+                 */
             }
         },delay);
     }
@@ -222,7 +232,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    String[] emojiChoices = {"🎃","👻","🎉","🐶","🐧","🏀","🏎","💎","🥑","🦇","🍎","🍏","🐧","🦅","🌏","☃️","🏁","💵","📱"};
+    String[] emojiChoices = {"🤡","👾","🦁","🐿","🔥","🌘","🍕","⚽️","🥁","🚕","🛩","📸","🎁","🍏","🍄","🌵","🐢","👑","🧞","👻","🧤","🎓","🐵","🐶","🐲","🍓","🧁","🏆","🎰"};
+
 
     @SuppressLint("UseSparseArrays")
     Map<Integer, String> emoji = new HashMap<>();
@@ -260,10 +271,12 @@ public class MainActivity extends AppCompatActivity {
             case 9: { chosenButton = button10; break; }
             case 10: { chosenButton = button11; break; }
             case 11: { chosenButton = button12; break; }
-            case 12: { chosenButton = button13; break; }
+            /*case 12: { chosenButton = button13; break; }
             case 13: { chosenButton = button14; break; }
             case 14: { chosenButton = button15; break; }
             case 15: { chosenButton = button16; break; }
+
+             */
 
         }
         return chosenButton;

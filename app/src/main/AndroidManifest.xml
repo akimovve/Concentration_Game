@@ -18,7 +18,12 @@
         </activity>
         <activity android:name=".MainActivity">
         </activity>
+
         <activity android:name=".SettingsMenu.Settings">
+        </activity>
+
+        <activity android:name=".Levels.LevelUp">
+           <!-- android:theme="@style/Theme.MyTransparent"-->
         </activity>
 
         <meta-data
