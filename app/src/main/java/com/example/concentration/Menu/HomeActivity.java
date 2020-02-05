@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.concentration.GamePlayActivity;
 import com.example.concentration.R;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -24,22 +26,28 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
 
+
         rewardsButton = findViewById(R.id.rewardsButton);
         gameModeButton = findViewById(R.id.gameModeButton);
         tableOfRecordsButton = findViewById(R.id.tableOfRecordsButton);
         settingsButton = findViewById(R.id.settingsButton);
 
+        OnClickListener onClickListener = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
+            }
+        };
+        rewardsButton.setOnClickListener(onClickListener);
+        tableOfRecordsButton.setOnClickListener(onClickListener);
+        settingsButton.setOnClickListener(onClickListener);
         gameModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialogModeSelector();
             }
         });
-
-
     }
-
-
 
     private void showDialogModeSelector() {
         final Dialog dialog = new Dialog(this);
@@ -64,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Nothing yet...
-                Toast.makeText(getApplicationContext(), "Nothing yet...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
