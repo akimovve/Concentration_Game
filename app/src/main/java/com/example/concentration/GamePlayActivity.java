@@ -3,7 +3,6 @@ package com.example.concentration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -11,38 +10,49 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.concentration.Info.Information;
-import com.example.concentration.Levels.LevelUp;
-import com.example.concentration.Menu.Menu;
-import com.example.concentration.SettingsMenu.Settings;
+import com.example.concentration.Info.Constants;
+import com.example.concentration.Levels.LevelUpActivity;
+import com.example.concentration.Menu.StartActivity;
+import com.example.concentration.SettingsMenu.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class GamePlayActivity extends AppCompatActivity {
 
     final int numberOfCards = 12;
     int flipCount = 0;
+    int maxLevel = 5;
 
-    Information info = new Information();
+    Constants constants = new Constants();
+    int connect = 0;
+    boolean flag = true;
+
 
     Concentration game = new Concentration((numberOfCards + 1) / 2);
-    private TextView flipsCountView;
+    private TextView flipsCountView, levelTextView;
     private Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10, button11, button12, button13, button14, button15, button16;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.gameplay_layout);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            connect = bundle.getInt("whichLevel");
+            flag = bundle.getBoolean("levelUp");
+        }
+
 
         flipsCountView = findViewById(R.id.flipsCountView);
+        levelTextView  = findViewById(R.id.levelTextView);
         Button settingsButton = findViewById(R.id.settingsButton);
         button01 = findViewById(R.id.button01);
         button02 = findViewById(R.id.button02);
@@ -62,17 +72,21 @@ public class MainActivity extends AppCompatActivity {
         button16 = findViewById(R.id.button16);
 
          */
+        final int levelNumber = Constants.getLevelNumber(flag);
+        levelTextView.setText("Level " + levelNumber);
 
 
-        setClick(false,1);
+
+
+        setClick(false,1); // time for becoming cards not clickable
         appearanceOfCards(); // cards start to appear one by one
         openCardsRandomly(); // cards start opening randomly
-        setClick(true, info.delayForFirstAppearance);
+        setClick(true, constants.delayForFirstAppearance + connect); // delay of start of the game
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Settings.class);
+                Intent intent = new Intent(GamePlayActivity.this, SettingsActivity.class);
                 startActivity(intent);
             }
         });
@@ -86,11 +100,16 @@ public class MainActivity extends AppCompatActivity {
                 flipsCountView.setText("Flips: " + flipCount);
                 game.chooseCard(getIndex(v.getId()));
                 updateViewFromModel();
-                if (!game.checkForAllMatchedCards()) {
 
-                    Intent intent = new Intent(MainActivity.this, LevelUp.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+                if (!game.checkForAllMatchedCards()) {
+                    if (levelNumber < maxLevel) {
+                        Intent intent = new Intent(GamePlayActivity.this, LevelUpActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+                    } else {
+                        Intent intent = new Intent(GamePlayActivity.this, StartActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         };
@@ -111,8 +130,7 @@ public class MainActivity extends AppCompatActivity {
         button14.setOnClickListener(onButtonsClick);
         button15.setOnClickListener(onButtonsClick);
         button16.setOnClickListener(onButtonsClick);
-
-         */
+        */
     }
 
     public void appearanceOfCards() {
@@ -123,8 +141,8 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     but.setVisibility(View.VISIBLE);
                 }
-            }, info.delayForFirstAppearance);
-            info.delayForFirstAppearance += info.delayBetweenAppearance;
+            }, constants.delayForFirstAppearance);
+            constants.delayForFirstAppearance += constants.delayBetweenAppearance;
         }
     }
 
@@ -170,16 +188,16 @@ public class MainActivity extends AppCompatActivity {
                     finalBut.setText(emoji(game.cards.get(randomButtonIndex)));
                     finalBut.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
                 }
-            }, info.delayForFirstAppearance);
-            info.delayForFirstAppearance += info.timeCardIsOpen; // time the card is being opened
+            }, constants.delayForFirstAppearance + 100); // default. DO NOT TOUCH!
+            constants.delayForFirstAppearance += constants.timeCardIsOpen - connect; // time the card is being opened
             finalBut.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     finalBut.setText("");
                     finalBut.getBackground().setColorFilter(getResources().getColor(R.color.buttonsColor), PorterDuff.Mode.MULTIPLY);
                 }
-            }, info.delayForFirstAppearance);
-            info.delayForFirstAppearance += info.timeCardIsClose; // time between closed and next opened card
+            }, constants.delayForFirstAppearance + 100); // default. DO NOT TOUCH!
+            constants.delayForFirstAppearance += constants.timeCardIsClose - connect; // time between closed and next opened card
         }
     }
 

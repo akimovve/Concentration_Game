@@ -13,7 +13,7 @@
         android:layout_height="389dp"
         android:fontFamily="@font/pixel_font"
         android:gravity="center"
-        android:text="Level passed!"
+        android:text="@string/level_passed"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="46sp" />
 
@@ -24,25 +24,27 @@
 
         <Button
             android:id="@+id/restartButton"
+            style="?attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
             android:fontFamily="@font/pixel_font"
             android:minWidth="100dip"
-            android:text="Restart"
+            android:text="@string/restart"
             android:textColor="@color/levelUpColor"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/nextButton"
+            style="?attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
             android:fontFamily="@font/pixel_font"
             android:minWidth="100dip"
-            android:text="Next"
+            android:text="@string/next"
             android:textColor="@color/levelUpColor"
             android:textSize="30sp" />
 

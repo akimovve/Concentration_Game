@@ -6,4 +6,8 @@
     <string name="resume_buttontitle">RESUME</string>
     <string name="pause_buttontitle">PAUSE</string>
     <string name="default_delay">400</string>
+    <string name="level_passed">Level passed!</string>
+    <string name="restart">Restart</string>
+    <string name="next">Next</string>
+    <string name="level">Level</string>
 </resources>

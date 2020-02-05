@@ -4,24 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.concentration.MainActivity;
+import com.example.concentration.Info.Variables;
+import com.example.concentration.GamePlayActivity;
 import com.example.concentration.R;
 
-public class Settings extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     Button resumeButton, newGameButton;
-
+    Variables var;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.pause_layout);
 
         resumeButton = findViewById(R.id.resumeButton);
         newGameButton = findViewById(R.id.newGameButton);
@@ -29,7 +27,9 @@ public class Settings extends AppCompatActivity {
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Settings.this, MainActivity.class);
+                var = new Variables(false);
+                Intent intent = new Intent(SettingsActivity.this, GamePlayActivity.class);
+                intent.putExtra("levelUp",false);
                 startActivity(intent);
             }
         });

@@ -7,6 +7,7 @@ class Concentration {
 
     ArrayList<Card> cards = new ArrayList<>();
 
+
     private int indexOfOneAndOnlyFaceUpCard = -1;
 
     Concentration(int numberOfPairsOfCards) {
