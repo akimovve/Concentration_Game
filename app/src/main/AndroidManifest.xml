@@ -9,21 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Menu.StartActivity">
+        <activity android:name=".Menu.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".GamePlayActivity">
         </activity>
 
-        <activity android:name=".SettingsMenu.SettingsActivity">
+        <activity android:name=".Menu.PauseActivity">
+
         </activity>
 
         <activity android:name=".Levels.LevelUpActivity">
-           <!-- android:theme="@style/Theme.MyTransparent"-->
         </activity>
 
         <meta-data

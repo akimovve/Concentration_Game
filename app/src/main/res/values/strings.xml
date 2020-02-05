@@ -10,4 +10,13 @@
     <string name="restart">Restart</string>
     <string name="next">Next</string>
     <string name="level">Level</string>
+    <string name="con">Con</string>
+    <string name="cen">cen</string>
+    <string name="trat">trat</string>
+    <string name="ion">ion</string>
+    <string name="choose_the_game_mode">Choose the game mode</string>
+    <string name="competition">Competition</string>
+    <string name="single_play">Single play</string>
+    <string name="game_mode">Game mode</string>
+    <string name="copyright_2020_akimovve">©copyright 2020.akimovve</string>
 </resources>

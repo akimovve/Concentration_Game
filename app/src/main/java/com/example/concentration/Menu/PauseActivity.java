@@ -1,4 +1,4 @@
-package com.example.concentration.SettingsMenu;
+package com.example.concentration.Menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import com.example.concentration.Info.Variables;
 import com.example.concentration.GamePlayActivity;
 import com.example.concentration.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class PauseActivity extends AppCompatActivity {
 
     Button resumeButton, newGameButton;
     Variables var;
@@ -28,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 var = new Variables(false);
-                Intent intent = new Intent(SettingsActivity.this, GamePlayActivity.class);
+                Intent intent = new Intent(PauseActivity.this, GamePlayActivity.class);
                 intent.putExtra("levelUp",false);
                 startActivity(intent);
             }
@@ -40,8 +40,5 @@ public class SettingsActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
     }
 }

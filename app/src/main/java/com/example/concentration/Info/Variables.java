@@ -15,7 +15,7 @@ public class Variables {
     private static int getUniqueChange() {
         if (flag) {
             changeable += change;
-            change--;
+            change-=10;
         } else {
             changeable = 0;
             change = 100;

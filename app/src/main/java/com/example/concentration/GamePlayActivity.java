@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.example.concentration.Info.Constants;
 import com.example.concentration.Levels.LevelUpActivity;
-import com.example.concentration.Menu.StartActivity;
-import com.example.concentration.SettingsMenu.SettingsActivity;
+import com.example.concentration.Menu.HomeActivity;
+import com.example.concentration.Menu.PauseActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,18 +54,18 @@ public class GamePlayActivity extends AppCompatActivity {
         flipsCountView = findViewById(R.id.flipsCountView);
         levelTextView  = findViewById(R.id.levelTextView);
         Button settingsButton = findViewById(R.id.settingsButton);
-        button01 = findViewById(R.id.button01);
-        button02 = findViewById(R.id.button02);
-        button03 = findViewById(R.id.button03);
-        button04 = findViewById(R.id.button04);
-        button05 = findViewById(R.id.button05);
-        button06 = findViewById(R.id.button06);
-        button07 = findViewById(R.id.button07);
-        button08 = findViewById(R.id.button08);
-        button09 = findViewById(R.id.button09);
-        button10 = findViewById(R.id.button10);
-        button11 = findViewById(R.id.button11);
-        button12 = findViewById(R.id.button12);
+        button01 = findViewById(R.id.button_01);
+        button02 = findViewById(R.id.button_02);
+        button03 = findViewById(R.id.button_03);
+        button04 = findViewById(R.id.button_04);
+        button05 = findViewById(R.id.button_05);
+        button06 = findViewById(R.id.button_06);
+        button07 = findViewById(R.id.button_07);
+        button08 = findViewById(R.id.button_08);
+        button09 = findViewById(R.id.button_09);
+        button10 = findViewById(R.id.button_10);
+        button11 = findViewById(R.id.button_11);
+        button12 = findViewById(R.id.button_12);
         /*button13 = findViewById(R.id.button13);
         button14 = findViewById(R.id.button14);
         button15 = findViewById(R.id.button15);
@@ -86,7 +86,7 @@ public class GamePlayActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GamePlayActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(GamePlayActivity.this, PauseActivity.class);
                 startActivity(intent);
             }
         });
@@ -107,7 +107,7 @@ public class GamePlayActivity extends AppCompatActivity {
                         startActivity(intent);
                         overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                     } else {
-                        Intent intent = new Intent(GamePlayActivity.this, StartActivity.class);
+                        Intent intent = new Intent(GamePlayActivity.this, HomeActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -301,7 +301,5 @@ public class GamePlayActivity extends AppCompatActivity {
     }
 
     @SuppressLint("ResourceType")
-    public int getIndex(int index) {
-        return index-2131296290;
-    }
+    public int getIndex(int index) { return index-2131296294; }
 }
