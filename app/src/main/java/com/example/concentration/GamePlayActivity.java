@@ -144,12 +144,12 @@ public class GamePlayActivity extends AppCompatActivity {
 
     public void openCardsRandomly() {
         @SuppressLint("UseSparseArrays")
-        Map<Integer, Boolean> checkTheRepeat = new HashMap<>();
+        Map<Integer,Boolean> checkTheRepeat = new HashMap<>();
         for (int k = 0; k < numberOfButtons; k++) {
-            checkTheRepeat.put(k, false);
+            checkTheRepeat.put(k, false); // all buttons haven't opened yet => false
         }
 
-        ArrayList<Integer> randArrOfFirstIndexes = new ArrayList<>();
+        ArrayList<Integer> randArrOfFirstIndexes = new ArrayList<>(); // array of random sequence of cards' indexes
         for (int i = 0; i < numberOfButtons; i++) {
             randArrOfFirstIndexes.add(i);
         }
@@ -160,7 +160,6 @@ public class GamePlayActivity extends AppCompatActivity {
             int randomIndexOfFirstArray;
             do {
                 randomIndexOfFirstArray = (int) (Math.random() * numberOfButtons);
-
             } while (checkTheRepeat.get(randomIndexOfFirstArray));
             secondRandArray[i] = randArrOfFirstIndexes.get(randomIndexOfFirstArray);
             checkTheRepeat.put(randomIndexOfFirstArray,true);
@@ -170,6 +169,20 @@ public class GamePlayActivity extends AppCompatActivity {
             randArrOfFirstIndexes.add(value);
         }
         Collections.shuffle(randArrOfFirstIndexes);
+
+        int index = 0;
+        do {
+            if (randArrOfFirstIndexes.get(index).equals(randArrOfFirstIndexes.get(index + 1))) {
+                int random;
+                do {
+                    random = (int) (Math.random() * randArrOfFirstIndexes.size());
+                } while (random == index || random == index + 1);
+                Integer temp = randArrOfFirstIndexes.get(index + 1);
+                randArrOfFirstIndexes.add(index + 1, randArrOfFirstIndexes.get(random));
+                randArrOfFirstIndexes.add(random, temp);
+            }
+            index++;
+        } while (index < randArrOfFirstIndexes.size() - 1);
         outPutRandomly(randArrOfFirstIndexes);
     }
 
@@ -181,19 +194,19 @@ public class GamePlayActivity extends AppCompatActivity {
             finalBut.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    finalBut.setText(emoji(game.cards.get(randomButtonIndex)));
+                    finalBut.setText(emoji(game.cards.get(randomButtonIndex))); // opened
                     finalBut.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
                 }
-            }, constants.delayForFirstAppearance + 100); // default. DO NOT TOUCH!
-            constants.delayForFirstAppearance += constants.timeCardIsOpen - connect; // time the card is being opened
+            }, constants.delayForFirstAppearance-connect); // default. DO NOT TOUCH!
+            constants.delayForFirstAppearance += constants.timeCardIsClose; // time the card is being opened
             finalBut.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    finalBut.setText("");
+                    finalBut.setText(""); // closed
                     finalBut.getBackground().setColorFilter(getResources().getColor(R.color.buttonsColor), PorterDuff.Mode.MULTIPLY);
                 }
-            }, constants.delayForFirstAppearance + 100); // default. DO NOT TOUCH!
-            constants.delayForFirstAppearance += constants.timeCardIsClose - connect; // time between closed and next opened card
+            }, constants.delayForFirstAppearance); // default. DO NOT TOUCH!
+            constants.delayForFirstAppearance += constants.timeCardIsOpen; // time between closed and next opened card
         }
     }
 
