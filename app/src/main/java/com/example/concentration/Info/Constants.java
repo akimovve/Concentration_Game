@@ -3,9 +3,9 @@ package com.example.concentration.Info;
 public class Constants {
     private static int levelNumber = 0;
     private static int numberOfBut = 0;
-    public int delayForFirstAppearance = 250;
-    public int delayBetweenAppearance = 70;
-    public int timeCardIsOpen = 200;
+    public int delayForFirstAppearance = 350;
+    public int delayBetweenAppearance = 80;
+    public int timeCardIsOpen = 240;
     public int timeCardIsClose = 150;
 
     public static int getNumberOFButtons(boolean flag) {

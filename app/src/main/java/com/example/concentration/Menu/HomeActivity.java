@@ -20,7 +20,7 @@ import java.util.Objects;
 public class HomeActivity extends AppCompatActivity {
 
     boolean isHomeButtonPressed = false;
-    Button rewardsButton, gameModeButton, tableOfRecordsButton, settingsButton;
+    Button rewardsButton, gameModeButton, tableOfRecordsButton, settingsButton, mainPlayButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         gameModeButton = findViewById(R.id.gameModeButton);
         tableOfRecordsButton = findViewById(R.id.tableOfRecordsButton);
         settingsButton = findViewById(R.id.pauseButton);
+        mainPlayButton = findViewById(R.id.mainPlayButton);
 
         OnClickListener onClickListener = new OnClickListener() {
             @Override
@@ -44,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         rewardsButton.setOnClickListener(onClickListener);
         tableOfRecordsButton.setOnClickListener(onClickListener);
         settingsButton.setOnClickListener(onClickListener);
+        mainPlayButton.setOnClickListener(onClickListener);
         gameModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -3,14 +3,18 @@ package com.example.concentration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.concentration.Info.Constants;
@@ -22,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class GamePlayActivity extends AppCompatActivity {
 
@@ -30,7 +35,7 @@ public class GamePlayActivity extends AppCompatActivity {
     int id = -1;
     int connect = 0;
     final int maxLevel = 5;
-    final int convertIdToIndex = 2131296294;
+    final int convertIdToIndex = R.id.button_00;
     boolean flag = true;
     boolean homeButtonIsPressed = false;
 
@@ -91,6 +96,8 @@ public class GamePlayActivity extends AppCompatActivity {
         buttons.add((Button)findViewById(R.id.button_18));
         buttons.add((Button)findViewById(R.id.button_19));
 
+        System.out.println(R.id.button_00);
+
         levelTextView.setText("Level " + levelNumber);
 
         setClick(false,1); // time for becoming cards not clickable
@@ -117,8 +124,8 @@ public class GamePlayActivity extends AppCompatActivity {
                         startActivity(intent);
                         overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                     } else {
-                        Intent intent = new Intent(GamePlayActivity.this, HomeActivity.class);
-                        startActivity(intent);
+                        showDialogModeSelector();
+
                     }
                 }
             }
@@ -297,4 +304,27 @@ public class GamePlayActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceType")
     public int getIndex(int index) { return index-convertIdToIndex; }
+
+
+    private void showDialogModeSelector() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.form_filling_layout);
+
+        final EditText nameEditText = dialog.findViewById(R.id.nameEditText);
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        dialog.findViewById(R.id.okButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameEditText.getText().toString();
+                System.out.println(name);
+                Intent intent = new Intent(GamePlayActivity.this, HomeActivity.class);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 }

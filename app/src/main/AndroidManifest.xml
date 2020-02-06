@@ -21,7 +21,6 @@
         </activity>
 
         <activity android:name=".Menu.PauseActivity">
-
         </activity>
 
         <activity android:name=".Levels.LevelUpActivity">
