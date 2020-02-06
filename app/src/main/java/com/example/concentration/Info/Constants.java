@@ -5,8 +5,8 @@ public class Constants {
     private static int numberOfBut = 0;
     public int delayForFirstAppearance = 350;
     public int delayBetweenAppearance = 80;
-    public int timeCardIsOpen = 240;
-    public int timeCardIsClose = 150;
+    public int timeCardIsOpen = 300;
+    public int timeCardIsClose = 250;
 
     public static int getNumberOFButtons(boolean flag) {
         if (flag) numberOfBut+=4;

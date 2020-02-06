@@ -219,7 +219,7 @@ public class GamePlayActivity extends AppCompatActivity {
         for (int rIndex = 0; rIndex < array.size(); rIndex++) {
             final int randomButtonIndex = array.get(rIndex);
             final Button finalBut = pressedButton(randomButtonIndex);
-            finalBut.setTextSize(60);
+            finalBut.setTextSize(40);
             finalBut.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -260,7 +260,7 @@ public class GamePlayActivity extends AppCompatActivity {
 
 
     public void functionForPressedButton(Button button, Card card) {
-        button.setTextSize(60);
+        button.setTextSize(40);
         if (card.isFaceUp) {
             button.setText(getEmoji(card));
             button.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);

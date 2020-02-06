@@ -15,8 +15,8 @@
 
         <Button
             android:id="@+id/closeButton"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="8dp"
             android:background="@mipmap/close"
             android:gravity="right|center_horizontal"
@@ -32,7 +32,7 @@
         android:gravity="center"
         android:text="@string/game_mode"
         android:textColor="@color/whiteColor"
-        android:textSize="24sp"
+        android:textSize="36sp"
         tools:layout_conversion_absoluteHeight="21dp"
         tools:layout_conversion_absoluteWidth="411dp"
         tools:layout_editor_absoluteX="0dp"
@@ -41,7 +41,7 @@
     <TextView
         android:id="@+id/textView14"
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="58dp" />
 
     <Button
         android:id="@+id/competitionButton"
@@ -50,7 +50,7 @@
         android:background="@color/buttonsColor"
         android:fontFamily="@font/pixel_font"
         android:text="@string/competition"
-        android:textSize="18sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textView13"
@@ -64,11 +64,11 @@
         android:background="@color/buttonsColor"
         android:fontFamily="@font/pixel_font"
         android:text="@string/single_play"
-        android:textSize="18sp" />
+        android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="338dp"
+        android:layout_height="230dp"
         android:orientation="vertical"></LinearLayout>
 
     <TextView
