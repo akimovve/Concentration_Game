@@ -25,18 +25,19 @@ import java.util.Map;
 
 public class GamePlayActivity extends AppCompatActivity {
 
-    final int numberOfCards = 12;
+    int numberOfButtons = 0;
+    final int maxLevel = 5;
     int flipCount = 0;
-    int maxLevel = 5;
-
-    Constants constants = new Constants();
+    final int convertIdToIndex = 2131296294;
     int connect = 0;
     boolean flag = true;
 
+    Constants constants = new Constants();
+    OnClickListener onButtonsClick;
+    Concentration game;
 
-    Concentration game = new Concentration((numberOfCards + 1) / 2);
     private TextView flipsCountView, levelTextView;
-    private Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10, button11, button12, button13, button14, button15, button16;
+    ArrayList<Button> buttons = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -50,33 +51,37 @@ public class GamePlayActivity extends AppCompatActivity {
             flag = bundle.getBoolean("levelUp");
         }
 
+        final int levelNumber = Constants.getLevelNumber(flag);
+        numberOfButtons = Constants.getNumberOFButtons(flag);
+
+        game = new Concentration((numberOfButtons + 1) / 2);
 
         flipsCountView = findViewById(R.id.flipsCountView);
         levelTextView  = findViewById(R.id.levelTextView);
         Button settingsButton = findViewById(R.id.settingsButton);
-        button01 = findViewById(R.id.button_01);
-        button02 = findViewById(R.id.button_02);
-        button03 = findViewById(R.id.button_03);
-        button04 = findViewById(R.id.button_04);
-        button05 = findViewById(R.id.button_05);
-        button06 = findViewById(R.id.button_06);
-        button07 = findViewById(R.id.button_07);
-        button08 = findViewById(R.id.button_08);
-        button09 = findViewById(R.id.button_09);
-        button10 = findViewById(R.id.button_10);
-        button11 = findViewById(R.id.button_11);
-        button12 = findViewById(R.id.button_12);
-        /*button13 = findViewById(R.id.button13);
-        button14 = findViewById(R.id.button14);
-        button15 = findViewById(R.id.button15);
-        button16 = findViewById(R.id.button16);
 
-         */
-        final int levelNumber = Constants.getLevelNumber(flag);
+        buttons.add((Button)findViewById(R.id.button_00));
+        buttons.add((Button)findViewById(R.id.button_01));
+        buttons.add((Button)findViewById(R.id.button_02));
+        buttons.add((Button)findViewById(R.id.button_03));
+        buttons.add((Button)findViewById(R.id.button_04));
+        buttons.add((Button)findViewById(R.id.button_05));
+        buttons.add((Button)findViewById(R.id.button_06));
+        buttons.add((Button)findViewById(R.id.button_07));
+        buttons.add((Button)findViewById(R.id.button_08));
+        buttons.add((Button)findViewById(R.id.button_09));
+        buttons.add((Button)findViewById(R.id.button_10));
+        buttons.add((Button)findViewById(R.id.button_11));
+        buttons.add((Button)findViewById(R.id.button_12));
+        buttons.add((Button)findViewById(R.id.button_13));
+        buttons.add((Button)findViewById(R.id.button_14));
+        buttons.add((Button)findViewById(R.id.button_15));
+        buttons.add((Button)findViewById(R.id.button_16));
+        buttons.add((Button)findViewById(R.id.button_17));
+        buttons.add((Button)findViewById(R.id.button_18));
+        buttons.add((Button)findViewById(R.id.button_19));
+
         levelTextView.setText("Level " + levelNumber);
-
-
-
 
         setClick(false,1); // time for becoming cards not clickable
         appearanceOfCards(); // cards start to appear one by one
@@ -91,8 +96,7 @@ public class GamePlayActivity extends AppCompatActivity {
             }
         });
 
-
-        OnClickListener onButtonsClick = new OnClickListener() {
+        onButtonsClick = new OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
@@ -114,32 +118,24 @@ public class GamePlayActivity extends AppCompatActivity {
             }
         };
 
-        button01.setOnClickListener(onButtonsClick);
-        button02.setOnClickListener(onButtonsClick);
-        button03.setOnClickListener(onButtonsClick);
-        button04.setOnClickListener(onButtonsClick);
-        button05.setOnClickListener(onButtonsClick);
-        button06.setOnClickListener(onButtonsClick);
-        button07.setOnClickListener(onButtonsClick);
-        button08.setOnClickListener(onButtonsClick);
-        button09.setOnClickListener(onButtonsClick);
-        button10.setOnClickListener(onButtonsClick);
-        button11.setOnClickListener(onButtonsClick);
-        button12.setOnClickListener(onButtonsClick);
-        /*button13.setOnClickListener(onButtonsClick);
-        button14.setOnClickListener(onButtonsClick);
-        button15.setOnClickListener(onButtonsClick);
-        button16.setOnClickListener(onButtonsClick);
-        */
+        for (int index = 0; index < numberOfButtons; index++)
+            createButtons(buttons.get(index),index);
+
+    }
+
+    public void createButtons(Button button, int num) {
+        if (button.getId() - convertIdToIndex == num) {
+            button.setOnClickListener(onButtonsClick);
+        }
     }
 
     public void appearanceOfCards() {
-        for (int i = 0; i < numberOfCards; i++) {
-            final Button but = pressedButton(i);
-            but.postDelayed(new Runnable() {
+        for (int index = 0; index < numberOfButtons; index++) {
+            final Button button = buttons.get(index);
+            button.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    but.setVisibility(View.VISIBLE);
+                    button.setVisibility(View.VISIBLE);
                 }
             }, constants.delayForFirstAppearance);
             constants.delayForFirstAppearance += constants.delayBetweenAppearance;
@@ -149,21 +145,21 @@ public class GamePlayActivity extends AppCompatActivity {
     public void openCardsRandomly() {
         @SuppressLint("UseSparseArrays")
         Map<Integer, Boolean> checkTheRepeat = new HashMap<>();
-        for (int k = 0; k < numberOfCards; k++) {
+        for (int k = 0; k < numberOfButtons; k++) {
             checkTheRepeat.put(k, false);
         }
 
         ArrayList<Integer> randArrOfFirstIndexes = new ArrayList<>();
-        for (int i = 0; i < numberOfCards; i++) {
+        for (int i = 0; i < numberOfButtons; i++) {
             randArrOfFirstIndexes.add(i);
         }
         Collections.shuffle(randArrOfFirstIndexes);
 
-        int[] secondRandArray = new int[(int) (Math.random() * (numberOfCards / 3) + (numberOfCards / 3))]; // random size [(numberOfCards / 4);(numberOfCards/2)]
+        int[] secondRandArray = new int[(int) (Math.random() * (numberOfButtons / 3) + (numberOfButtons / 3))]; // random size [(numberOfCards / 4);(numberOfCards/2)]
         for (int i = 0; i < secondRandArray.length; i++) {
             int randomIndexOfFirstArray;
             do {
-                randomIndexOfFirstArray = (int) (Math.random() * numberOfCards);
+                randomIndexOfFirstArray = (int) (Math.random() * numberOfButtons);
 
             } while (checkTheRepeat.get(randomIndexOfFirstArray));
             secondRandArray[i] = randArrOfFirstIndexes.get(randomIndexOfFirstArray);
@@ -205,32 +201,17 @@ public class GamePlayActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                button01.setClickable(fl);
-                button02.setClickable(fl);
-                button03.setClickable(fl);
-                button04.setClickable(fl);
-                button05.setClickable(fl);
-                button06.setClickable(fl);
-                button07.setClickable(fl);
-                button08.setClickable(fl);
-                button09.setClickable(fl);
-                button10.setClickable(fl);
-                button11.setClickable(fl);
-                button12.setClickable(fl);
-                /*button13.setClickable(fl);
-                button14.setClickable(fl);
-                button15.setClickable(fl);
-                button16.setClickable(fl);
-
-                 */
+                for (int index = 0; index < numberOfButtons; index++) {
+                    buttons.get(index).setClickable(fl);
+                }
             }
         },delay);
     }
 
     public void updateViewFromModel() {
-        for (int i = 0; i < numberOfCards; i++) {
-            Card card = game.cards.get(i);
-            functionForPressedButton(pressedButton(i), card);
+        for (int index = 0; index < numberOfButtons; index++) {
+            Card card = game.cards.get(index);
+            functionForPressedButton(buttons.get(index), card);
         }
     }
 
@@ -275,31 +256,9 @@ public class GamePlayActivity extends AppCompatActivity {
     }
 
     public Button pressedButton(int index) {
-        Button chosenButton = button01;
-        switch (index) {
-            case 0: { chosenButton = button01; break; }
-            case 1: { chosenButton = button02; break; }
-            case 2: { chosenButton = button03; break; }
-            case 3: { chosenButton = button04; break; }
-            case 4: { chosenButton = button05; break; }
-            case 5: { chosenButton = button06; break; }
-            case 6: { chosenButton = button07; break; }
-            case 7: { chosenButton = button08; break; }
-            case 8: { chosenButton = button09; break; }
-            case 9: { chosenButton = button10; break; }
-            case 10: { chosenButton = button11; break; }
-            case 11: { chosenButton = button12; break; }
-            /*case 12: { chosenButton = button13; break; }
-            case 13: { chosenButton = button14; break; }
-            case 14: { chosenButton = button15; break; }
-            case 15: { chosenButton = button16; break; }
-
-             */
-
-        }
-        return chosenButton;
+        return buttons.get(index);
     }
 
     @SuppressLint("ResourceType")
-    public int getIndex(int index) { return index-2131296294; }
+    public int getIndex(int index) { return index-convertIdToIndex; }
 }

@@ -13,6 +13,7 @@ class Card {
 
     private static int getUniqueIdentifier() {
         identifierFactory += 1;
+        System.out.println(identifierFactory);
         return identifierFactory;
     }
 }
