@@ -15,22 +15,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.concentration.GamePlayActivity;
 import com.example.concentration.R;
 
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
+    boolean isHomeButtonPressed = false;
     Button rewardsButton, gameModeButton, tableOfRecordsButton, settingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) { isHomeButtonPressed = bundle.getBoolean("isHomeButtonPressed"); }
 
         rewardsButton = findViewById(R.id.rewardsButton);
         gameModeButton = findViewById(R.id.gameModeButton);
         tableOfRecordsButton = findViewById(R.id.tableOfRecordsButton);
-        settingsButton = findViewById(R.id.settingsButton);
+        settingsButton = findViewById(R.id.pauseButton);
 
         OnClickListener onClickListener = new OnClickListener() {
             @Override
@@ -49,11 +52,13 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void showDialogModeSelector() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
         dialog.setContentView(R.layout.game_mode_layout);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setCancelable(true);
         dialog.findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, GamePlayActivity.class);
+                intent.putExtra("isHomButPressed", isHomeButtonPressed);
                 startActivity(intent);
             }
         });

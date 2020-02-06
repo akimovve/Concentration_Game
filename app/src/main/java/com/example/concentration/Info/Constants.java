@@ -1,8 +1,8 @@
 package com.example.concentration.Info;
 
 public class Constants {
-    public static int levelNumber = 0;
-    public static int numberOfBut = 0;
+    private static int levelNumber = 0;
+    private static int numberOfBut = 0;
     public int delayForFirstAppearance = 250;
     public int delayBetweenAppearance = 70;
     public int timeCardIsOpen = 200;

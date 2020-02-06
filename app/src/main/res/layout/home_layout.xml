@@ -163,7 +163,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/settingsButton"
+            android:id="@+id/pauseButton"
             android:layout_width="25dp"
             android:layout_height="42dp"
             android:layout_weight="1"

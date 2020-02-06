@@ -4,50 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/levelUpColor"
+    android:background="@color/colorPrimaryDark"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/levelPassedTextView"
-        android:layout_width="match_parent"
-        android:layout_height="389dp"
+        android:layout_width="wrap_content"
+        android:layout_height="458dp"
         android:fontFamily="@font/pixel_font"
         android:gravity="center"
-        android:text="@string/level_passed"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="46sp" />
+        android:textColor="@color/levelUpColor"
+        android:textSize="44sp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="101dp"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/restartButton"
             style="?attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_width="190dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/levelUpColor"
             android:fontFamily="@font/pixel_font"
             android:minWidth="100dip"
             android:text="@string/restart"
-            android:textColor="@color/levelUpColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/nextButton"
             style="?attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_width="190dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/levelUpColor"
             android:fontFamily="@font/pixel_font"
             android:minWidth="100dip"
             android:text="@string/next"
-            android:textColor="@color/levelUpColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="385dp"
+        android:layout_height="60dp"
+        android:background="@color/levelUpColor"
+        android:fontFamily="@font/pixel_font"
+        android:text="@string/menu"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp" />
 
 </LinearLayout>

@@ -6,5 +6,6 @@
     <color name="buttonsColor">#56AFCC</color>
     <color name="redColor">#EC322C</color>
     <color name="levelUpColor">#3F51B5</color>
+    <color name="grayColor">#8D8D8D</color>
     <color name="noColor">#00FFFFFF</color>
 </resources>

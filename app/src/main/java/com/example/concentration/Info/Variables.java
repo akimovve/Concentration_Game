@@ -2,13 +2,13 @@ package com.example.concentration.Info;
 
 public class Variables {
     public int changeDelay;
-    static int change = 100;
-    static boolean flag;
+    private static int change = 100;
+    private static boolean flag;
 
     private static int changeable = 0;
 
     public Variables(boolean flag) {
-        this.flag = flag;
+        Variables.flag = flag;
         this.changeDelay = getUniqueChange();
     }
 

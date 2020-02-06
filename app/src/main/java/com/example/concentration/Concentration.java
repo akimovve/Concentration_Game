@@ -7,7 +7,6 @@ class Concentration {
 
     ArrayList<Card> cards = new ArrayList<>();
 
-
     private int indexOfOneAndOnlyFaceUpCard = -1;
 
     Concentration(int numberOfPairsOfCards) {
@@ -34,11 +33,6 @@ class Concentration {
                 indexOfOneAndOnlyFaceUpCard = -1;
             } else {
                 for (Card value : cards) value.isFaceUp = false;
-                /*for (int i = 0; i < index; i++) {
-                    cards.get(i).isFaceUp = false;
-                }
-
-                 */
                 cards.get(index).isFaceUp = true;
                 indexOfOneAndOnlyFaceUpCard = index;
             }

@@ -13,7 +13,7 @@ import com.example.concentration.R;
 
 public class PauseActivity extends AppCompatActivity {
 
-    Button resumeButton, newGameButton;
+    Button resumeButton, newGameButton, homeButton;
     Variables var;
 
     @Override
@@ -23,6 +23,7 @@ public class PauseActivity extends AppCompatActivity {
 
         resumeButton = findViewById(R.id.resumeButton);
         newGameButton = findViewById(R.id.newGameButton);
+        homeButton = findViewById(R.id.homeButton);
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +39,15 @@ public class PauseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PauseActivity.this, HomeActivity.class);
+                intent.putExtra("homeButtonIsPressed", true);
+                startActivity(intent);
             }
         });
     }
