@@ -20,6 +20,9 @@
         <activity android:name=".GamePlayActivity">
         </activity>
 
+        <activity android:name=".ResultsActivity">
+        </activity>
+
         <activity android:name=".Menu.PauseActivity">
         </activity>
 

@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -46,6 +52,9 @@ public class GamePlayActivity extends AppCompatActivity {
     private TextView flipsCountView;
     Button pauseButton;
     ArrayList<Button> buttons = new ArrayList<>();
+
+    DBHelper dbHelper;
+    final String LOG_TAG = "myLogs"; // logging
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -96,7 +105,7 @@ public class GamePlayActivity extends AppCompatActivity {
         buttons.add((Button)findViewById(R.id.button_18));
         buttons.add((Button)findViewById(R.id.button_19));
 
-        System.out.println(R.id.button_00);
+        dbHelper = new DBHelper(this); // creating object for Data Base
 
         levelTextView.setText("Level " + levelNumber);
 
@@ -118,7 +127,7 @@ public class GamePlayActivity extends AppCompatActivity {
                 updateViewFromModel();
 
                 if (!game.checkForAllMatchedCards()) {
-                    if (levelNumber < maxLevel) {
+                    if (levelNumber < 1) {
                         Intent intent = new Intent(GamePlayActivity.this, LevelUpActivity.class);
                         intent.putExtra("number_of_flips", flipCount);
                         startActivity(intent);
@@ -318,13 +327,82 @@ public class GamePlayActivity extends AppCompatActivity {
         dialog.findViewById(R.id.okButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int a = 1; // 1 - add, 2 - show, 3 - clear Data Base
+                ContentValues cv = new ContentValues();
                 String name = nameEditText.getText().toString();
-                System.out.println(name);
-                Intent intent = new Intent(GamePlayActivity.this, HomeActivity.class);
+                SQLiteDatabase db = dbHelper.getWritableDatabase(); // connecting to Data Base (insert – вставка, query – чтение, delete – удаление)
+
+                switch (a) {
+                    case 1: {
+                        Log.d(LOG_TAG, "--- INSERT in the table: ---");
+                        cv.put("name", name);
+                        cv.put("flips", flipCount);
+                        long rowID = db.insert("results_table", null, cv);
+                        Log.d(LOG_TAG, "row inserted, ID = " + rowID);
+                        break;
+                    }
+                    case 2: {
+                        Log.d(LOG_TAG, "--- READ the table: ---"); // Делаем запрос всех данных из таблицы results_table, получаем Cursor
+                        Cursor c = db.query("results_table", null, null, null, null, null, null);
+
+                        // Ставим позицию курсора на первую строку выборки. Если в выборке нет строк, вернётся false
+                        if (c.moveToFirst()) {
+                            int idColIndex = c.getColumnIndex("id"); // Номера столбцов по имени в выборке
+                            int nameColIndex = c.getColumnIndex("name");
+                            int flipsColIndex = c.getColumnIndex("flips");
+
+                            do {
+                                // Получаем значения по номерам столбцов и пишем все в лог
+                                Log.d(LOG_TAG,
+                                        "ID = " + c.getInt(idColIndex) +
+                                                ", name = " + c.getString(nameColIndex) +
+                                        ", flips = " + c.getInt(flipsColIndex));
+
+                            } while (c.moveToNext()); // Переход на следующую строку, а если следующей нет (текущая - последняя), то false - выходим из цикла
+                        } else
+                            Log.d(LOG_TAG, "0 rows");
+                        c.close();
+                        break;
+                    }
+                    case 3: {
+                        Log.d(LOG_TAG, "--- DELETE the table: ---");
+                        int clearCount = db.delete("results_table", null, null); // Удаляем всё
+                        Log.d(LOG_TAG, "deleted rows count = " + clearCount);
+                        break;
+                    }
+                }
+                dbHelper.close();
+
+                Intent intent = new Intent(GamePlayActivity.this, ResultsActivity.class);
                 startActivity(intent);
                 dialog.dismiss();
             }
         });
         dialog.show();
     }
+
+
+    class DBHelper extends SQLiteOpenHelper {
+
+        public DBHelper(Context context) {
+            // конструктор суперкласса
+            super(context, "resultsDB", null, 1);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase database) {
+            Log.d(LOG_TAG, "--- onCreate database ---");
+            // создаем таблицу с полями
+            database.execSQL("create table results_table ("
+                    + "id integer primary key autoincrement,"
+                    + "name text,"
+                    + "flips text" + ");");
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        }
+    }
+
 }
