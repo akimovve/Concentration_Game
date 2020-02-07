@@ -127,7 +127,7 @@ public class GamePlayActivity extends AppCompatActivity {
                 updateViewFromModel();
 
                 if (!game.checkForAllMatchedCards()) {
-                    if (levelNumber < 1) {
+                    if (levelNumber < maxLevel) {
                         Intent intent = new Intent(GamePlayActivity.this, LevelUpActivity.class);
                         intent.putExtra("number_of_flips", flipCount);
                         startActivity(intent);
