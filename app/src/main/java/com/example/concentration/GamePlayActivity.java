@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import com.example.concentration.Info.Constants;
 import com.example.concentration.Levels.LevelUpActivity;
-import com.example.concentration.Menu.HomeActivity;
 import com.example.concentration.Menu.PauseActivity;
 
 import java.util.ArrayList;
@@ -38,6 +37,7 @@ public class GamePlayActivity extends AppCompatActivity {
 
     int numberOfButtons = 0;
     int flipCount = 0;
+    static int amountOfFlips = 0;
     int id = -1;
     int connect = 0;
     final int maxLevel = 5;
@@ -77,6 +77,8 @@ public class GamePlayActivity extends AppCompatActivity {
             levelNumber = Constants.getLevelNumber(flag);
             numberOfButtons = Constants.getNumberOFButtons(flag);
         }
+
+        if (!flag) amountOfFlips = 0;
 
         game = new Concentration((numberOfButtons + 1) / 2);
 
@@ -120,9 +122,11 @@ public class GamePlayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (id != v.getId()) {
                     flipCount += 1;
+                    amountOfFlips += 1;
                     id = v.getId();
                 }
                 flipsCountView.setText("Flips: " + flipCount);
+
                 game.chooseCard(getIndex(v.getId()));
                 updateViewFromModel();
 
@@ -336,7 +340,7 @@ public class GamePlayActivity extends AppCompatActivity {
                     case 1: {
                         Log.d(LOG_TAG, "--- INSERT in the table: ---");
                         cv.put("name", name);
-                        cv.put("flips", flipCount);
+                        cv.put("flips", amountOfFlips);
                         long rowID = db.insert("results_table", null, cv);
                         Log.d(LOG_TAG, "row inserted, ID = " + rowID);
                         break;

@@ -2,21 +2,19 @@ package com.example.concentration.Menu;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.concentration.GamePlayActivity;
 import com.example.concentration.R;
+import com.example.concentration.ResultsActivity;
 
 import java.util.Objects;
 
@@ -39,6 +37,15 @@ public class HomeActivity extends AppCompatActivity {
         settingsButton = findViewById(R.id.pauseButton);
         mainPlayButton = findViewById(R.id.mainPlayButton);
 
+
+        tableOfRecordsButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, ResultsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         OnClickListener onClickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +53,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
         rewardsButton.setOnClickListener(onClickListener);
-        tableOfRecordsButton.setOnClickListener(onClickListener);
         settingsButton.setOnClickListener(onClickListener);
         mainPlayButton.setOnClickListener(onClickListener);
         gameModeButton.setOnClickListener(new View.OnClickListener() {
