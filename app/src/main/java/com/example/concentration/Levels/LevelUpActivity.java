@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -34,6 +36,8 @@ public class LevelUpActivity extends Activity {
         homeButton = findViewById(R.id.homeButton);
         levelPassedTextView = findViewById(R.id.levelPassedTextView);
 
+        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             flipsNum = bundle.getInt("number_of_flips");
@@ -44,13 +48,14 @@ public class LevelUpActivity extends Activity {
         OnClickListener onButtonClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animAlpha);
                 boolean flag = true;
                 if (v.getId() == R.id.restartButton) flag = false;
                 var = new Variables(flag); // check if the user tapped "next" or "previous" for changing level number and delay
                 intent = new Intent(LevelUpActivity.this, GamePlayActivity.class);
                 intent.putExtra("whichLevel", var.changeDelay);
                 intent.putExtra("levelUp",flag);
-
+                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
         };
@@ -61,8 +66,10 @@ public class LevelUpActivity extends Activity {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animAlpha);
                 Intent intent = new Intent(LevelUpActivity.this, HomeActivity.class);
                 intent.putExtra("homeButtonIsPressed", true);
+                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
         });

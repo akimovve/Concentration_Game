@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -107,6 +109,8 @@ public class GamePlayActivity extends AppCompatActivity {
         buttons.add((Button)findViewById(R.id.button_18));
         buttons.add((Button)findViewById(R.id.button_19));
 
+        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
+
         dbHelper = new DBHelper(this); // creating object for Data Base
 
         levelTextView.setText("Level " + levelNumber);
@@ -120,6 +124,7 @@ public class GamePlayActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
+                v.startAnimation(animAlpha);
                 if (id != v.getId()) {
                     flipCount += 1;
                     amountOfFlips += 1;
@@ -134,8 +139,8 @@ public class GamePlayActivity extends AppCompatActivity {
                     if (levelNumber < maxLevel) {
                         Intent intent = new Intent(GamePlayActivity.this, LevelUpActivity.class);
                         intent.putExtra("number_of_flips", flipCount);
-                        startActivity(intent);
                         overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+                        startActivity(intent);
                     } else {
                         showDialogModeSelector();
 
@@ -151,6 +156,7 @@ public class GamePlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GamePlayActivity.this, PauseActivity.class);
+                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
         });

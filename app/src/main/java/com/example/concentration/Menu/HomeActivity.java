@@ -4,9 +4,12 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -37,35 +40,41 @@ public class HomeActivity extends AppCompatActivity {
         settingsButton = findViewById(R.id.pauseButton);
         mainPlayButton = findViewById(R.id.mainPlayButton);
 
+        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
 
         tableOfRecordsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animAlpha);
                 Intent intent = new Intent(HomeActivity.this, ResultsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        gameModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(animAlpha);
+                showDialogModeSelector();
             }
         });
 
         OnClickListener onClickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animAlpha);
                 Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
             }
         };
         rewardsButton.setOnClickListener(onClickListener);
         settingsButton.setOnClickListener(onClickListener);
         mainPlayButton.setOnClickListener(onClickListener);
-        gameModeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogModeSelector();
-            }
-        });
     }
 
 
 
     private void showDialogModeSelector() {
+        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
         dialog.setContentView(R.layout.game_mode_layout);
@@ -80,14 +89,22 @@ public class HomeActivity extends AppCompatActivity {
         dialog.findViewById(R.id.competitionButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, GamePlayActivity.class);
+                v.startAnimation(animAlpha);
+                final Intent intent = new Intent(HomeActivity.this, GamePlayActivity.class);
                 intent.putExtra("isHomButPressed", isHomeButtonPressed);
-                startActivity(intent);
+                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                    }
+                },100);
             }
         });
         dialog.findViewById(R.id.singlePlayButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(animAlpha);
                 // Nothing yet...
                 Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
             }
