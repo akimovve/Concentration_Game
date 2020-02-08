@@ -15,9 +15,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.concentration.GamePlayActivity;
+import com.example.concentration.CompetitionGameActivity;
 import com.example.concentration.R;
 import com.example.concentration.ResultsActivity;
+import com.example.concentration.UnlimitedGameActivity;
 
 import java.util.Objects;
 
@@ -59,6 +60,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        mainPlayButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(animAlpha);
+                Intent intent = new Intent(HomeActivity.this, UnlimitedGameActivity.class);
+                startActivity(intent);
+            }
+        });
+
         OnClickListener onClickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +78,6 @@ public class HomeActivity extends AppCompatActivity {
         };
         rewardsButton.setOnClickListener(onClickListener);
         settingsButton.setOnClickListener(onClickListener);
-        mainPlayButton.setOnClickListener(onClickListener);
     }
 
 
@@ -90,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
-                final Intent intent = new Intent(HomeActivity.this, GamePlayActivity.class);
+                final Intent intent = new Intent(HomeActivity.this, CompetitionGameActivity.class);
                 intent.putExtra("isHomButPressed", isHomeButtonPressed);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 new Handler().postDelayed(new Runnable() {

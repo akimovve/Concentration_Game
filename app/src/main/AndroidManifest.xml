@@ -17,7 +17,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".GamePlayActivity">
+        <activity android:name=".CompetitionGameActivity">
+        </activity>
+
+        <activity android:name=".UnlimitedGameActivity">
+        </activity>
+
+        <activity android:name=".Game">
         </activity>
 
         <activity android:name=".ResultsActivity">

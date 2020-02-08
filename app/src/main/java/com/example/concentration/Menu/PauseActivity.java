@@ -9,19 +9,25 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.concentration.CompetitionGameActivity;
 import com.example.concentration.Info.Variables;
-import com.example.concentration.GamePlayActivity;
 import com.example.concentration.R;
+import com.example.concentration.UnlimitedGameActivity;
 
 public class PauseActivity extends AppCompatActivity {
 
     Button resumeButton, newGameButton, homeButton;
     Variables var;
+    boolean whichActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pause_layout);
+        whichActivity = false;
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) { whichActivity = bundle.getBoolean("activity"); }
 
         resumeButton = findViewById(R.id.resumeButton);
         newGameButton = findViewById(R.id.newGameButton);
@@ -34,7 +40,10 @@ public class PauseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
                 var = new Variables(false);
-                Intent intent = new Intent(PauseActivity.this, GamePlayActivity.class);
+                Intent intent;
+                if (whichActivity) {
+                    intent = new Intent(PauseActivity.this, UnlimitedGameActivity.class);
+                } else intent = new Intent(PauseActivity.this, CompetitionGameActivity.class);
                 intent.putExtra("levelUp",false);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
