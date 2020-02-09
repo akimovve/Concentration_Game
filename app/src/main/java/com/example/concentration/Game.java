@@ -24,8 +24,8 @@ public class Game extends AppCompatActivity {
     int howShorter = 0;
     int id = -1;
     final int convertIdToIndex = R.id.button_00;
-    String[] emojiTypes = {"🏰","🏁","💂","💍","🐒","🦞","🎄","🏍","👾","🦁","🐿","🔥","🌘","🍕","⚽️","🥁","🧀","🛩","📸","🎁","🍏",
-            "🌈","🎮️","🌶","🪁","🚔","🎡","🏔","🚄","🎬","🐙","🍄","🌵","🐢","👑","🧞","👻","🧤","🎓","🎪","🐶","🐲","🍓","🏆","🎰" };
+    String[] emojiTypes = {"🏰","🐨","🐝","🦂","🦖","⛄️","🛸","💻","🏁","💂","💍","🐒","🐊","🎄","🏍","👾","🦁","🐿","🔥","🌘","🍕","⚽️","🥁","🧀","🛩","📸","🎁","🍏","🐩","🐓","🍁",
+            "🌈","🦈","🛏","📚","🗿","🎭","🍿","🥥","🍆","🦔","🎮️","🌶","🐘","🚔","🎡","🏔","🚄","🎬","🐙","🍄","🌵","🐢","👑","🧞","👻","🧤","🎓","🎪","🐶","🐲","🍓","🏆","🎰" };
 
     public Game(){}
 
@@ -113,7 +113,7 @@ public class Game extends AppCompatActivity {
         for (int index = 0; index < array.size(); index++) {
             final int randomButtonIndex = array.get(index);
             final Button finalBut = pressedButton(randomButtonIndex);
-            finalBut.setTextSize(40);
+            finalBut.setTextSize(43);
             finalBut.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -150,7 +150,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void functionForPressedButton(Button button, Card card) {
-        button.setTextSize(40);
+        button.setTextSize(43);
         if (card.isFaceUp) {
             button.setText(getEmoji(card));
             button.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
