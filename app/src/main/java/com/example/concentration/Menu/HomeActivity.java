@@ -36,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     Button rewardsButton, gameModeButton, tableOfRecordsButton, settingsButton, mainPlayButton;
     TextView lvlTextView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
 
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
 
-        readDB(); // BIG PROBLEMS WITH THIS DATA BASE!!!!!!!!!!!!!!!!!!!!
+        readDB(); // BIG PROBLEMS WITH THIS DATA BASE!!!!!!!!!!!!!!!!!!!! FIX IT!!!
 
         String lvl = String.valueOf(levelNumber);
         lvlTextView.setText(lvl);

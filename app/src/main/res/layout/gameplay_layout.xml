@@ -1,290 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".CompetitionGameActivity">
-
-    <Button
-        android:id="@+id/button_18"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="7dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/button_19"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/button_17"
-        app:layout_constraintTop_toBottomOf="@+id/button_14" />
-
-    <Button
-        android:id="@+id/button_16"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="10dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_12" />
-
-    <Button
-        android:id="@+id/button_17"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="7dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/button_16"
-        app:layout_constraintTop_toBottomOf="@+id/button_13" />
-
-    <Button
-        android:id="@+id/button_19"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_15" />
-
-    <Button
-        android:id="@+id/button_13"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="7dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/button_12"
-        app:layout_constraintTop_toBottomOf="@+id/button_09" />
-
-    <Button
-        android:id="@+id/button_14"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="7dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/button_15"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/button_13"
-        app:layout_constraintTop_toBottomOf="@+id/button_10" />
-
-    <Button
-        android:id="@+id/button_12"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="10dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_08" />
-
-    <Button
-        android:id="@+id/button_09"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="7dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/button_08"
-        app:layout_constraintTop_toBottomOf="@+id/button_05" />
-
-    <Button
-        android:id="@+id/button_08"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="10dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_04" />
-
-    <Button
-        android:id="@+id/button_10"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="7dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/button_11"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/button_09"
-        app:layout_constraintTop_toBottomOf="@+id/button_06" />
-
-    <Button
-        android:id="@+id/button_04"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="10dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_00" />
-
-    <Button
-        android:id="@+id/button_06"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="7dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/button_07"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/button_05"
-        app:layout_constraintTop_toBottomOf="@+id/button_02" />
-
-    <Button
-        android:id="@+id/button_07"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_03" />
-
-    <Button
-        android:id="@+id/button_11"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_07" />
-
-    <Button
-        android:id="@+id/button_05"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="7dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/button_04"
-        app:layout_constraintTop_toBottomOf="@+id/button_01" />
-
-    <Button
-        android:id="@+id/button_02"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="7dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/button_03"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/button_01"
-        app:layout_constraintTop_toBottomOf="@+id/levelTextView" />
-
-    <Button
-        android:id="@+id/button_03"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/levelTextView" />
-
-    <Button
-        android:id="@+id/button_00"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/levelTextView" />
-
-    <Button
-        android:id="@+id/button_01"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/button_00"
-        app:layout_constraintTop_toBottomOf="@+id/levelTextView" />
-
-    <Button
-        android:id="@+id/button_15"
-        android:layout_width="88dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/buttonsColor"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_11" />
-
-    <TextView
-        android:id="@+id/flipsCountView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/pixel_font"
-        android:textColor="@color/buttonsColor"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/pauseButton"
-        android:layout_width="35dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="16dp"
-        android:background="@mipmap/pause"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/flipsCountView" />
+    tools:context=".CompetitionGameActivity"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/levelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/pixel_font"
         android:textColor="@color/buttonsColor"
-        android:textSize="50sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="50sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_00"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_01"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_02"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_03"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_04"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_05"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_06"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_07"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_08"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_09"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_10"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_11"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_12"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_13"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_14"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_15"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_16"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_17"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_18"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_19"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/buttonsColor"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/flipsCountView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/pixel_font"
+        android:textColor="@color/buttonsColor"
+        android:textSize="40sp"/>
+
+    <Button
+        android:id="@+id/pauseButton"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="14dp"
+        android:background="@mipmap/pause" />
+
+</LinearLayout>
