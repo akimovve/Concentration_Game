@@ -1,11 +1,11 @@
 package com.example.concentration.Menu;
 
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,12 +36,19 @@ public class HomeActivity extends AppCompatActivity {
     final String LOG_TAG = "myLogs";
     Button rewardsButton, gameModeButton, tableOfRecordsButton, settingsButton, mainPlayButton;
     TextView lvlTextView;
+    LinearLayout layout;
+    private AnimationDrawable mAnimationDrawable;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
+
+        layout = findViewById(R.id.main_linear);
+        mAnimationDrawable = (AnimationDrawable) layout.getBackground();
+        mAnimationDrawable.setEnterFadeDuration(100);
+        mAnimationDrawable.setExitFadeDuration(4000);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) { isHomeButtonPressed = bundle.getBoolean("isHomeButtonPressed"); }
@@ -94,6 +102,13 @@ public class HomeActivity extends AppCompatActivity {
         };
         rewardsButton.setOnClickListener(onClickListener);
         settingsButton.setOnClickListener(onClickListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mAnimationDrawable.start();
     }
 
 
