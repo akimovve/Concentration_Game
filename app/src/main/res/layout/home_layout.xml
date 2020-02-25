@@ -8,90 +8,74 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/redimage"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            app:srcCompat="@mipmap/focus_1" />
-
-        <ImageView
-            android:id="@+id/whiteimage"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            app:srcCompat="@mipmap/focus_2" />
-
-        <ImageView
-            android:id="@+id/blueimage"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            app:srcCompat="@mipmap/focus_3" />
-
-        <ImageView
-            android:id="@+id/greenimage"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            app:srcCompat="@mipmap/focus_4" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/pauseButton"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="start"
+        android:background="@mipmap/settings" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="247dp"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/concentrationTitle"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="256dp"
             android:layout_weight="1"
-            android:fontFamily="@font/pixel_font"
-            android:gravity="center_horizontal"
-            android:text="@string/concentration_title"
-            android:textColor="@color/whiteColor"
-            android:textSize="54sp" />
+            app:srcCompat="@mipmap/title_copyright"
+            android:contentDescription="@string/todo" />
 
         <TextView
             android:id="@+id/lvlTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="144dp"
             android:layout_weight="1"
-            android:fontFamily="@font/pixel_font"
-            android:gravity="center_horizontal"
-            android:textColor="@color/buttonsColor"
-            android:textSize="85sp" />
+            android:fontFamily="@font/sf_pro_bold"
+            android:gravity="center"
+            android:text="@string/score_0"
+            android:textColor="@color/whiteColor"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="249dp"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/challengeButton"
+            style="@style/TextAppearance.AppCompat.Widget.Button"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/challenge_button"
+            android:fontFamily="@font/sf_pro_bold"
+            android:text="@string/challenge"
+            android:textColor="@color/whiteColor"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/mainPlayButton"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@mipmap/playbutton"
-            android:gravity="center_horizontal" />
+            style="@style/TextAppearance.AppCompat.Widget.Button"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/play_button"
+            android:fontFamily="@font/sf_pro_bold"
+            android:text="@string/play"
+            android:textColor="@color/whiteColor"
+            android:textSize="24sp" />
+
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
@@ -100,10 +84,10 @@
         <Button
             android:id="@+id/rewardsButton"
             style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="20dp"
-            android:background="@mipmap/rewardsbutton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="30dp"
+            android:background="@mipmap/trophy"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -111,41 +95,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/gameModeButton"
+            android:id="@+id/tableOfRecordsButton"
             style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@mipmap/gamemodebutton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="30dp"
+            android:background="@mipmap/podium"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pauseButton"
-            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toEndOf="@+id/presentsButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/presentsButton"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="30dp"
+            android:background="@mipmap/gift"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/rewardsButton"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/tableOfRecordsButton"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@mipmap/tableofrecordsbutton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pauseButton"
-            app:layout_constraintStart_toEndOf="@+id/gameModeButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/pauseButton"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginEnd="20dp"
-            android:background="@mipmap/settingsbutton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </LinearLayout>

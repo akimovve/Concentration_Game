@@ -20,8 +20,12 @@
     <string name="enter_your_name">Enter your name:</string>
     <string name="name">Name</string>
     <string name="ok">Ok</string>
-    <string name="results">Results</string>
+    <string name="results">RESULTS</string>
     <string name="pos">Pos.</string>
     <string name="name_big">Name</string>
     <string name="back">Back</string>
+    <string name="challenge">challenge</string>
+    <string name="play">play</string>
+    <string name="score_0">SCORE 0</string>
+    <string name="todo">TODO</string>
 </resources>

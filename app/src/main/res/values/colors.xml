@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryDark">#050505</color>
+    <color name="colorPrimaryDark">#151520</color>
     <color name="greenColor">#2D9416</color>
     <color name="whiteColor">#FFFFFF</color>
     <color name="buttonsColor">#56AFCC</color>
@@ -8,6 +8,8 @@
     <color name="levelUpColor">#3F51B5</color>
     <color name="grayColor">#8D8D8D</color>
     <color name="noColor">#00FFFFFF</color>
-    <color name="indigo_500">#283593</color>
-    <color name="blue_500">#3462AA</color>
+    <color name="indigo_500">#09343E</color>
+    <color name="blue_500">#061229</color>
+    <color name="yellow">#EEC71C</color>
+    <color name="green">#46B241</color>
 </resources>

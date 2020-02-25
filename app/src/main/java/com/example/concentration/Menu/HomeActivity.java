@@ -1,5 +1,6 @@
 package com.example.concentration.Menu;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -30,12 +31,13 @@ public class HomeActivity extends AppCompatActivity {
 
     boolean isHomeButtonPressed = false;
     int levelNumber = 1;
-    Button rewardsButton, gameModeButton, tableOfRecordsButton, settingsButton, mainPlayButton;
+    Button rewardsButton, challengeButton, tableOfRecordsButton, settingsButton, mainPlayButton, presentsButton;
     TextView lvlTextView;
     LinearLayout layout;
     private AnimationDrawable mAnimationDrawable;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +52,10 @@ public class HomeActivity extends AppCompatActivity {
         if (bundle != null) { isHomeButtonPressed = bundle.getBoolean("isHomeButtonPressed"); }
 
         rewardsButton = findViewById(R.id.rewardsButton);
-        gameModeButton = findViewById(R.id.gameModeButton);
+        challengeButton = findViewById(R.id.challengeButton);
         tableOfRecordsButton = findViewById(R.id.tableOfRecordsButton);
         settingsButton = findViewById(R.id.pauseButton);
+        presentsButton = findViewById(R.id.presentsButton);
         mainPlayButton = findViewById(R.id.mainPlayButton);
         lvlTextView = findViewById(R.id.lvlTextView);
 
@@ -61,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
         readDB();
 
         String lvl = String.valueOf(levelNumber);
-        lvlTextView.setText(lvl);
+        lvlTextView.setText("SCORE " + lvl);
 
         tableOfRecordsButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -72,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        gameModeButton.setOnClickListener(new View.OnClickListener() {
+        challengeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
@@ -98,6 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         };
         rewardsButton.setOnClickListener(onClickListener);
         settingsButton.setOnClickListener(onClickListener);
+        presentsButton.setOnClickListener(onClickListener);
     }
 
     @Override

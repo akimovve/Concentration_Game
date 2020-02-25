@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/concentration_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Menu.HomeActivity">
+        <activity android:name=".Menu.HomeActivity"
+            android:theme="@style/MainWindowAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
