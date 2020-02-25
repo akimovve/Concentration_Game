@@ -1,5 +1,6 @@
 package com.example.concentration;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -48,44 +49,49 @@ public class ResultsActivity extends AppCompatActivity {
             }
         });
 
+
         SQLiteDatabase db;
         db = openOrCreateDatabase("resultsDB", Context.MODE_PRIVATE, null);
 
-        Cursor c = db.query("results_table", null, null, null, null, null, null);
+        try {
+            Cursor c = db.query("results_table", null, null, null, null, null, null);
+            if (c.moveToFirst()) {
+                isEmpty = false;
+                int nameColIndex = c.getColumnIndex("name");
+                int flipsColIndex = c.getColumnIndex("flips");
 
-        if (c.moveToFirst()) {
-            isEmpty = false;
-            int nameColIndex = c.getColumnIndex("name");
-            int flipsColIndex = c.getColumnIndex("flips");
+                do {
+                    resArrayOfFlips.put(c.getString(nameColIndex), c.getInt(flipsColIndex));
+                } while (c.moveToNext());
+            } else isEmpty = true;
+            c.close();
 
-            do {
-                resArrayOfFlips.put(c.getString(nameColIndex), c.getInt(flipsColIndex));
-            } while (c.moveToNext());
-        } else isEmpty = true;
-        c.close();
+            if (!isEmpty) {
+                List<Map.Entry<String, Integer>> sortList = new ArrayList(resArrayOfFlips.entrySet());
+                Collections.sort(sortList, new Comparator<Map.Entry<String, Integer>>() {
+                    @Override
+                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                        return o1.getValue().compareTo(o2.getValue());
+                    }
+                });
 
-        if (!isEmpty) {
-            List<Map.Entry<String, Integer>> sortList = new ArrayList(resArrayOfFlips.entrySet());
-            Collections.sort(sortList, new Comparator<Map.Entry<String, Integer>>() {
-                @Override
-                public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                    return o1.getValue().compareTo(o2.getValue());
+                int size;
+                if (resArrayOfFlips.size() < 10) size = resArrayOfFlips.size();
+                else size = 10;
+
+                System.out.println(size);
+
+                for (int index = 1; index <= size; index++) {
+                    addRow(index, sortList.get(index - 1).getKey(), resArrayOfFlips.get(sortList.get(index - 1).getKey()));
                 }
-            });
-
-            int size;
-            if (resArrayOfFlips.size() < 10) size = resArrayOfFlips.size();
-            else size = 10;
-
-            System.out.println(size);
-
-            for (int index = 1; index <= size; index++) {
-                addRow(index, sortList.get(index - 1).getKey(), resArrayOfFlips.get(sortList.get(index - 1).getKey()));
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
 
+    @SuppressLint("SetTextI18n")
     public void addRow(int id, String name, int flips) {
         TableLayout resultsTableLayout = findViewById(R.id.resultsTable);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -98,6 +104,4 @@ public class ResultsActivity extends AppCompatActivity {
         tv.setText(Integer.toString(flips));
         resultsTableLayout.addView(tr);
     }
-
-
 }

@@ -1,15 +1,11 @@
 package com.example.concentration.Menu;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -23,6 +19,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.concentration.CompetitionGameActivity;
+import com.example.concentration.PreferencesUtil;
 import com.example.concentration.R;
 import com.example.concentration.ResultsActivity;
 import com.example.concentration.UnlimitedGameActivity;
@@ -33,7 +30,6 @@ public class HomeActivity extends AppCompatActivity {
 
     boolean isHomeButtonPressed = false;
     int levelNumber = 1;
-    final String LOG_TAG = "myLogs";
     Button rewardsButton, gameModeButton, tableOfRecordsButton, settingsButton, mainPlayButton;
     TextView lvlTextView;
     LinearLayout layout;
@@ -62,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
 
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
 
-        readDB(); // BIG PROBLEMS WITH THIS DATA BASE!!!!!!!!!!!!!!!!!!!! FIX IT!!!
+        readDB();
 
         String lvl = String.valueOf(levelNumber);
         lvlTextView.setText(lvl);
@@ -111,8 +107,6 @@ public class HomeActivity extends AppCompatActivity {
         mAnimationDrawable.start();
     }
 
-
-
     private void showDialogModeSelector() {
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
         final Dialog dialog = new Dialog(this);
@@ -153,24 +147,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void readDB() {
-        SQLiteDatabase db;
-        db = openOrCreateDatabase("DataBaseLevel", Context.MODE_PRIVATE, null);
-
-        Cursor c = db.query("table_levels", null, null, null, null, null, null);
-
-        if (c.moveToFirst()) {
-            int idColIndex = c.getColumnIndex("id");
-            int levelColIndex = c.getColumnIndex("level");
-
-            do {
-                if (c.isLast()) levelNumber = c.getInt(levelColIndex);
-                Log.d(LOG_TAG,
-                        "LAST: ID = " + c.getInt(idColIndex) +
-                                ", level = " + c.getInt(levelColIndex));
-            } while (c.moveToNext());
-        } else {
-            levelNumber = 1;
-            Log.d(LOG_TAG, "0 rows");
-        }
+        levelNumber = PreferencesUtil.getUserLevel(this);
     }
 }
