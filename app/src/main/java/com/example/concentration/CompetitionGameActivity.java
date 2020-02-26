@@ -95,7 +95,7 @@ public class CompetitionGameActivity extends Game {
                     amountOfFlips += 1;
                     id = v.getId();
                 }
-                flipsCountView.setText("Flips: " + flipCount);
+                flipsCountView.setText(String.valueOf(flipCount));
 
                 gameLogic.chooseCard(getIndex(v.getId()));
                 updateViewFromModel();

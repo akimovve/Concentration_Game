@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import com.example.concentration.Levels.LevelUpActivity;
 import com.example.concentration.Menu.PauseActivity;
 
+import java.util.Random;
+
 public class UnlimitedGameActivity extends Game {
 
     OnClickListener buttonClicks;
@@ -58,7 +60,7 @@ public class UnlimitedGameActivity extends Game {
                     flipCount += 1;
                     id = v.getId();
                 }
-                flipsCountView.setText("Flips: " + flipCount);
+                flipsCountView.setText(String.valueOf(flipCount));
 
                 gameLogic.chooseCard(getIndex(v.getId()));
                 updateViewFromModel();

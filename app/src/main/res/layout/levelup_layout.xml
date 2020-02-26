@@ -10,10 +10,10 @@
         android:id="@+id/levelPassedTextView"
         android:layout_width="wrap_content"
         android:layout_height="458dp"
-        android:fontFamily="@font/pixel_font"
+        android:fontFamily="@font/sf_pro_bold"
         android:gravity="center"
-        android:textColor="@color/levelUpColor"
-        android:textSize="44sp" />
+        android:textColor="@color/yellow"
+        android:textSize="55sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,28 +26,28 @@
             style="?attr/buttonBarButtonStyle"
             android:layout_width="190dp"
             android:layout_height="80dp"
+            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@color/levelUpColor"
-            android:fontFamily="@font/pixel_font"
+            android:background="@drawable/play_button"
+            android:fontFamily="@font/sf_pro_medium"
             android:minWidth="100dip"
             android:text="@string/restart"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp"
-            android:layout_margin="2dp"/>
+            android:textColor="@color/whiteColor"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/nextButton"
             style="?attr/buttonBarButtonStyle"
             android:layout_width="190dp"
             android:layout_height="80dp"
+            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@color/levelUpColor"
-            android:fontFamily="@font/pixel_font"
+            android:background="@drawable/challenge_button"
+            android:fontFamily="@font/sf_pro_medium"
             android:minWidth="100dip"
             android:text="@string/next"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp"
-            android:layout_margin="2dp"/>
+            android:textColor="@color/whiteColor"
+            android:textSize="30sp" />
 
     </LinearLayout>
 
@@ -55,10 +55,10 @@
         android:id="@+id/homeButton"
         android:layout_width="385dp"
         android:layout_height="60dp"
-        android:background="@color/levelUpColor"
-        android:fontFamily="@font/pixel_font"
+        android:background="@drawable/play_button"
+        android:fontFamily="@font/sf_pro_medium"
         android:text="@string/menu"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/whiteColor"
         android:textSize="30sp" />
 
 </LinearLayout>

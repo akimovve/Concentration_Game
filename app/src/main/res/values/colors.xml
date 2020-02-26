@@ -8,8 +8,32 @@
     <color name="levelUpColor">#3F51B5</color>
     <color name="grayColor">#8D8D8D</color>
     <color name="noColor">#00FFFFFF</color>
-    <color name="indigo_500">#09343E</color>
-    <color name="blue_500">#061229</color>
+    <color name="turquoise">#09343E</color>
+    <color name="dark_green">#061229</color>
     <color name="yellow">#EEC71C</color>
     <color name="green">#46B241</color>
+    <color name="ddddd">#FF8C00</color>
+
+    <color name="pink_but">#E85668</color>
+    <color name="purple_but">#B10361</color>
+    <color name="blue_but">#418CF8</color>
+    <color name="green_but">#4BB462</color>
+    <color name="red_but">#D12424</color>
+    <color name="yellow_but">#FFE55E</color>
+    <color name="orange_but">#FF9800</color>
+    <color name="violet_but">#A771FE</color>
+    <color name="light_blue_but">#3ECECE</color>
+    
+    <integer-array name="buttoncolors">
+        <item>@color/pink_but</item>
+        <item>@color/purple_but</item>
+        <item>@color/blue_but</item>
+        <item>@color/green_but</item>
+        <item>@color/red_but</item>
+        <item>@color/yellow_but</item>
+        <item>@color/orange_but</item>
+        <item>@color/violet_but</item>
+        <item>@color/light_blue_but</item>
+    </integer-array>
+
 </resources>

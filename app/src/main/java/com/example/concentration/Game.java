@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Game extends AppCompatActivity {
 
@@ -29,12 +30,24 @@ public class Game extends AppCompatActivity {
 
     public Game(){}
 
+    @SuppressLint("UseSparseArrays")
+    Map<Integer, Integer> colors = new HashMap<>();
     ArrayList<Button> buttons = new ArrayList<>();
     Constants constants = new Constants();
     Concentration gameLogic;
     Button pauseButton;
     TextView levelNumTextView, flipsCountView;
 
+    private void setColorOfButtons() {
+        int[] buttonColors = getResources().getIntArray(R.array.buttoncolors);
+        for (int index = 0; index < numberOfCards; index++) {
+            colors.put(index,buttonColors[new Random().nextInt(buttonColors.length)]);
+        }
+    }
+
+    private int getColorOfButtons(int index) {
+        return colors.get(index);
+    }
 
 
     public void setClick(final Boolean fl, int delay) {
@@ -48,8 +61,10 @@ public class Game extends AppCompatActivity {
     }
 
     public void appearanceOfCards() {
+        setColorOfButtons();
         for (int index = 0; index < numberOfCards; index++) {
             final Button button = buttons.get(index);
+            button.getBackground().setColorFilter(getColorOfButtons(index),PorterDuff.Mode.MULTIPLY);
             button.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -110,6 +125,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void outPutRandomly(ArrayList<Integer> array) {
+
         for (int index = 0; index < array.size(); index++) {
             final int randomButtonIndex = array.get(index);
             final Button finalBut = pressedButton(randomButtonIndex);
@@ -126,7 +142,7 @@ public class Game extends AppCompatActivity {
                 @Override
                 public void run() {
                     finalBut.setText(""); // closed
-                    finalBut.getBackground().setColorFilter(getResources().getColor(R.color.buttonsColor), PorterDuff.Mode.MULTIPLY);
+                    finalBut.getBackground().setColorFilter(getColorOfButtons(getIndex(finalBut.getId())),PorterDuff.Mode.MULTIPLY);
                 }
             }, constants.delayForFirstAppearance); // default. DO NOT TOUCH!
             constants.delayForFirstAppearance += constants.timeCardIsOpen; // time between closed and next opened card
@@ -157,7 +173,7 @@ public class Game extends AppCompatActivity {
         } else {
             button.setText("");
             if (!card.isMatched) {
-                button.getBackground().setColorFilter(getResources().getColor(R.color.buttonsColor), PorterDuff.Mode.MULTIPLY);
+                button.getBackground().setColorFilter(getColorOfButtons(getIndex(button.getId())),PorterDuff.Mode.MULTIPLY);
             } else {
                 button.getBackground().setColorFilter(getResources().getColor(R.color.noColor), PorterDuff.Mode.MULTIPLY);
                 button.setEnabled(false);
