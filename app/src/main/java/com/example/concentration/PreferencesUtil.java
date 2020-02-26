@@ -16,6 +16,17 @@ public class PreferencesUtil {
         return Integer.valueOf(mDatabase);
     }
 
+    static void saveNumOfColors(Context context, int colors){
+        saveValue(context, String.valueOf(colors), "colors");
+    }
+
+    static int getNumOfColors(Context context){
+        String mDatabase = getValue(context, "colors");
+        if (mDatabase == null) mDatabase = "1";
+
+        return Integer.valueOf(mDatabase);
+    }
+
     private static void saveValue(Context context, String data, String key) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();

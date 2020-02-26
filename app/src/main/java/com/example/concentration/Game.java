@@ -39,9 +39,15 @@ public class Game extends AppCompatActivity {
     TextView levelNumTextView, flipsCountView;
 
     private void setColorOfButtons() {
+        int amountOfColors = PreferencesUtil.getNumOfColors(this);
         int[] buttonColors = getResources().getIntArray(R.array.buttoncolors);
+        ArrayList<Integer> arrayOfColors = new ArrayList<>();
+        for (int a : buttonColors) arrayOfColors.add(a);
+        Collections.shuffle(arrayOfColors);
+
         for (int index = 0; index < numberOfCards; index++) {
-            colors.put(index,buttonColors[new Random().nextInt(buttonColors.length)]);
+            int randomColor = new Random().nextInt(amountOfColors);
+            colors.put(index,arrayOfColors.get(randomColor));
         }
     }
 
