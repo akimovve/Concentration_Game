@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -162,52 +164,56 @@ public class CompetitionGameActivity extends Game {
                 int a = 1; // 1 - add, 2 - show, 3 - clear Data Base
                 ContentValues cv = new ContentValues();
                 String name = nameEditText.getText().toString();
-                SQLiteDatabase db = dbHelper.getWritableDatabase(); // connecting to Data Base (insert – вставка, query – чтение, delete – удаление)
+                if (name.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Enter your name", Toast.LENGTH_SHORT).show();
+                } else {
+                    SQLiteDatabase db = dbHelper.getWritableDatabase(); // connecting to Data Base (insert – вставка, query – чтение, delete – удаление)
 
-                switch (a) {
-                    case 1: {
-                        Log.d(LOG_TAG, "--- INSERT in the table: ---");
-                        cv.put("name", name);
-                        cv.put("flips", amountOfFlips);
-                        long rowID = db.insert("results_table", null, cv);
-                        Log.d(LOG_TAG, "row inserted, ID = " + rowID);
-                        break;
+                    switch (a) {
+                        case 1: {
+                            Log.d(LOG_TAG, "--- INSERT in the table: ---");
+                            cv.put("name", name);
+                            cv.put("flips", amountOfFlips);
+                            long rowID = db.insert("results_table", null, cv);
+                            Log.d(LOG_TAG, "row inserted, ID = " + rowID);
+                            break;
+                        }
+                        case 2: {
+                            Log.d(LOG_TAG, "--- READ the table: ---"); // Делаем запрос всех данных из таблицы results_table, получаем Cursor
+                            Cursor c = db.query("results_table", null, null, null, null, null, null);
+
+                            // Ставим позицию курсора на первую строку выборки. Если в выборке нет строк, вернётся false
+                            if (c.moveToFirst()) {
+                                int idColIndex = c.getColumnIndex("id"); // Номера столбцов по имени в выборке
+                                int nameColIndex = c.getColumnIndex("name");
+                                int flipsColIndex = c.getColumnIndex("flips");
+
+                                do {
+                                    // Получаем значения по номерам столбцов и пишем все в лог
+                                    Log.d(LOG_TAG,
+                                            "ID = " + c.getInt(idColIndex) +
+                                                    ", name = " + c.getString(nameColIndex) +
+                                                    ", flips = " + c.getInt(flipsColIndex));
+
+                                } while (c.moveToNext()); // Переход на следующую строку, а если следующей нет (текущая - последняя), то false - выходим из цикла
+                            } else
+                                Log.d(LOG_TAG, "0 rows");
+                            c.close();
+                            break;
+                        }
+                        case 3: {
+                            Log.d(LOG_TAG, "--- DELETE the table: ---");
+                            int clearCount = db.delete("results_table", null, null); // Удаляем всё
+                            Log.d(LOG_TAG, "deleted rows count = " + clearCount);
+                            break;
+                        }
                     }
-                    case 2: {
-                        Log.d(LOG_TAG, "--- READ the table: ---"); // Делаем запрос всех данных из таблицы results_table, получаем Cursor
-                        Cursor c = db.query("results_table", null, null, null, null, null, null);
+                    dbHelper.close();
 
-                        // Ставим позицию курсора на первую строку выборки. Если в выборке нет строк, вернётся false
-                        if (c.moveToFirst()) {
-                            int idColIndex = c.getColumnIndex("id"); // Номера столбцов по имени в выборке
-                            int nameColIndex = c.getColumnIndex("name");
-                            int flipsColIndex = c.getColumnIndex("flips");
-
-                            do {
-                                // Получаем значения по номерам столбцов и пишем все в лог
-                                Log.d(LOG_TAG,
-                                        "ID = " + c.getInt(idColIndex) +
-                                                ", name = " + c.getString(nameColIndex) +
-                                                ", flips = " + c.getInt(flipsColIndex));
-
-                            } while (c.moveToNext()); // Переход на следующую строку, а если следующей нет (текущая - последняя), то false - выходим из цикла
-                        } else
-                            Log.d(LOG_TAG, "0 rows");
-                        c.close();
-                        break;
-                    }
-                    case 3: {
-                        Log.d(LOG_TAG, "--- DELETE the table: ---");
-                        int clearCount = db.delete("results_table", null, null); // Удаляем всё
-                        Log.d(LOG_TAG, "deleted rows count = " + clearCount);
-                        break;
-                    }
+                    Intent intent = new Intent(CompetitionGameActivity.this, ResultsActivity.class);
+                    startActivity(intent);
+                    dialog.dismiss();
                 }
-                dbHelper.close();
-
-                Intent intent = new Intent(CompetitionGameActivity.this, ResultsActivity.class);
-                startActivity(intent);
-                dialog.dismiss();
             }
         });
         dialog.show();

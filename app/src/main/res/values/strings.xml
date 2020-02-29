@@ -31,4 +31,14 @@
     <string name="settings">SETTINGS</string>
     <string name="number_of_colors">Number of colors</string>
     <string name="colors_number">Colors\' number:</string>
+    <string name="cooperate_with_your_friend">Cooperate with your friend</string>
+    <string name="competition_text_preview">
+        Welcome to the competition mode!\n
+        In this mode you and your friend(s) will understand\n
+        who is the most <b>concentration person</b>> of you\n
+        Your goal is to complete 5 levels of matching cards\n
+        In the end their will be a <b>winner</b>!\n
+        Good luck!
+    </string>
+    <string name="start">START</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.concentration">
 
     <application
@@ -10,33 +11,48 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Menu.HomeActivity"
-            android:theme="@style/MainWindowAppTheme">
+            android:theme="@style/MainWindowAppTheme"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".CompetitionGameActivity">
+        <activity android:name=".CompetitionGameActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".UnlimitedGameActivity">
+        <activity android:name=".UnlimitedGameActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".Game">
+        <activity android:name=".Game"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".ResultsActivity">
+        <activity android:name=".ResultsActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".Menu.PauseActivity">
+        <activity android:name=".Menu.PauseActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".Levels.LevelUpActivity">
+        <activity android:name=".Levels.LevelUpActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".SettingsActivity">
+        <activity android:name=".SettingsActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
         </activity>
 
         <meta-data

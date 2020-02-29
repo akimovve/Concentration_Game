@@ -2,7 +2,9 @@ package com.example.concentration.Menu;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -37,7 +39,6 @@ public class HomeActivity extends AppCompatActivity {
     LinearLayout layout;
     private AnimationDrawable mAnimationDrawable;
 
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +64,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
-                final Intent intent = new Intent(HomeActivity.this, CompetitionGameActivity.class);
-                intent.putExtra("isHomButPressed", isHomeButtonPressed);
-                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(intent);
-                    }
-                },100);
+                showDialogModeSelector();
             }
         });
 
@@ -108,6 +101,30 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mAnimationDrawable.start();
+    }
+
+    private void showDialogModeSelector() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.precompetition_layout);
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.findViewById(R.id.startCompetition).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(HomeActivity.this, CompetitionGameActivity.class);
+                intent.putExtra("isHomButPressed", isHomeButtonPressed);
+                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                },100);
+            }
+        });
+        dialog.show();
     }
 
     private void init() {
