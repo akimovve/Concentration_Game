@@ -17,12 +17,12 @@ public class PreferencesUtil {
     }
 
     static void saveNumOfColors(Context context, int colors){
-        saveValue(context, String.valueOf(colors), "colors");
+        saveValue(context, String.valueOf(colors), "difLvl");
     }
 
     static int getNumOfColors(Context context){
-        String mDatabase = getValue(context, "colors");
-        if (mDatabase == null) mDatabase = "1";
+        String mDatabase = getValue(context, "difLvl");
+        if (mDatabase == null) mDatabase = "0";
 
         return Integer.valueOf(mDatabase);
     }

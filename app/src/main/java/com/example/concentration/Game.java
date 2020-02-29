@@ -38,16 +38,24 @@ public class Game extends AppCompatActivity {
     Button pauseButton;
     TextView levelNumTextView, flipsCountView;
 
-    private void setColorOfButtons() {
-        int amountOfColors = PreferencesUtil.getNumOfColors(this);
+    private void setDifficulty() {
+        int numColors = 1;
+        int difficultyLevel = PreferencesUtil.getNumOfColors(this);
         int[] buttonColors = getResources().getIntArray(R.array.buttoncolors);
         ArrayList<Integer> arrayOfColors = new ArrayList<>();
         for (int a : buttonColors) arrayOfColors.add(a);
         Collections.shuffle(arrayOfColors);
-
-        for (int index = 0; index < numberOfCards; index++) {
-            int randomColor = new Random().nextInt(amountOfColors);
-            colors.put(index,arrayOfColors.get(randomColor));
+        switch (difficultyLevel) {
+            case 1:
+                numColors = 2;
+                break;
+            case 2:
+                numColors = 3;
+                break;
+        }
+        for (int i = 0; i < numberOfCards; i++) {
+            int randomColor = new Random().nextInt(numColors);
+            colors.put(i,arrayOfColors.get(randomColor));
         }
     }
 
@@ -55,6 +63,19 @@ public class Game extends AppCompatActivity {
         return colors.get(index);
     }
 
+    private void circleCards() {
+        for (int index = 0; index < numberOfCards-1; index++) {
+            final int k = index + 1;
+            final Button button = buttons.get(index);
+            button.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    button.getBackground().setColorFilter(getColorOfButtons(k), PorterDuff.Mode.MULTIPLY);
+                    button.setVisibility(View.VISIBLE);
+                }
+            }, constants.delayForFirstAppearance - 200);
+        }
+    }
 
     public void setClick(final Boolean fl, int delay) {
         new Handler().postDelayed(new Runnable() {
@@ -67,7 +88,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void appearanceOfCards() {
-        setColorOfButtons();
+        setDifficulty();
         for (int index = 0; index < numberOfCards; index++) {
             final Button button = buttons.get(index);
             button.getBackground().setColorFilter(getColorOfButtons(index),PorterDuff.Mode.MULTIPLY);
@@ -79,6 +100,7 @@ public class Game extends AppCompatActivity {
             }, constants.delayForFirstAppearance - 200);
             constants.delayForFirstAppearance += constants.delayBetweenAppearance;
         }
+        if (PreferencesUtil.getNumOfColors(this) == 2) circleCards();
     }
 
     public void openCardsRandomly() {
@@ -131,7 +153,6 @@ public class Game extends AppCompatActivity {
     }
 
     public void outPutRandomly(ArrayList<Integer> array) {
-
         for (int index = 0; index < array.size(); index++) {
             final int randomButtonIndex = array.get(index);
             final Button finalBut = pressedButton(randomButtonIndex);
@@ -153,6 +174,7 @@ public class Game extends AppCompatActivity {
             }, constants.delayForFirstAppearance); // default. DO NOT TOUCH!
             constants.delayForFirstAppearance += constants.timeCardIsOpen; // time between closed and next opened card
         }
+        if (PreferencesUtil.getNumOfColors(this) == 2) circleCards();
     }
 
     public Button pressedButton(int index) {

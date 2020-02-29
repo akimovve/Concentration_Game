@@ -34,20 +34,32 @@
         android:layout_margin="10dp"
         android:contentDescription="@string/todo" />
 
-    <EditText
-        android:id="@+id/numberOfColorsTextView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
-        android:backgroundTint="@color/whiteColor"
-        android:ems="10"
-        android:hint="Number of colors"
-        android:inputType="numberSigned"
-        android:textColor="@color/whiteColor"
-        android:textColorHint="@color/grayColor" />
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/difTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_medium"
+            android:textColor="@color/whiteColor"
+            android:textSize="24sp">
+
+        </TextView>
+
+        <SeekBar
+            android:id="@+id/colorsSeekBar"
+            style="@style/SeekBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:max="2"
+            android:progress="1" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

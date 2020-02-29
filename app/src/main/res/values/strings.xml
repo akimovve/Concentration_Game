@@ -29,4 +29,6 @@
     <string name="score_0">SCORE 0</string>
     <string name="todo">TODO</string>
     <string name="settings">SETTINGS</string>
+    <string name="number_of_colors">Number of colors</string>
+    <string name="colors_number">Colors\' number:</string>
 </resources>
