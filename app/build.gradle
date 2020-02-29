@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        akimovve {
+            storeFile file('/Users/akimovve/Documents/keys/key_store.jks')
+            storePassword 'qwerty12345'
+            keyAlias = 'GameApp'
+            keyPassword '12345qwerty'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -15,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.akimovve
         }
     }
 }
