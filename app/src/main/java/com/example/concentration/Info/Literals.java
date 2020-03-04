@@ -6,8 +6,9 @@ public class Literals {
     private static int levelNumber = 0;
     private static int numberOfBut = 0;
 
-    public static int match = 2;
-    public static int miss = 1;
+    public final static int match = 2;
+    public final static int miss = 1;
+    public static int points = 0;
 
     public int delayForFirstAppearance = 350;
     public int delayBetweenAppearance = 80;

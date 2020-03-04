@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.example.concentration.Game.ChallengeGameActivity;
 import com.example.concentration.Game.MajorGameActivity;
+import com.example.concentration.Info.Literals;
 import com.example.concentration.Info.Variables;
 
 public class LevelUpActivity extends Activity {
@@ -21,7 +22,7 @@ public class LevelUpActivity extends Activity {
     private Intent intent;
     private Variables var;
     private boolean whichActivity;
-    private int flipsNum = 0;
+    private int flipsNum = 0, points = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -33,12 +34,13 @@ public class LevelUpActivity extends Activity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             whichActivity = bundle.getBoolean("activity");
-            flipsNum = bundle.getInt("number_of_flips");
+            flipsNum = bundle.getInt("flips");
+            points = bundle.getInt("points");
         }
 
         init();
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
-        levelPassedTextView.setText("You found pairs in " + flipsNum + " flips!");
+        levelPassedTextView.setText("MATCHED!\n" + flipsNum + " flips\n" + points + " points");
 
         OnClickListener onButtonClick = new OnClickListener() {
             @Override

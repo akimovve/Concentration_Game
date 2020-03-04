@@ -14,7 +14,6 @@
     <string name="competition">Competition</string>
     <string name="single_play">Single play</string>
     <string name="game_mode">Game mode</string>
-    <string name="copyright_2020_akimovve">©copyright 2020.akimovve</string>
     <string name="menu">Menu</string>
     <string name="you_won">You won!</string>
     <string name="enter_your_name">Enter your name:</string>
@@ -42,4 +41,7 @@
         Good luck!
     </string>
     <string name="start">START</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
 </resources>

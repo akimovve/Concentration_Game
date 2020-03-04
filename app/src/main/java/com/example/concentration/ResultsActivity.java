@@ -25,7 +25,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     boolean isEmpty = true;
     Button backButton;
-    private Map<String, Integer> resArrayOfFlips = new HashMap<>();
+    private Map<String, Double> resArrayOfFlips = new HashMap<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,33 +44,30 @@ public class ResultsActivity extends AppCompatActivity {
         });
 
         SQLiteDatabase db;
-        db = openOrCreateDatabase("resultsDB", Context.MODE_PRIVATE, null);
+        db = openOrCreateDatabase("ChallengeResults", Context.MODE_PRIVATE, null);
 
         try {
-            Cursor c = db.query("results_table", null, null, null, null, null, null);
+            Cursor c = db.query("ChallengeResults", null, null, null, null, null, null);
             if (c.moveToFirst()) {
                 isEmpty = false;
-                int nameColIndex = c.getColumnIndex("name");
-                int flipsColIndex = c.getColumnIndex("flips");
+                int nameColIndex = c.getColumnIndex("Name");
+                int flipsColIndex = c.getColumnIndex("Percents");
 
                 do {
-                    resArrayOfFlips.put(c.getString(nameColIndex), c.getInt(flipsColIndex));
+                    resArrayOfFlips.put(c.getString(nameColIndex), c.getDouble(flipsColIndex));
                 } while (c.moveToNext());
             } else isEmpty = true;
             c.close();
 
             if (!isEmpty) {
-                List<Map.Entry<String, Integer>> sortList = new ArrayList(resArrayOfFlips.entrySet());
-                Collections.sort(sortList, new Comparator<Map.Entry<String, Integer>>() {
+                List<Map.Entry<String, Double>> sortList = new ArrayList(resArrayOfFlips.entrySet());
+                Collections.sort(sortList, new Comparator<Map.Entry<String, Double>>() {
                     @Override
-                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                        return o1.getValue().compareTo(o2.getValue());
+                    public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
+                        return o2.getValue().compareTo(o1.getValue());
                     }
                 });
-
-                int size;
-                if (resArrayOfFlips.size() < 10) size = resArrayOfFlips.size();
-                else size = 10;
+                int size = Math.min(resArrayOfFlips.size(), 10);
 
                 System.out.println(size);
 
@@ -83,8 +80,14 @@ public class ResultsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * TO DO: Create an array of info buttons, which will appear in each row of Results Table
+     * to show the the information of every person who plays that game:
+     * amount of flips, amount of points, time
+     */
+
     @SuppressLint("SetTextI18n")
-    public void addRow(int id, String name, int flips) {
+    public void addRow(int id, String name, Double percents) {
         TableLayout resultsTableLayout = findViewById(R.id.resultsTable);
         LayoutInflater inflater = LayoutInflater.from(this);
         TableRow tr = (TableRow) inflater.inflate(R.layout.table_row, null);
@@ -92,8 +95,8 @@ public class ResultsActivity extends AppCompatActivity {
         tv.setText(Integer.toString(id));
         tv = tr.findViewById(R.id.name);
         tv.setText(name);
-        tv = tr.findViewById(R.id.flips);
-        tv.setText(Integer.toString(flips));
+        tv = tr.findViewById(R.id.percents);
+        tv.setText(percents + " %");
         resultsTableLayout.addView(tr);
     }
 }

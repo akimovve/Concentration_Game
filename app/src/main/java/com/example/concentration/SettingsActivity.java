@@ -1,21 +1,21 @@
 package com.example.concentration;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.concentration.DataSave.PreferencesUtil;
+import java.util.ArrayList;
 
-public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+public class SettingsActivity extends AppCompatActivity {
 
     private Button backButton;
-    private TextView difTextView;
-    private SeekBar colorsSeekBar;
+    private ArrayList<Button> complexity = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,39 +32,34 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
             }
         });
 
-        colorsSeekBar.post(new Runnable() {
-            @SuppressLint("SetTextI18n")
+        OnClickListener onClickListener = new OnClickListener() {
             @Override
-            public void run() {
-                difTextView.setText("Complexity level: " + (PreferencesUtil.getComplexity(SettingsActivity.this) + 1));
-                colorsSeekBar.setProgress(PreferencesUtil.getComplexity(SettingsActivity.this));
+            public void onClick(View v) {
+                for (int i = 0; i < complexity.size(); i++) {
+                    if (complexity.get(i).getId() == v.getId()) {
+                        complexity.get(i).getBackground().setColorFilter(getResources().getColor(R.color.redColor), PorterDuff.Mode.MULTIPLY);
+                        complexity.get(i).setTextColor(Color.WHITE);
+                        PreferencesUtil.saveComplexity(SettingsActivity.this, i);
+                    } else {
+                        complexity.get(i).getBackground().setColorFilter(getResources().getColor(R.color.whiteColor), PorterDuff.Mode.MULTIPLY);
+                        complexity.get(i).setTextColor(Color.BLACK);
+                    }
+                }
             }
-        });
+        };
 
+        for (int i = 0; i < complexity.size(); i++) {
+            complexity.get(i).setOnClickListener(onClickListener);
+        }
     }
 
     private void init() {
         backButton = findViewById(R.id.backButton);
-        difTextView = findViewById(R.id.difTextView);
-        colorsSeekBar = findViewById(R.id.colorsSeekBar);
-        colorsSeekBar.setOnSeekBarChangeListener(this);
-    }
-
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        int difficultyLevel = colorsSeekBar.getProgress();
-        PreferencesUtil.saveComplexity(SettingsActivity.this, difficultyLevel);
-        difTextView.setText("Complexity level: " + (PreferencesUtil.getComplexity(this) + 1));
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
+        complexity.add((Button)findViewById(R.id.easyComplBut));
+        complexity.add((Button)findViewById(R.id.mediumComplBut));
+        complexity.add((Button)findViewById(R.id.hardComplBut));
+        int index = PreferencesUtil.getComplexity(this);
+        complexity.get(index).getBackground().setColorFilter(getResources().getColor(R.color.redColor), PorterDuff.Mode.MULTIPLY);
+        complexity.get(index).setTextColor(Color.WHITE);
     }
 }

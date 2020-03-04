@@ -31,7 +31,7 @@ public class GameClass extends AppCompatActivity {
 
     public GameClass(){}
 
-    private void setDifficulty() {
+    private void setComplexity() {
         int numColors = 1;
         int difficultyLevel = PreferencesUtil.getComplexity(this);
         int[] buttonColors = getResources().getIntArray(R.array.buttoncolors);
@@ -81,7 +81,7 @@ public class GameClass extends AppCompatActivity {
     }
 
     public void appearanceOfCards() {
-        setDifficulty();
+        setComplexity();
         for (int index = 0; index < numberOfCards; index++) {
             final Button button = buttons.get(index);
             button.getBackground().setColorFilter(getColorOfButtons(index),PorterDuff.Mode.MULTIPLY);

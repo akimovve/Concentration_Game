@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/levelPassedTextView"
         android:layout_width="wrap_content"
-        android:layout_height="458dp"
+        android:layout_height="400dp"
         android:fontFamily="@font/sf_pro_bold"
         android:gravity="center"
         android:textColor="@color/yellow"

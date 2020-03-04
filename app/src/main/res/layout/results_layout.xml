@@ -7,24 +7,30 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="20dp"
-        android:layout_height="28dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@mipmap/back_button" />
-
-    <TextView
-        android:id="@+id/textView5"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sf_pro_medium"
-        android:gravity="center_horizontal"
-        android:text="@string/results"
-        android:textColor="@color/whiteColor"
-        android:textSize="36sp" />
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="20dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@mipmap/back_button" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_medium"
+            android:text="@string/results"
+            android:textColor="@color/whiteColor"
+            android:layout_marginStart="75dp"
+            android:textSize="36sp" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/line"
@@ -34,11 +40,33 @@
         android:layout_margin="10dp"
         android:contentDescription="@string/todo" />
 
-    <TableLayout
-        android:id="@+id/resultsTable"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+        android:orientation="horizontal">
+
+        <TableLayout
+            android:id="@+id/resultsTable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="60dp"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
