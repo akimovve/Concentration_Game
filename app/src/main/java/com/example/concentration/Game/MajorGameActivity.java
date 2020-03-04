@@ -27,7 +27,7 @@ public class MajorGameActivity extends GameClass {
         setContentView(R.layout.gameplay_layout);
 
         numberOfCards = 16;
-        gameLogic = new Concentration((numberOfCards + 1) / 2);
+        gameLogic = new Focus((numberOfCards + 1) / 2);
 
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         init();

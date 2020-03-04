@@ -25,7 +25,7 @@ public class GameClass extends AppCompatActivity {
     private Map<Integer, Integer> colors = new HashMap<>();
     protected ArrayList<Button> buttons = new ArrayList<>();
     protected Literals literals = new Literals();
-    protected Concentration gameLogic;
+    protected Focus gameLogic;
     protected Button pauseButton;
     protected TextView levelNumTextView, flipsCountView, pointsView;
 

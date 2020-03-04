@@ -60,7 +60,7 @@ public class ChallengeGameActivity extends GameClass {
             numberOfCards = Literals.getNumberOFButtons(flag);
         }
 
-        gameLogic = new Concentration((numberOfCards + 1) / 2);
+        gameLogic = new Focus((numberOfCards + 1) / 2);
 
         if (!flag) amountOfFlips = 0;
 

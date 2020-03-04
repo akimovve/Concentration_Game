@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Concentration</string>
+    <string name="app_name">Focus</string>
     <string name="flips">Flips</string>
-    <string name="concentration_title">Concentration</string>
+    <string name="concentration_title">Focus</string>
     <string name="new_game">NEW GAME</string>
     <string name="resume_buttontitle">RESUME</string>
     <string name="pause_buttontitle">PAUSE</string>

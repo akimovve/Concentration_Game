@@ -4,14 +4,14 @@ import com.example.concentration.Info.Literals;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Concentration {
+class Focus {
 
     ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Integer> openedCards = new ArrayList<>();
     private int indexOfOneAndOnlyFaceUpCard = -1;
     int points = 0;
 
-    Concentration(int numberOfPairsOfCards) {
+    Focus(int numberOfPairsOfCards) {
         for (int i = 0; i < numberOfPairsOfCards * 2; i++) {
             Card card = new Card();
             cards.add(card);
