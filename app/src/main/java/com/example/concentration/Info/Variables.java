@@ -4,7 +4,6 @@ public class Variables {
     public int changeDelay;
     private static int change = 100;
     private static boolean flag;
-
     private static int changeable = 0;
 
     public Variables(boolean flag) {

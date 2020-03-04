@@ -12,12 +12,8 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.concentration.Menu.HomeActivity;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,13 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class ResultsActivity extends AppCompatActivity {
 
     boolean isEmpty = true;
-
     Button backButton;
-    Map<String, Integer> resArrayOfFlips = new HashMap<>();
+    private Map<String, Integer> resArrayOfFlips = new HashMap<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +42,6 @@ public class ResultsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         SQLiteDatabase db;
         db = openOrCreateDatabase("resultsDB", Context.MODE_PRIVATE, null);
@@ -89,7 +82,6 @@ public class ResultsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
     @SuppressLint("SetTextI18n")
     public void addRow(int id, String name, int flips) {

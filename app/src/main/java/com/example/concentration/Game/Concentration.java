@@ -1,13 +1,15 @@
-package com.example.concentration;
+package com.example.concentration.Game;
 
+import com.example.concentration.Info.Literals;
 import java.util.ArrayList;
 import java.util.Collections;
 
 class Concentration {
 
     ArrayList<Card> cards = new ArrayList<>();
-
+    private ArrayList<Integer> openedCards = new ArrayList<>();
     private int indexOfOneAndOnlyFaceUpCard = -1;
+    int points = 0;
 
     Concentration(int numberOfPairsOfCards) {
         for (int i = 0; i < numberOfPairsOfCards * 2; i++) {
@@ -28,6 +30,16 @@ class Concentration {
                 if (cards.get(matchIndex).identifier == cards.get(index).identifier) {
                     cards.get(matchIndex).isMatched = true;
                     cards.get(index).isMatched = true;
+                    points += Literals.match;
+                } else {
+                    if (openedCards.contains(index)) {
+                        points -= Literals.miss;
+                    }
+                    if (openedCards.contains(matchIndex)) {
+                        points -= Literals.miss;
+                    }
+                    openedCards.add(index);
+                    openedCards.add(matchIndex);
                 }
                 cards.get(index).isFaceUp = true;
                 indexOfOneAndOnlyFaceUpCard = -1;
@@ -47,6 +59,6 @@ class Concentration {
                 break;
             }
         }
-        return result;
+        return !result;
     }
 }

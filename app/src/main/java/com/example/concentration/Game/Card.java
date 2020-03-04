@@ -1,18 +1,17 @@
-package com.example.concentration;
+package com.example.concentration.Game;
 
 class Card {
     boolean isFaceUp = false;
     boolean isMatched = false;
     int identifier;
-
-    private static int identifierFactory = 0;
+    private static int idCreator = 0;
 
     Card() {
         this.identifier = getUniqueIdentifier();
     }
 
     private static int getUniqueIdentifier() {
-        identifierFactory += 1;
-        return identifierFactory;
+        idCreator++;
+        return idCreator;
     }
 }

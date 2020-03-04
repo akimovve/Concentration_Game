@@ -35,9 +35,10 @@
     <string name="competition_text_preview">
         Welcome to the competition mode!\n
         In this mode you and your friend(s) will understand\n
-        who is the most <b>concentration person</b>> of you\n
-        Your goal is to complete 5 levels of matching cards\n
-        In the end their will be a <b>winner</b>!\n
+        who is the most concentration person of you\n
+        Your goal is to complete \n
+        5 levels of matching cards\n
+        In the end their will be a winner!\n
         Good luck!
     </string>
     <string name="start">START</string>

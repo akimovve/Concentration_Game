@@ -1,4 +1,4 @@
-package com.example.concentration.Menu;
+package com.example.concentration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,19 +6,16 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.concentration.CompetitionGameActivity;
+import com.example.concentration.Game.ChallengeGameActivity;
+import com.example.concentration.Game.MajorGameActivity;
 import com.example.concentration.Info.Variables;
-import com.example.concentration.R;
-import com.example.concentration.UnlimitedGameActivity;
 
 public class PauseActivity extends AppCompatActivity {
 
-    Button resumeButton, newGameButton, homeButton;
+    private Button resumeButton, newGameButton, homeButton;
     Variables var;
-    boolean whichActivity;
+    private boolean whichActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +24,10 @@ public class PauseActivity extends AppCompatActivity {
         whichActivity = false;
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) { whichActivity = bundle.getBoolean("activity"); }
+        if (bundle != null)
+            whichActivity = bundle.getBoolean("activity");
 
-        resumeButton = findViewById(R.id.resumeButton);
-        newGameButton = findViewById(R.id.newGameButton);
-        homeButton = findViewById(R.id.homeButton);
-
+        init();
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +37,8 @@ public class PauseActivity extends AppCompatActivity {
                 var = new Variables(false);
                 Intent intent;
                 if (whichActivity) {
-                    intent = new Intent(PauseActivity.this, UnlimitedGameActivity.class);
-                } else intent = new Intent(PauseActivity.this, CompetitionGameActivity.class);
+                    intent = new Intent(PauseActivity.this, MajorGameActivity.class);
+                } else intent = new Intent(PauseActivity.this, ChallengeGameActivity.class);
                 intent.putExtra("levelUp",false);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
@@ -68,5 +63,11 @@ public class PauseActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void init() {
+        resumeButton = findViewById(R.id.resumeButton);
+        newGameButton = findViewById(R.id.newGameButton);
+        homeButton = findViewById(R.id.homeButton);
     }
 }

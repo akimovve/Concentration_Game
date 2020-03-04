@@ -1,4 +1,4 @@
-package com.example.concentration;
+package com.example.concentration.Game;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,26 +19,22 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
-
-import com.example.concentration.Info.Constants;
-import com.example.concentration.Levels.LevelUpActivity;
-import com.example.concentration.Menu.PauseActivity;
-
+import com.example.concentration.Info.Literals;
+import com.example.concentration.LevelUpActivity;
+import com.example.concentration.PauseActivity;
+import com.example.concentration.R;
+import com.example.concentration.ResultsActivity;
 import java.util.Objects;
 
-public class CompetitionGameActivity extends Game {
+public class ChallengeGameActivity extends GameClass {
 
     OnClickListener buttonClicks;
-    int maxLevel = 5;
-    int flipCount = 0;
-    int connect = 0;
-    static int amountOfFlips = 0;
-    boolean flag = true;
-    boolean homeButtonIsPressed = false;
     DBHelper dbHelper;
-    final String LOG_TAG = "myLogs";
+    private int flipCount = 0;
+    private static int amountOfFlips = 0;
+    private boolean flag = true, homeButtonIsPressed = false;
+    private final String LOG_TAG = "myLogs";
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -48,6 +43,7 @@ public class CompetitionGameActivity extends Game {
         setContentView(R.layout.gameplay_layout);
 
         Bundle bundle = getIntent().getExtras();
+        int connect = 0;
         if (bundle != null) {
             connect = bundle.getInt("whichLevel");
             flag = bundle.getBoolean("levelUp");
@@ -57,19 +53,16 @@ public class CompetitionGameActivity extends Game {
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         final int levelNumber;
         if (homeButtonIsPressed) {
-            levelNumber = Constants.getLevelNumber(false);
-            numberOfCards = Constants.getNumberOFButtons(false);
+            levelNumber = Literals.getLevelNumber(false);
+            numberOfCards = Literals.getNumberOFButtons(false);
         } else {
-            levelNumber = Constants.getLevelNumber(flag);
-            numberOfCards = Constants.getNumberOFButtons(flag);
+            levelNumber = Literals.getLevelNumber(flag);
+            numberOfCards = Literals.getNumberOFButtons(flag);
         }
 
         gameLogic = new Concentration((numberOfCards + 1) / 2);
 
         if (!flag) amountOfFlips = 0;
-
-        homeButtonIsPressed = false;
-        flag = true;
 
         init();
         levelNumTextView.setText("Level " + levelNumber);
@@ -77,12 +70,12 @@ public class CompetitionGameActivity extends Game {
         setClick(false,1); // time for becoming cards not clickable
         appearanceOfCards(); // cards start to appear one by one
         openCardsRandomly(); // cards start opening randomly
-        setClick(true, constants.delayForFirstAppearance + connect); // delay of start of the game
+        setClick(true, literals.delayForFirstAppearance + connect); // delay of start of the game
 
         pauseButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CompetitionGameActivity.this, PauseActivity.class);
+                Intent intent = new Intent(ChallengeGameActivity.this, PauseActivity.class);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
@@ -97,14 +90,14 @@ public class CompetitionGameActivity extends Game {
                     amountOfFlips += 1;
                     id = v.getId();
                 }
-                flipsCountView.setText(String.valueOf(flipCount));
-
+                flipsCountView.setText("Flips: " + flipCount);
+                pointsView.setText("Points: " + gameLogic.points);
                 gameLogic.chooseCard(getIndex(v.getId()));
                 updateViewFromModel();
 
-                if (!gameLogic.checkForAllMatchedCards()) {
-                    if (levelNumber < maxLevel) {
-                        Intent intent = new Intent(CompetitionGameActivity.this, LevelUpActivity.class);
+                if (gameLogic.checkForAllMatchedCards()) {
+                    if (levelNumber < Literals.maxLevel) {
+                        Intent intent = new Intent(ChallengeGameActivity.this, LevelUpActivity.class);
                         intent.putExtra("number_of_flips", flipCount);
                         overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                         startActivity(intent);
@@ -123,10 +116,13 @@ public class CompetitionGameActivity extends Game {
     }
 
     private void init() {
+        homeButtonIsPressed = false;
+        flag = true;
         dbHelper = new DBHelper(this); // creating object for Data Base
         pauseButton = findViewById(R.id.pauseButton);
         levelNumTextView = findViewById(R.id.levelTextView);
         flipsCountView = findViewById(R.id.flipsCountView);
+        pointsView = findViewById(R.id.pointsView);
         buttons.add((Button)findViewById(R.id.button_00));
         buttons.add((Button)findViewById(R.id.button_01));
         buttons.add((Button)findViewById(R.id.button_02));
@@ -210,7 +206,7 @@ public class CompetitionGameActivity extends Game {
                     }
                     dbHelper.close();
 
-                    Intent intent = new Intent(CompetitionGameActivity.this, ResultsActivity.class);
+                    Intent intent = new Intent(ChallengeGameActivity.this, ResultsActivity.class);
                     startActivity(intent);
                     dialog.dismiss();
                 }

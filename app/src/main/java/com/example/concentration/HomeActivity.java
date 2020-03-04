@@ -1,10 +1,8 @@
-package com.example.concentration.Menu;
+package com.example.concentration;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -18,24 +16,18 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.concentration.CompetitionGameActivity;
-import com.example.concentration.PreferencesUtil;
-import com.example.concentration.R;
-import com.example.concentration.ResultsActivity;
-import com.example.concentration.SettingsActivity;
-import com.example.concentration.UnlimitedGameActivity;
-
+import com.example.concentration.DataSave.PreferencesUtil;
+import com.example.concentration.Game.ChallengeGameActivity;
+import com.example.concentration.Game.MajorGameActivity;
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
-    boolean isHomeButtonPressed = false;
-    int levelNumber = 1;
-    Button rewardsButton, challengeButton, tableOfRecordsButton, settingsButton, mainPlayButton, presentsButton;
-    TextView lvlTextView;
+    private boolean isHomeButtonPressed = false;
+    private int levelNumber = 1;
+    private Button rewardsButton, challengeButton, tableOfRecordsButton, settingsButton, mainPlayButton, presentsButton;
+    private TextView lvlTextView;
     LinearLayout layout;
     private AnimationDrawable mAnimationDrawable;
 
@@ -72,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
-                Intent intent = new Intent(HomeActivity.this, UnlimitedGameActivity.class);
+                Intent intent = new Intent(HomeActivity.this, MajorGameActivity.class);
                 startActivity(intent);
             }
         });
@@ -98,6 +90,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         mAnimationDrawable.start();
@@ -112,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
         dialog.findViewById(R.id.startCompetition).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(HomeActivity.this, CompetitionGameActivity.class);
+                final Intent intent = new Intent(HomeActivity.this, ChallengeGameActivity.class);
                 intent.putExtra("isHomButPressed", isHomeButtonPressed);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 new Handler().postDelayed(new Runnable() {

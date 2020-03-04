@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/concentration_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Menu.HomeActivity"
+        <activity android:name=".HomeActivity"
             android:theme="@style/MainWindowAppTheme"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -20,17 +20,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CompetitionGameActivity"
+        <activity android:name=".Game.ChallengeGameActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".UnlimitedGameActivity"
+        <activity android:name=".Game.MajorGameActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".Game"
+        <activity android:name=".Game.GameClass"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
         </activity>
@@ -40,12 +40,12 @@
             tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".Menu.PauseActivity"
+        <activity android:name=".PauseActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
         </activity>
 
-        <activity android:name=".Levels.LevelUpActivity"
+        <activity android:name=".LevelUpActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
         </activity>

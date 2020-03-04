@@ -1,46 +1,39 @@
-package com.example.concentration;
+package com.example.concentration.Game;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.concentration.Info.Constants;
-
+import com.example.concentration.Info.Literals;
+import com.example.concentration.DataSave.PreferencesUtil;
+import com.example.concentration.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Game extends AppCompatActivity {
+public class GameClass extends AppCompatActivity {
 
-    int numberOfCards;
-    int connect = 0;
-    int howShorter = 0;
-    int id = -1;
-    final int convertIdToIndex = R.id.button_00;
-    String[] emojiTypes = {"🏰","🐨","🐝","🦂","🦖","⛄️","🛸","💻","🏁","💂","💍","🐒","🐊","🎄","🏍","👾","🦁","🐿","🔥","🌘","🍕","⚽️","🥁","🧀","🛩","📸","🎁","🍏","🐩","🐓","🍁",
-            "🌈","🦈","🛏","📚","🗿","🎭","🍿","🥥","🍆","🦔","🎮️","🌶","🐘","🚔","🎡","🏔","🚄","🎬","🐙","🍄","🌵","🐢","👑","🧞","👻","🧤","🎓","🎪","🐶","🐲","🍓","🏆","🎰" };
+    protected int numberOfCards;
+    protected int connect = 0, id = -1;
+    private int howShorter = 0;
+    protected final int convertIdToIndex = R.id.button_00;
+    private Map<Integer, Integer> colors = new HashMap<>();
+    protected ArrayList<Button> buttons = new ArrayList<>();
+    protected Literals literals = new Literals();
+    protected Concentration gameLogic;
+    protected Button pauseButton;
+    protected TextView levelNumTextView, flipsCountView, pointsView;
 
-    public Game(){}
-
-    @SuppressLint("UseSparseArrays")
-    Map<Integer, Integer> colors = new HashMap<>();
-    ArrayList<Button> buttons = new ArrayList<>();
-    Constants constants = new Constants();
-    Concentration gameLogic;
-    Button pauseButton;
-    TextView levelNumTextView, flipsCountView;
+    public GameClass(){}
 
     private void setDifficulty() {
         int numColors = 1;
-        int difficultyLevel = PreferencesUtil.getNumOfColors(this);
+        int difficultyLevel = PreferencesUtil.getComplexity(this);
         int[] buttonColors = getResources().getIntArray(R.array.buttoncolors);
         ArrayList<Integer> arrayOfColors = new ArrayList<>();
         for (int a : buttonColors) arrayOfColors.add(a);
@@ -73,7 +66,7 @@ public class Game extends AppCompatActivity {
                     button.getBackground().setColorFilter(getColorOfButtons(k), PorterDuff.Mode.MULTIPLY);
                     button.setVisibility(View.VISIBLE);
                 }
-            }, constants.delayForFirstAppearance - 200);
+            }, literals.delayForFirstAppearance - 200);
         }
     }
 
@@ -97,14 +90,13 @@ public class Game extends AppCompatActivity {
                 public void run() {
                     button.setVisibility(View.VISIBLE);
                 }
-            }, constants.delayForFirstAppearance - 200);
-            constants.delayForFirstAppearance += constants.delayBetweenAppearance;
+            }, literals.delayForFirstAppearance - 200);
+            literals.delayForFirstAppearance += literals.delayBetweenAppearance;
         }
-        if (PreferencesUtil.getNumOfColors(this) == 2) circleCards();
+        if (PreferencesUtil.getComplexity(this) == 2) circleCards();
     }
 
     public void openCardsRandomly() {
-        @SuppressLint("UseSparseArrays")
         Map<Integer,Boolean> checkTheRepeat = new HashMap<>();
         for (int index = 0; index < numberOfCards; index++) {
             checkTheRepeat.put(index, false); // all buttons haven't opened yet => false
@@ -163,25 +155,24 @@ public class Game extends AppCompatActivity {
                     finalBut.setText(getEmoji(gameLogic.cards.get(randomButtonIndex))); // opened
                     finalBut.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
                 }
-            }, constants.delayForFirstAppearance - connect); // default. DO NOT TOUCH!
-            constants.delayForFirstAppearance += constants.timeCardIsClose; // time the card is being opened
+            }, literals.delayForFirstAppearance - connect); // default. DO NOT TOUCH!
+            literals.delayForFirstAppearance += literals.timeCardIsClose; // time the card is being opened
             finalBut.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     finalBut.setText(""); // closed
                     finalBut.getBackground().setColorFilter(getColorOfButtons(getIndex(finalBut.getId())),PorterDuff.Mode.MULTIPLY);
                 }
-            }, constants.delayForFirstAppearance); // default. DO NOT TOUCH!
-            constants.delayForFirstAppearance += constants.timeCardIsOpen; // time between closed and next opened card
+            }, literals.delayForFirstAppearance); // default. DO NOT TOUCH!
+            literals.delayForFirstAppearance += literals.timeCardIsOpen; // time between closed and next opened card
         }
-        if (PreferencesUtil.getNumOfColors(this) == 2) circleCards();
+        if (PreferencesUtil.getComplexity(this) == 2) circleCards();
     }
 
     public Button pressedButton(int index) {
         return buttons.get(index);
     }
 
-    @SuppressLint("ResourceType")
     public int getIndex(int index) {
         return index-convertIdToIndex;
     }
@@ -209,8 +200,9 @@ public class Game extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("UseSparseArrays")
-    Map<Integer, String> emoji = new HashMap<>();
+    private Map<Integer, String> emoji = new HashMap<>();
+    private String[] emojiTypes = {"🏰","🐨","🐝","🦂","🦖","⛄️","🛸","💻","🏁","💂","💍","🐒","🐊","🎄","🏍","👾","🦁","🐿","🔥","🌘","🍕","⚽️","🥁","🧀","🛩","📸","🎁","🍏","🐩","🐓","🍁",
+            "🌈","🦈","🛏","📚","🗿","🎭","🍿","🥥","🍆","🦔","🎮️","🌶","🐘","🚔","🎡","🏔","🚄","🎬","🐙","🍄","🌵","🐢","👑","🧞","👻","🧤","🎓","🎪","🐶","🐲","🍓","🏆","🎰" };
 
     public String getEmoji(Card card) {
         if (emoji.get(card.identifier) == null && emojiTypes.length > 0) {

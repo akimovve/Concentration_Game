@@ -1,30 +1,28 @@
-package com.example.concentration;
+package com.example.concentration.DataSave;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class PreferencesUtil {
-    static void saveUserLevel(Context context, int level){
+    public static void saveUserLevel(Context context, int level){
         saveValue(context, String.valueOf(level), "level");
     }
 
     public static int getUserLevel(Context context){
         String mDatabase = getValue(context, "level");
         if (mDatabase == null) mDatabase = "1";
-
-        return Integer.valueOf(mDatabase);
+        return Integer.parseInt(mDatabase);
     }
 
-    static void saveNumOfColors(Context context, int colors){
+    public static void saveComplexity(Context context, int colors){
         saveValue(context, String.valueOf(colors), "difLvl");
     }
 
-    static int getNumOfColors(Context context){
+    public static int getComplexity(Context context){
         String mDatabase = getValue(context, "difLvl");
         if (mDatabase == null) mDatabase = "0";
-
-        return Integer.valueOf(mDatabase);
+        return Integer.parseInt(mDatabase);
     }
 
     private static void saveValue(Context context, String data, String key) {

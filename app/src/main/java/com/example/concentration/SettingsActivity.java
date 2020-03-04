@@ -5,31 +5,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.concentration.Menu.HomeActivity;
+import com.example.concentration.DataSave.PreferencesUtil;
 
 public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
-    Button backButton;
-    TextView difTextView;
-    SeekBar colorsSeekBar;
+    private Button backButton;
+    private TextView difTextView;
+    private SeekBar colorsSeekBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_layout);
 
-        backButton = findViewById(R.id.backButton);
-        difTextView = findViewById(R.id.difTextView);
-        colorsSeekBar = findViewById(R.id.colorsSeekBar);
-        colorsSeekBar.setOnSeekBarChangeListener(this);
-
+        init();
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,19 +38,26 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
             @SuppressLint("SetTextI18n")
             @Override
             public void run() {
-                difTextView.setText("Complexity level: " + (PreferencesUtil.getNumOfColors(SettingsActivity.this) + 1));
-                colorsSeekBar.setProgress(PreferencesUtil.getNumOfColors(SettingsActivity.this));
+                difTextView.setText("Complexity level: " + (PreferencesUtil.getComplexity(SettingsActivity.this) + 1));
+                colorsSeekBar.setProgress(PreferencesUtil.getComplexity(SettingsActivity.this));
             }
         });
 
+    }
+
+    private void init() {
+        backButton = findViewById(R.id.backButton);
+        difTextView = findViewById(R.id.difTextView);
+        colorsSeekBar = findViewById(R.id.colorsSeekBar);
+        colorsSeekBar.setOnSeekBarChangeListener(this);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         int difficultyLevel = colorsSeekBar.getProgress();
-        PreferencesUtil.saveNumOfColors(SettingsActivity.this, difficultyLevel);
-        difTextView.setText("Complexity level: " + (PreferencesUtil.getNumOfColors(this) + 1));
+        PreferencesUtil.saveComplexity(SettingsActivity.this, difficultyLevel);
+        difTextView.setText("Complexity level: " + (PreferencesUtil.getComplexity(this) + 1));
     }
 
     @Override
