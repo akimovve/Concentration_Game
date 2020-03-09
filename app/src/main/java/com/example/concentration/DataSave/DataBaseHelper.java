@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    private static String TABLE_NAME = "ChallengeResults";
+    private static String TABLE_NAME = "TableResultsChallenge";
 
     public DataBaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -20,10 +20,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             String COLUMN_ID = "id";
             String COLUMN_NAME = "Name";
             String COLUMN_PERCENTS = "Percents";
+            String COLUMN_FLIPS = "Flips";
+            String COLUMN_POINTS = "Points";
             query = "CREATE TABLE " + TABLE_NAME
                     + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COLUMN_NAME + " TEXT UNIQUE, "
-                    + COLUMN_PERCENTS + " REAL);";
+                    + COLUMN_PERCENTS + " REAL, "
+                    + COLUMN_FLIPS + " INTEGER, "
+                    + COLUMN_POINTS + " INTEGER);";
         }
         db.execSQL(query);
     }

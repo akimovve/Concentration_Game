@@ -32,7 +32,7 @@ import java.util.Objects;
 public class ChallengeGameActivity extends GameClass {
 
     OnClickListener buttonClicks;
-    DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "ChallengeResults", null, 1);
+    DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "TableResultsChallenge", null, 1);
     private int flipCount = 0;
     private static int amountOfFlips = 0;
     private boolean flag = true, homeButtonIsPressed = false;
@@ -65,6 +65,7 @@ public class ChallengeGameActivity extends GameClass {
 
         if (!flag) amountOfFlips = 0;
         if (!flag || homeButtonIsPressed) Literals.points = 0;
+
 
         init();
         levelNumTextView.setText("Level " + levelNumber);
@@ -103,13 +104,13 @@ public class ChallengeGameActivity extends GameClass {
                         Intent intent = new Intent(ChallengeGameActivity.this, LevelUpActivity.class);
                         intent.putExtra("flips", flipCount);
                         intent.putExtra("points", gameLogic.points);
+                        /**
+                         * TO DO: Fix the problem with amount of points!!!!!
+                         */
                         overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                         startActivity(intent);
                     } else {
                         showDialogModeSelector();
-                        System.out.println(Literals.points);
-
-                        System.out.println("RESULT = " + round(120.0/Literals.points) * 100);
                     }
                 }
             }
@@ -120,14 +121,6 @@ public class ChallengeGameActivity extends GameClass {
             if (btn.getId() - convertIdToIndex == index)
                 btn.setOnClickListener(buttonClicks);
         }
-    }
-
-    private double round(double number) {
-        int pow = 10;
-        for (int i = 1; i < 3; i++)
-            pow *= 10;
-        double tmp = number * pow;
-        return (double) (int) ((tmp - (int) tmp) >= 0.5 ? tmp + 1 : tmp) / pow;
     }
 
     private void init() {
@@ -174,33 +167,44 @@ public class ChallengeGameActivity extends GameClass {
                 int a = 1; // 1 - add, 2 - show, 3 - clear Data Base
                 ContentValues contentValues = new ContentValues();
                 String name = nameEditText.getText().toString();
+
                 if (name.equals("")) {
                     Toast.makeText(getApplicationContext(), "Enter your name", Toast.LENGTH_SHORT).show();
                 } else {
-                    SQLiteDatabase database = dataBaseHelper.getWritableDatabase();// connecting to Data Base (insert – вставка, query – чтение, delete – удаление)
+                    SQLiteDatabase database = dataBaseHelper.getWritableDatabase(); // connecting to Data Base (insert – вставка, query – чтение, delete – удаление)
 
                     switch (a) {
                         case 1: {
+                            double resultOfPer = 120.0/Literals.points;
+                            resultOfPer *= 10000;
+                            int roundRes = (int) Math.round(resultOfPer);
+                            resultOfPer = (double) roundRes/100;
                             Log.d(LOG_TAG, "--- INSERT in the table: ---");
                             contentValues.put("Name", name);
-                            contentValues.put("Percents", round(120.0/Literals.points) * 100);
-                            long rowID = database.insert("ChallengeResults", null, contentValues);
+                            contentValues.put("Percents", resultOfPer);
+                            contentValues.put("Flips", amountOfFlips);
+                            contentValues.put("Points", gameLogic.points);
+                            long rowID = database.insert("TableResultsChallenge", null, contentValues);
                             Log.d(LOG_TAG, "row inserted, ID = " + rowID);
                             break;
                         }
                         case 2: {
                             Log.d(LOG_TAG, "--- READ the table: ---"); // Делаем запрос всех данных из таблицы results_table, получаем Cursor
-                            Cursor cursor = database.query("ChallengeResults", null, null, null, null, null, null);
+                            Cursor cursor = database.query("TableResultsChallenge", null, null, null, null, null, null);
                             if (cursor.moveToFirst()) { // Ставим позицию курсора на первую строку выборки. Если в выборке нет строк, вернётся false
                                 int idColIndex = cursor.getColumnIndex("id"); // Номера столбцов по имени в выборке
                                 int nameColIndex = cursor.getColumnIndex("Name");
                                 int resultInPercents = cursor.getColumnIndex("Percents");
+                                int resultInFlips = cursor.getColumnIndex("Flips");
+                                int resultInPoints = cursor.getColumnIndex("Points");
                                 do {
                                     // Получаем значения по номерам столбцов и пишем все в лог
                                     Log.d(LOG_TAG,
                                             "ID = " + cursor.getInt(idColIndex) +
                                                     ", Name = " + cursor.getString(nameColIndex) +
-                                                    ", Percents = " + cursor.getDouble(resultInPercents));
+                                                    ", Percents = " + cursor.getDouble(resultInPercents) +
+                                                    ", Flips = " + cursor.getInt(resultInFlips) +
+                                                    ", Points = " + cursor.getInt(resultInPoints));
 
                                 } while (cursor.moveToNext()); // Переход на следующую строку, а если следующей нет (текущая - последняя), то false - выходим из цикла
                             } else
@@ -210,7 +214,7 @@ public class ChallengeGameActivity extends GameClass {
                         }
                         case 3: {
                             Log.d(LOG_TAG, "--- DELETE the table: ---");
-                            int clear = database.delete("ChallengeResults", null, null);
+                            int clear = database.delete("TableResultsChallenge", null, null);
                             Log.d(LOG_TAG, "deleted rows count = " + clear);
                             break;
                         }

@@ -1,35 +1,22 @@
 <resources>
     <string name="app_name">Focus</string>
-    <string name="flips">Flips</string>
-    <string name="concentration_title">Focus</string>
     <string name="new_game">NEW GAME</string>
     <string name="resume_buttontitle">RESUME</string>
     <string name="pause_buttontitle">PAUSE</string>
-    <string name="default_delay">400</string>
     <string name="level_passed">Level passed!</string>
     <string name="restart">Restart</string>
     <string name="next">Next</string>
-    <string name="level">Level</string>
-    <string name="choose_the_game_mode">Choose the game mode</string>
-    <string name="competition">Competition</string>
-    <string name="single_play">Single play</string>
-    <string name="game_mode">Game mode</string>
     <string name="menu">Menu</string>
     <string name="you_won">You won!</string>
     <string name="enter_your_name">Enter your name:</string>
     <string name="name">Name</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="results">RESULTS</string>
-    <string name="pos">Pos.</string>
-    <string name="name_big">Name</string>
-    <string name="back">Back</string>
     <string name="challenge">challenge</string>
     <string name="play">play</string>
     <string name="score_0">SCORE 0</string>
     <string name="todo">TODO</string>
     <string name="settings">SETTINGS</string>
-    <string name="number_of_colors">Number of colors</string>
-    <string name="colors_number">Colors\' number:</string>
     <string name="cooperate_with_your_friend">Cooperate with your friend</string>
     <string name="competition_text_preview">
         Welcome to the competition mode!\n
