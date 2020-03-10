@@ -10,8 +10,8 @@
 
     <Button
         android:id="@+id/pauseButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_gravity="start"
         android:layout_marginStart="24dp"
         android:layout_marginTop="22dp"
@@ -28,8 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="256dp"
             android:layout_weight="1"
-            app:srcCompat="@mipmap/title_copyright"
-            android:contentDescription="@string/todo" />
+            android:contentDescription="@string/todo"
+            app:srcCompat="@mipmap/logo_focus" />
 
         <TextView
             android:id="@+id/lvlTextView"
@@ -53,9 +53,9 @@
         <Button
             android:id="@+id/challengeButton"
             style="@style/TextAppearance.AppCompat.Widget.Button"
-            android:layout_width="120dp"
+            android:layout_width="140dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/challenge_button"
             android:fontFamily="@font/sf_pro_bold"
             android:text="@string/challenge"
@@ -65,9 +65,9 @@
         <Button
             android:id="@+id/mainPlayButton"
             style="@style/TextAppearance.AppCompat.Widget.Button"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/play_button"
             android:fontFamily="@font/sf_pro_bold"
             android:text="@string/play"
@@ -80,14 +80,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
 
         <Button
             android:id="@+id/rewardsButton"
             style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="40dp"
             android:background="@mipmap/trophy"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,9 +99,9 @@
         <Button
             android:id="@+id/tableOfRecordsButton"
             style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="40dp"
             android:background="@mipmap/podium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/presentsButton"
@@ -109,9 +110,9 @@
         <Button
             android:id="@+id/presentsButton"
             style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="40dp"
             android:background="@mipmap/gift"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/rewardsButton"

@@ -15,6 +15,15 @@ public class Literals {
     public int timeCardIsOpen = 300;
     public int timeCardIsClose = 250;
 
+    public static double getMaximumPoints() {
+        int res = 0, c = 4;
+        for (int i = 0; i < maxLevel; i++) {
+            res += c * 2;
+            c += 4;
+        }
+        return res;
+    }
+
     public static int getNumberOFButtons(boolean flag) {
         if (flag) numberOfBut+=4;
         else numberOfBut = 4;

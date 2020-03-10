@@ -11,15 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical">
 
         <Button
             android:id="@+id/backButton"
-            android:layout_width="20dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
             android:background="@mipmap/back_button" />
+
 
         <TextView
             android:id="@+id/textView5"
@@ -28,7 +29,7 @@
             android:fontFamily="@font/sf_pro_medium"
             android:text="@string/settings"
             android:textColor="@color/whiteColor"
-            android:layout_marginStart="65dp"
+            android:layout_marginStart="58dp"
             android:textSize="36sp" />
     </LinearLayout>
 

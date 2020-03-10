@@ -9,7 +9,7 @@ class Focus {
     ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Integer> openedCards = new ArrayList<>();
     private int indexOfOneAndOnlyFaceUpCard = -1;
-    int points = 0;
+    int mistakePoints = 0;
 
     Focus(int numberOfPairsOfCards) {
         for (int i = 0; i < numberOfPairsOfCards * 2; i++) {
@@ -30,13 +30,13 @@ class Focus {
                 if (cards.get(matchIndex).identifier == cards.get(index).identifier) {
                     cards.get(matchIndex).isMatched = true;
                     cards.get(index).isMatched = true;
-                    points += Literals.match;
+                    mistakePoints += Literals.match;
                 } else {
                     if (openedCards.contains(index)) {
-                        points -= Literals.miss;
+                        mistakePoints -= Literals.miss;
                     }
                     if (openedCards.contains(matchIndex)) {
-                        points -= Literals.miss;
+                        mistakePoints -= Literals.miss;
                     }
                     openedCards.add(index);
                     openedCards.add(matchIndex);

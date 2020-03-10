@@ -3,6 +3,7 @@ package com.example.concentration.Game;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -58,17 +59,18 @@ public class MajorGameActivity extends GameClass {
                     id = v.getId();
                 }
                 flipsCountView.setText("Flips: " + flipCount);
-                pointsView.setText("Points: " + gameLogic.points);
+                pointsView.setText("Points: " + gameLogic.mistakePoints);
 
                 gameLogic.chooseCard(getIndex(v.getId()));
-                System.out.println(gameLogic.points);
+                System.out.println(gameLogic.mistakePoints);
                 updateViewFromModel();
 
                 if (gameLogic.checkForAllMatchedCards()) {
                     levelNumber += 1;
                     PreferencesUtil.saveUserLevel(MajorGameActivity.this, levelNumber);
                     Intent intent = new Intent(MajorGameActivity.this, LevelUpActivity.class);
-                    intent.putExtra("number_of_flips", flipCount);
+                    intent.putExtra("flips", flipCount);
+                    intent.putExtra("points", gameLogic.mistakePoints);
                     intent.putExtra("activity", true);
                     overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                     startActivity(intent);

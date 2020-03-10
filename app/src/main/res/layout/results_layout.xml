@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical">
 
         <Button
             android:id="@+id/backButton"
-            android:layout_width="20dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
             android:background="@mipmap/back_button" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:fontFamily="@font/sf_pro_medium"
             android:text="@string/results"
             android:textColor="@color/whiteColor"
-            android:layout_marginStart="75dp"
+            android:layout_marginStart="67dp"
             android:textSize="36sp" />
     </LinearLayout>
 
@@ -43,105 +43,99 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TableLayout
             android:id="@+id/resultsTable"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/button00"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button01"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button02"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button03"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button04"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button05"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button06"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button07"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button08"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button09"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
@@ -149,6 +143,19 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/mainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_round"
+        android:text="@string/menu"
+        android:fontFamily="@font/sf_pro_medium"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:textSize="25sp"
+        android:visibility="invisible"/>
 
 
 </LinearLayout>

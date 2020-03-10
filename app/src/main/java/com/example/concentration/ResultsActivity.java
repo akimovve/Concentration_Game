@@ -27,7 +27,7 @@ import java.util.Map;
 public class ResultsActivity extends AppCompatActivity {
 
     boolean isEmpty = true;
-    Button backButton;
+    Button backButton, mainMenu;
     private Map<String, Double> arrayPercents = new HashMap<>();
     private Map<String, Integer> arrayFlips = new HashMap<>();
     private Map<String, Integer> arrayPoints = new HashMap<>();
@@ -41,14 +41,32 @@ public class ResultsActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         init();
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        boolean flag = false;
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+            flag = bundle.getBoolean("Results");
+
+        if (flag) {
+            mainMenu.setVisibility(View.VISIBLE);
+            backButton.setVisibility(View.INVISIBLE);
+        }
+        else {
+            mainMenu.setVisibility(View.INVISIBLE);
+            backButton.setVisibility(View.VISIBLE);
+        }
+
+        OnClickListener onClickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResultsActivity.this, HomeActivity.class);
+                Intent intent  = new Intent(ResultsActivity.this, HomeActivity.class);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
-        });
+        };
+        backButton.setOnClickListener(onClickListener);
+        mainMenu.setOnClickListener(onClickListener);
+
+
 
         final SQLiteDatabase db;
         db = openOrCreateDatabase("TableResultsChallenge", Context.MODE_PRIVATE, null);
@@ -136,6 +154,7 @@ public class ResultsActivity extends AppCompatActivity {
         buts.add((Button)findViewById(R.id.button07));
         buts.add((Button)findViewById(R.id.button08));
         buts.add((Button)findViewById(R.id.button09));
+        mainMenu = findViewById(R.id.mainMenu);
     }
 
     private void displayInformation(String name, int flips, int points) {

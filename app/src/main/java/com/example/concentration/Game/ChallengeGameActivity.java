@@ -3,11 +3,9 @@ package com.example.concentration.Game;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,7 +32,7 @@ public class ChallengeGameActivity extends GameClass {
     OnClickListener buttonClicks;
     DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "TableResultsChallenge", null, 1);
     private int flipCount = 0;
-    private static int amountOfFlips = 0;
+    private static int amountOfFlips = 0, allMistakes = 0;
     private boolean flag = true, homeButtonIsPressed = false;
     private final String LOG_TAG = "myLogs";
 
@@ -63,8 +61,15 @@ public class ChallengeGameActivity extends GameClass {
         }
         gameLogic = new Focus((numberOfCards + 1) / 2);
 
-        if (!flag) amountOfFlips = 0;
-        if (!flag || homeButtonIsPressed) Literals.points = 0;
+        if (!flag || homeButtonIsPressed) {
+            Literals.points = 0;
+            amountOfFlips = 0;
+            allMistakes = 0;
+        }
+
+        Log.d(LOG_TAG, "Literals.Points = " + Literals.points);
+        Log.d(LOG_TAG, "amountOfFlips = " + amountOfFlips);
+        Log.d(LOG_TAG, "allMistakes = " + allMistakes);
 
 
         init();
@@ -94,16 +99,17 @@ public class ChallengeGameActivity extends GameClass {
                     id = v.getId();
                 }
                 flipsCountView.setText("Flips: " + flipCount);
-                pointsView.setText("Points: " + gameLogic.points);
+                pointsView.setText("Points: " + gameLogic.mistakePoints);
                 gameLogic.chooseCard(getIndex(v.getId()));
                 updateViewFromModel();
 
                 if (gameLogic.checkForAllMatchedCards()) {
-                    Literals.points += Math.abs(gameLogic.points) + flipCount;
+                    Literals.points += Math.abs(gameLogic.mistakePoints) + flipCount;
+                    allMistakes += gameLogic.mistakePoints;
                     if (levelNumber < Literals.maxLevel) {
                         Intent intent = new Intent(ChallengeGameActivity.this, LevelUpActivity.class);
                         intent.putExtra("flips", flipCount);
-                        intent.putExtra("points", gameLogic.points);
+                        intent.putExtra("points", gameLogic.mistakePoints);
                         /**
                          * TO DO: Fix the problem with amount of points!!!!!
                          */
@@ -152,6 +158,13 @@ public class ChallengeGameActivity extends GameClass {
         buttons.add((Button)findViewById(R.id.button_19));
     }
 
+    private double round(int digit) {
+        double result = Literals.getMaximumPoints()/digit;
+        result *= 10000;
+        int roundRes = (int) Math.round(result);
+        return (double) roundRes/100;
+    }
+
     private void showDialogModeSelector() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -171,42 +184,35 @@ public class ChallengeGameActivity extends GameClass {
                 if (name.equals("")) {
                     Toast.makeText(getApplicationContext(), "Enter your name", Toast.LENGTH_SHORT).show();
                 } else {
-                    SQLiteDatabase database = dataBaseHelper.getWritableDatabase(); // connecting to Data Base (insert – вставка, query – чтение, delete – удаление)
-
+                    SQLiteDatabase database = dataBaseHelper.getWritableDatabase();
                     switch (a) {
                         case 1: {
-                            double resultOfPer = 120.0/Literals.points;
-                            resultOfPer *= 10000;
-                            int roundRes = (int) Math.round(resultOfPer);
-                            resultOfPer = (double) roundRes/100;
                             Log.d(LOG_TAG, "--- INSERT in the table: ---");
                             contentValues.put("Name", name);
-                            contentValues.put("Percents", resultOfPer);
+                            contentValues.put("Percents", round(Literals.points));
                             contentValues.put("Flips", amountOfFlips);
-                            contentValues.put("Points", gameLogic.points);
+                            contentValues.put("Points", allMistakes);
                             long rowID = database.insert("TableResultsChallenge", null, contentValues);
                             Log.d(LOG_TAG, "row inserted, ID = " + rowID);
                             break;
                         }
                         case 2: {
-                            Log.d(LOG_TAG, "--- READ the table: ---"); // Делаем запрос всех данных из таблицы results_table, получаем Cursor
+                            Log.d(LOG_TAG, "--- READ the table: ---");
                             Cursor cursor = database.query("TableResultsChallenge", null, null, null, null, null, null);
-                            if (cursor.moveToFirst()) { // Ставим позицию курсора на первую строку выборки. Если в выборке нет строк, вернётся false
-                                int idColIndex = cursor.getColumnIndex("id"); // Номера столбцов по имени в выборке
+                            if (cursor.moveToFirst()) {
+                                int idColIndex = cursor.getColumnIndex("id");
                                 int nameColIndex = cursor.getColumnIndex("Name");
                                 int resultInPercents = cursor.getColumnIndex("Percents");
                                 int resultInFlips = cursor.getColumnIndex("Flips");
                                 int resultInPoints = cursor.getColumnIndex("Points");
                                 do {
-                                    // Получаем значения по номерам столбцов и пишем все в лог
-                                    Log.d(LOG_TAG,
-                                            "ID = " + cursor.getInt(idColIndex) +
-                                                    ", Name = " + cursor.getString(nameColIndex) +
-                                                    ", Percents = " + cursor.getDouble(resultInPercents) +
-                                                    ", Flips = " + cursor.getInt(resultInFlips) +
-                                                    ", Points = " + cursor.getInt(resultInPoints));
+                                    Log.d(LOG_TAG, "ID = " + cursor.getInt(idColIndex)
+                                                        + ", Name = " + cursor.getString(nameColIndex)
+                                                        + ", Percents = " + cursor.getDouble(resultInPercents)
+                                                        + ", Flips = " + cursor.getInt(resultInFlips)
+                                                        + ", Points = " + cursor.getInt(resultInPoints));
 
-                                } while (cursor.moveToNext()); // Переход на следующую строку, а если следующей нет (текущая - последняя), то false - выходим из цикла
+                                } while (cursor.moveToNext());
                             } else
                                 Log.d(LOG_TAG, "0 rows");
                             cursor.close();
@@ -221,6 +227,7 @@ public class ChallengeGameActivity extends GameClass {
                     }
                     dataBaseHelper.close();
                     Intent intent = new Intent(ChallengeGameActivity.this, ResultsActivity.class);
+                    intent.putExtra("Results", true);
                     startActivity(intent);
                     dialog.dismiss();
                 }
@@ -228,27 +235,4 @@ public class ChallengeGameActivity extends GameClass {
         });
         dialog.show();
     }
-
-    /*class DBHelper extends SQLiteOpenHelper {
-
-        DBHelper(Context context) { // Конструктор суперкласса
-            super(context, "resultsDB", null, 1);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase database) {
-            Log.d(LOG_TAG, "--- onCreate database ---"); // Создаем таблицу с полями
-            database.execSQL("create table results_table ("
-                    + "id integer primary key autoincrement,"
-                    + "name text,"
-                    + "flips text" + ");");
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        }
-    }
-
-     */
 }
