@@ -1,6 +1,7 @@
 package com.example.concentration.Game;
 
 class Card {
+
     boolean isFaceUp = false;
     boolean isMatched = false;
     int identifier;

@@ -15,7 +15,7 @@ import com.example.concentration.LevelUpActivity;
 import com.example.concentration.DataSave.PreferencesUtil;
 import com.example.concentration.R;
 
-public class MajorGameActivity extends GameClass {
+public class MajorGameActivity extends GameAlgorithm {
 
     OnClickListener buttonClicks;
     private int flipCount = 0;
@@ -28,7 +28,7 @@ public class MajorGameActivity extends GameClass {
         setContentView(R.layout.gameplay_layout);
 
         numberOfCards = 16;
-        gameLogic = new Focus((numberOfCards + 1) / 2);
+        gameLogic = new SimilarGame((numberOfCards + 1) / 2);
 
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         init();
@@ -80,7 +80,7 @@ public class MajorGameActivity extends GameClass {
         };
 
         for (int index = 0; index < numberOfCards; index++) {
-            Button btn = buttons.get(index);
+            Button btn = cards.get(index);
             if (btn.getId() - convertIdToIndex == index)
                 btn.setOnClickListener(buttonClicks);
         }
@@ -92,26 +92,26 @@ public class MajorGameActivity extends GameClass {
         levelNumTextView = findViewById(R.id.levelTextView);
         flipsCountView = findViewById(R.id.flipsCountView);
         pointsView = findViewById(R.id.pointsView);
-        buttons.add((Button)findViewById(R.id.button_00));
-        buttons.add((Button)findViewById(R.id.button_01));
-        buttons.add((Button)findViewById(R.id.button_02));
-        buttons.add((Button)findViewById(R.id.button_03));
-        buttons.add((Button)findViewById(R.id.button_04));
-        buttons.add((Button)findViewById(R.id.button_05));
-        buttons.add((Button)findViewById(R.id.button_06));
-        buttons.add((Button)findViewById(R.id.button_07));
-        buttons.add((Button)findViewById(R.id.button_08));
-        buttons.add((Button)findViewById(R.id.button_09));
-        buttons.add((Button)findViewById(R.id.button_10));
-        buttons.add((Button)findViewById(R.id.button_11));
-        buttons.add((Button)findViewById(R.id.button_12));
-        buttons.add((Button)findViewById(R.id.button_13));
-        buttons.add((Button)findViewById(R.id.button_14));
-        buttons.add((Button)findViewById(R.id.button_15));
-        buttons.add((Button)findViewById(R.id.button_16));
-        buttons.add((Button)findViewById(R.id.button_17));
-        buttons.add((Button)findViewById(R.id.button_18));
-        buttons.add((Button)findViewById(R.id.button_19));
+        cards.add((Button)findViewById(R.id.button_00));
+        cards.add((Button)findViewById(R.id.button_01));
+        cards.add((Button)findViewById(R.id.button_02));
+        cards.add((Button)findViewById(R.id.button_03));
+        cards.add((Button)findViewById(R.id.button_04));
+        cards.add((Button)findViewById(R.id.button_05));
+        cards.add((Button)findViewById(R.id.button_06));
+        cards.add((Button)findViewById(R.id.button_07));
+        cards.add((Button)findViewById(R.id.button_08));
+        cards.add((Button)findViewById(R.id.button_09));
+        cards.add((Button)findViewById(R.id.button_10));
+        cards.add((Button)findViewById(R.id.button_11));
+        cards.add((Button)findViewById(R.id.button_12));
+        cards.add((Button)findViewById(R.id.button_13));
+        cards.add((Button)findViewById(R.id.button_14));
+        cards.add((Button)findViewById(R.id.button_15));
+        cards.add((Button)findViewById(R.id.button_16));
+        cards.add((Button)findViewById(R.id.button_17));
+        cards.add((Button)findViewById(R.id.button_18));
+        cards.add((Button)findViewById(R.id.button_19));
         restartButton.setVisibility(View.INVISIBLE);
     }
 }

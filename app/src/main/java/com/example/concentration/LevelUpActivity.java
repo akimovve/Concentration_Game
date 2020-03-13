@@ -63,7 +63,6 @@ public class LevelUpActivity extends Activity {
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
                 Intent intent = new Intent(LevelUpActivity.this, HomeActivity.class);
-                intent.putExtra("homeButtonIsPressed", true);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }

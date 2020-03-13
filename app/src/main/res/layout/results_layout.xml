@@ -44,7 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <TableLayout
             android:id="@+id/resultsTable"
@@ -61,81 +62,81 @@
 
             <Button
                 android:id="@+id/button00"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="17dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button01"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button02"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button03"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button04"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button05"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button06"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button07"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button08"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
             <Button
                 android:id="@+id/button09"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 

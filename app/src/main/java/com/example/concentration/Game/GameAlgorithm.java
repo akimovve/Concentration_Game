@@ -16,20 +16,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class GameClass extends AppCompatActivity {
+public class GameAlgorithm extends AppCompatActivity {
 
     protected int numberOfCards;
     protected int connect = 0, id = -1;
     private int howShorter = 0;
     protected final int convertIdToIndex = R.id.button_00;
-    private Map<Integer, Integer> colors = new HashMap<>();
-    protected ArrayList<Button> buttons = new ArrayList<>();
+    private ArrayList<Integer> colorsOfCards = new ArrayList<>();
+    protected ArrayList<Button> cards = new ArrayList<>();
     protected Literals literals = new Literals();
-    protected Focus gameLogic;
+    protected SimilarGame gameLogic;
     protected Button menuButton, restartButton;
     protected TextView levelNumTextView, flipsCountView, pointsView;
 
-    public GameClass(){}
+    public GameAlgorithm(){}
 
     private void setComplexity() {
         int numColors = 1;
@@ -48,18 +48,18 @@ public class GameClass extends AppCompatActivity {
         }
         for (int i = 0; i < numberOfCards; i++) {
             int randomColor = new Random().nextInt(numColors);
-            colors.put(i,arrayOfColors.get(randomColor));
+            colorsOfCards.add(i, arrayOfColors.get(randomColor));
         }
     }
 
     private int getColorOfButtons(int index) {
-        return colors.get(index);
+        return colorsOfCards.get(index);
     }
 
     private void circleCards() {
         for (int index = 0; index < numberOfCards-1; index++) {
             final int k = index + 1;
-            final Button button = buttons.get(index);
+            final Button button = cards.get(index);
             button.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -75,7 +75,7 @@ public class GameClass extends AppCompatActivity {
             @Override
             public void run() {
                 for (int index = 0; index < numberOfCards; index++)
-                    buttons.get(index).setClickable(fl);
+                    cards.get(index).setClickable(fl);
             }
         }, delay);
     }
@@ -83,7 +83,7 @@ public class GameClass extends AppCompatActivity {
     public void appearanceOfCards() {
         setComplexity();
         for (int index = 0; index < numberOfCards; index++) {
-            final Button button = buttons.get(index);
+            final Button button = cards.get(index);
             button.getBackground().setColorFilter(getColorOfButtons(index),PorterDuff.Mode.MULTIPLY);
             button.postDelayed(new Runnable() {
                 @Override
@@ -170,7 +170,7 @@ public class GameClass extends AppCompatActivity {
     }
 
     public Button pressedButton(int index) {
-        return buttons.get(index);
+        return cards.get(index);
     }
 
     public int getIndex(int index) {
@@ -180,7 +180,7 @@ public class GameClass extends AppCompatActivity {
     public void updateViewFromModel() {
         for (int index = 0; index < numberOfCards; index++) {
             Card card = gameLogic.cards.get(index);
-            functionForPressedButton(buttons.get(index), card);
+            functionForPressedButton(cards.get(index), card);
         }
     }
 

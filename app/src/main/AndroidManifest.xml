@@ -28,15 +28,11 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
 
-        <activity android:name=".Game.GameClass"
+        <activity android:name=".Game.GameAlgorithm"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
 
         <activity android:name=".ResultsActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-
-        <activity android:name=".PauseActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
 
