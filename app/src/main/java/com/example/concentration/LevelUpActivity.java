@@ -17,7 +17,7 @@ import com.example.concentration.Info.Variables;
 
 public class LevelUpActivity extends Activity {
 
-    private Button restartButton, nextButton, homeButton;
+    private Button nextButton, homeButton;
     private TextView levelPassedTextView;
     private Intent intent;
     private Variables var;
@@ -47,7 +47,6 @@ public class LevelUpActivity extends Activity {
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
                 boolean flag = true;
-                if (v.getId() == R.id.restartButton) flag = false;
                 var = new Variables(flag); // check if the user tapped "next" or "previous" for changing level number and delay
                 if (whichActivity) {
                     intent = new Intent(LevelUpActivity.this, MajorGameActivity.class);
@@ -69,13 +68,10 @@ public class LevelUpActivity extends Activity {
                 startActivity(intent);
             }
         });
-
-        restartButton.setOnClickListener(onButtonClick);
         nextButton.setOnClickListener(onButtonClick);
     }
 
     private void init() {
-        restartButton = findViewById(R.id.restartButton);
         nextButton = findViewById(R.id.nextButton);
         homeButton = findViewById(R.id.homeButton);
         levelPassedTextView = findViewById(R.id.levelPassedTextView);

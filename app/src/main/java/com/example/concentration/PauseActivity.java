@@ -38,7 +38,10 @@ public class PauseActivity extends AppCompatActivity {
                 Intent intent;
                 if (whichActivity) {
                     intent = new Intent(PauseActivity.this, MajorGameActivity.class);
-                } else intent = new Intent(PauseActivity.this, ChallengeGameActivity.class);
+                } else {
+                    intent = new Intent(PauseActivity.this, ChallengeGameActivity.class);
+                    intent.putExtra("pressedPause", true);
+                }
                 intent.putExtra("levelUp",false);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);

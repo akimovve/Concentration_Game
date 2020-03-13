@@ -22,38 +22,31 @@
 
         <activity android:name=".Game.ChallengeGameActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity"/>
 
         <activity android:name=".Game.MajorGameActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity"/>
 
         <activity android:name=".Game.GameClass"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity"/>
 
         <activity android:name=".ResultsActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity"/>
 
         <activity android:name=".PauseActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity"/>
 
         <activity android:name=".LevelUpActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity"/>
 
         <activity android:name=".SettingsActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

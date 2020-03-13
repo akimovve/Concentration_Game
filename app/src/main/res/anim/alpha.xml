@@ -7,6 +7,5 @@
         android:toAlpha="1.0"
         android:duration="280"
         android:repeatCount="0"
-        android:repeatMode="reverse"
-        />
+        android:repeatMode="reverse" />
 </set>

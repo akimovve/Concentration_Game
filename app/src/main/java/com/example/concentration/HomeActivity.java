@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.concentration.DataSave.PreferencesUtil;
 import com.example.concentration.Game.ChallengeGameActivity;
 import com.example.concentration.Game.MajorGameActivity;
@@ -135,7 +136,7 @@ public class HomeActivity extends AppCompatActivity {
         rewardsButton = findViewById(R.id.rewardsButton);
         challengeButton = findViewById(R.id.challengeButton);
         tableOfRecordsButton = findViewById(R.id.tableOfRecordsButton);
-        settingsButton = findViewById(R.id.pauseButton);
+        settingsButton = findViewById(R.id.menuButton);
         presentsButton = findViewById(R.id.presentsButton);
         mainPlayButton = findViewById(R.id.mainPlayButton);
         lvlTextView = findViewById(R.id.lvlTextView);

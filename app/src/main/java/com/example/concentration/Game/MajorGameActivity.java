@@ -3,15 +3,15 @@ package com.example.concentration.Game;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import androidx.annotation.Nullable;
+
+import com.example.concentration.HomeActivity;
 import com.example.concentration.LevelUpActivity;
-import com.example.concentration.PauseActivity;
 import com.example.concentration.DataSave.PreferencesUtil;
 import com.example.concentration.R;
 
@@ -40,12 +40,13 @@ public class MajorGameActivity extends GameClass {
         openCardsRandomly(); // cards start opening randomly
         setClick(true, literals.delayForFirstAppearance + connect); // delay of start of the game
 
-        pauseButton.setOnClickListener(new View.OnClickListener() {
+        menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MajorGameActivity.this, PauseActivity.class);
+                v.startAnimation(animAlpha);
+                Intent intent = new Intent(MajorGameActivity.this, HomeActivity.class);
+                intent.putExtra("homeButtonIsPressed", true);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
-                intent.putExtra("activity", true);
                 startActivity(intent);
             }
         });
@@ -86,7 +87,8 @@ public class MajorGameActivity extends GameClass {
     }
 
     private void init() {
-        pauseButton = findViewById(R.id.pauseButton);
+        menuButton = findViewById(R.id.menuButton);
+        restartButton = findViewById(R.id.restartButton);
         levelNumTextView = findViewById(R.id.levelTextView);
         flipsCountView = findViewById(R.id.flipsCountView);
         pointsView = findViewById(R.id.pointsView);
@@ -110,5 +112,6 @@ public class MajorGameActivity extends GameClass {
         buttons.add((Button)findViewById(R.id.button_17));
         buttons.add((Button)findViewById(R.id.button_18));
         buttons.add((Button)findViewById(R.id.button_19));
+        restartButton.setVisibility(View.INVISIBLE);
     }
 }

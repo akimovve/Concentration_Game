@@ -26,7 +26,7 @@ public class GameClass extends AppCompatActivity {
     protected ArrayList<Button> buttons = new ArrayList<>();
     protected Literals literals = new Literals();
     protected Focus gameLogic;
-    protected Button pauseButton;
+    protected Button menuButton, restartButton;
     protected TextView levelNumTextView, flipsCountView, pointsView;
 
     public GameClass(){}

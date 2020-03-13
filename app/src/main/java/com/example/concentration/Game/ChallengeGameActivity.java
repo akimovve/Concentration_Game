@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,24 +18,31 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.concentration.DataSave.DataBaseHelper;
+import com.example.concentration.HomeActivity;
 import com.example.concentration.Info.Literals;
 import com.example.concentration.LevelUpActivity;
-import com.example.concentration.PauseActivity;
 import com.example.concentration.R;
 import com.example.concentration.ResultsActivity;
+
 import java.util.Objects;
 
 public class ChallengeGameActivity extends GameClass {
 
     OnClickListener buttonClicks;
+    TextView stopWatchText;
     DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "TableResultsChallenge", null, 1);
+    Handler handler;
+    long startTime, buffTime = 0L, resetTime, millisecTime;
+    int seconds, minutes, milliSecs;
     private int flipCount = 0;
     private static int amountOfFlips = 0, allMistakes = 0;
     private boolean flag = true, homeButtonIsPressed = false;
+    private static boolean pressedRestart = false;
     private final String LOG_TAG = "myLogs";
 
     @SuppressLint("SetTextI18n")
@@ -48,6 +57,11 @@ public class ChallengeGameActivity extends GameClass {
             connect = bundle.getInt("whichLevel");
             flag = bundle.getBoolean("levelUp");
             homeButtonIsPressed = bundle.getBoolean("isHomButPressed");
+        }
+
+        if (pressedRestart) {
+            pressedRestart = false;
+            flag = false;
         }
 
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
@@ -67,11 +81,6 @@ public class ChallengeGameActivity extends GameClass {
             allMistakes = 0;
         }
 
-        Log.d(LOG_TAG, "Literals.Points = " + Literals.points);
-        Log.d(LOG_TAG, "amountOfFlips = " + amountOfFlips);
-        Log.d(LOG_TAG, "allMistakes = " + allMistakes);
-
-
         init();
         levelNumTextView.setText("Level " + levelNumber);
 
@@ -79,12 +88,33 @@ public class ChallengeGameActivity extends GameClass {
         appearanceOfCards(); // cards start to appear one by one
         openCardsRandomly(); // cards start opening randomly
         setClick(true, literals.delayForFirstAppearance + connect); // delay of start of the game
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handler = new Handler();
+                handler.postDelayed(runnable, 0);
+                startTime = SystemClock.uptimeMillis();
+            }
+        }, literals.delayForFirstAppearance + connect);
 
-        pauseButton.setOnClickListener(new OnClickListener() {
+
+        menuButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChallengeGameActivity.this, PauseActivity.class);
+                v.startAnimation(animAlpha);
+                Intent intent = new Intent(ChallengeGameActivity.this, HomeActivity.class);
+                intent.putExtra("homeButtonIsPressed", true);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+                startActivity(intent);
+            }
+        });
+
+        restartButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pressedRestart = true;
+                Intent intent = getIntent();
+                finish();
                 startActivity(intent);
             }
         });
@@ -107,15 +137,16 @@ public class ChallengeGameActivity extends GameClass {
                     Literals.points += Math.abs(gameLogic.mistakePoints) + flipCount;
                     allMistakes += gameLogic.mistakePoints;
                     if (levelNumber < Literals.maxLevel) {
+                        buffTime += millisecTime;
+                        handler.removeCallbacks(runnable);
                         Intent intent = new Intent(ChallengeGameActivity.this, LevelUpActivity.class);
                         intent.putExtra("flips", flipCount);
                         intent.putExtra("points", gameLogic.mistakePoints);
-                        /**
-                         * TO DO: Fix the problem with amount of points!!!!!
-                         */
                         overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                         startActivity(intent);
                     } else {
+                        buffTime += millisecTime;
+                        handler.removeCallbacks(runnable);
                         showDialogModeSelector();
                     }
                 }
@@ -132,9 +163,11 @@ public class ChallengeGameActivity extends GameClass {
     private void init() {
         homeButtonIsPressed = false;
         flag = true;
-        pauseButton = findViewById(R.id.pauseButton);
+        menuButton = findViewById(R.id.menuButton);
+        restartButton = findViewById(R.id.restartButton);
         levelNumTextView = findViewById(R.id.levelTextView);
         flipsCountView = findViewById(R.id.flipsCountView);
+        stopWatchText = findViewById(R.id.stopWatchText);
         pointsView = findViewById(R.id.pointsView);
         buttons.add((Button)findViewById(R.id.button_00));
         buttons.add((Button)findViewById(R.id.button_01));
@@ -156,7 +189,32 @@ public class ChallengeGameActivity extends GameClass {
         buttons.add((Button)findViewById(R.id.button_17));
         buttons.add((Button)findViewById(R.id.button_18));
         buttons.add((Button)findViewById(R.id.button_19));
+        millisecTime = 0L;
+        startTime = 0L;
+        buffTime = 0L;
+        resetTime = 0L;
+        seconds = 0;
+        minutes = 0;
+        milliSecs = 0;
+        stopWatchText.setText("00:00:00");
     }
+
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            millisecTime = SystemClock.uptimeMillis() - startTime;
+            resetTime = buffTime + millisecTime;
+            seconds = (int) (resetTime / 1000);
+            minutes = seconds / 60;
+            seconds = seconds % 60;
+            milliSecs = (int) (resetTime % 1000);
+            stopWatchText.setText("" + minutes + ":"
+                    + String.format("%02d", seconds) + ":"
+                    + String.format("%03d", milliSecs));
+            handler.postDelayed(this, 0);
+        }
+    };
 
     private double round(int digit) {
         double result = Literals.getMaximumPoints()/digit;

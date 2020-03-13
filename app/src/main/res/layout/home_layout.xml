@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/pauseButton"
+        android:id="@+id/menuButton"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_gravity="start"

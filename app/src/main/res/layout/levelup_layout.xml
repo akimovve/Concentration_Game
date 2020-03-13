@@ -15,50 +15,31 @@
         android:textColor="@color/yellow"
         android:textSize="55sp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/restartButton"
-            style="?attr/buttonBarButtonStyle"
-            android:layout_width="190dp"
-            android:layout_height="80dp"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/play_button"
-            android:fontFamily="@font/sf_pro_medium"
-            android:minWidth="100dip"
-            android:text="@string/restart"
-            android:textColor="@color/whiteColor"
-            android:textSize="30sp" />
-
-        <Button
-            android:id="@+id/nextButton"
-            style="?attr/buttonBarButtonStyle"
-            android:layout_width="190dp"
-            android:layout_height="80dp"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/challenge_button"
-            android:fontFamily="@font/sf_pro_medium"
-            android:minWidth="100dip"
-            android:text="@string/next"
-            android:textColor="@color/whiteColor"
-            android:textSize="30sp" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/challenge_button"
+        android:fontFamily="@font/sf_pro_medium"
+        android:text="@string/next"
+        android:textColor="@color/whiteColor"
+        android:textSize="30sp"
+        android:layout_gravity="center" />
 
     <Button
         android:id="@+id/homeButton"
-        android:layout_width="385dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/play_button"
         android:fontFamily="@font/sf_pro_medium"
         android:text="@string/menu"
         android:textColor="@color/whiteColor"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

@@ -31,4 +31,6 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
+    <string name="flips_0">Flips: 0</string>
+    <string name="points_0">Points: 0</string>
 </resources>
