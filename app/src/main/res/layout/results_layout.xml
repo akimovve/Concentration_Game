@@ -65,7 +65,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="17dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
@@ -73,7 +73,7 @@
                 android:id="@+id/button01"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
@@ -81,7 +81,7 @@
                 android:id="@+id/button02"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
@@ -89,7 +89,7 @@
                 android:id="@+id/button03"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
@@ -97,7 +97,7 @@
                 android:id="@+id/button04"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
@@ -105,7 +105,7 @@
                 android:id="@+id/button05"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
@@ -113,7 +113,7 @@
                 android:id="@+id/button06"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
@@ -121,7 +121,7 @@
                 android:id="@+id/button07"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 
@@ -129,7 +129,7 @@
                 android:id="@+id/button08"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@mipmap/info"
                 android:visibility="invisible" />
 

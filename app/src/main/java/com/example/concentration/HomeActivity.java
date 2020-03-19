@@ -20,12 +20,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.concentration.DataSave.PreferencesUtil;
 import com.example.concentration.Game.ChallengeGameActivity;
-import com.example.concentration.Game.MajorGameActivity;
+import com.example.concentration.Game.MainGameActivity;
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private boolean isHomeButtonPressed = false;
     private int levelNumber = 1;
     private Button rewardsButton, challengeButton, tableOfRecordsButton, settingsButton, mainPlayButton, presentsButton;
     private TextView lvlTextView;
@@ -40,6 +39,8 @@ public class HomeActivity extends AppCompatActivity {
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
 
         init();
+        Bundle bundle = getIntent().getExtras();
+        final boolean reset = bundle != null;
         readDB();
         String lvl = String.valueOf(levelNumber);
         lvlTextView.setText("SCORE " + lvl);
@@ -57,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
-                showDialogModeSelector();
+                showDialogModeSelector(reset);
             }
         });
 
@@ -65,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
-                Intent intent = new Intent(HomeActivity.this, MajorGameActivity.class);
+                Intent intent = new Intent(HomeActivity.this, MainGameActivity.class);
                 startActivity(intent);
             }
         });
@@ -93,7 +94,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        
     }
 
     @Override
@@ -102,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
         mAnimationDrawable.start();
     }
 
-    private void showDialogModeSelector() {
+    private void showDialogModeSelector(final boolean fl) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
@@ -112,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(HomeActivity.this, ChallengeGameActivity.class);
-                intent.putExtra("isHomButPressed", isHomeButtonPressed);
+                intent.putExtra("reset_game", fl);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -131,8 +131,6 @@ public class HomeActivity extends AppCompatActivity {
         mAnimationDrawable = (AnimationDrawable) layout.getBackground();
         mAnimationDrawable.setEnterFadeDuration(100);
         mAnimationDrawable.setExitFadeDuration(4000);
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) { isHomeButtonPressed = bundle.getBoolean("isHomeButtonPressed"); }
         rewardsButton = findViewById(R.id.rewardsButton);
         challengeButton = findViewById(R.id.challengeButton);
         tableOfRecordsButton = findViewById(R.id.tableOfRecordsButton);

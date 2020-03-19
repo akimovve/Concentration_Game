@@ -19,15 +19,14 @@ import java.util.Random;
 public class GameAlgorithm extends AppCompatActivity {
 
     protected int numberOfCards;
-    protected int connect = 0, id = -1;
-    private int howShorter = 0;
-    protected final int convertIdToIndex = R.id.button_00;
     private ArrayList<Integer> colorsOfCards = new ArrayList<>();
     protected ArrayList<Button> cards = new ArrayList<>();
     protected Literals literals = new Literals();
-    protected SimilarGame gameLogic;
+    protected QuickEyeGame gameLogic;
     protected Button menuButton, restartButton;
     protected TextView levelNumTextView, flipsCountView, pointsView;
+    protected final int convertIdToIndex = R.id.button_00;
+    protected int speed = 0, id = -1;
 
     public GameAlgorithm(){}
 
@@ -155,7 +154,7 @@ public class GameAlgorithm extends AppCompatActivity {
                     finalBut.setText(getEmoji(gameLogic.cards.get(randomButtonIndex))); // opened
                     finalBut.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
                 }
-            }, literals.delayForFirstAppearance - connect); // default. DO NOT TOUCH!
+            }, literals.delayForFirstAppearance + speed); // default. DO NOT TOUCH!
             literals.delayForFirstAppearance += literals.timeCardIsClose; // time the card is being opened
             finalBut.postDelayed(new Runnable() {
                 @Override
@@ -203,14 +202,15 @@ public class GameAlgorithm extends AppCompatActivity {
     private Map<Integer, String> emoji = new HashMap<>();
     private String[] emojiTypes = {"🏰","🐨","🐝","🦂","🦖","⛄️","🛸","💻","🏁","💂","💍","🐒","🐊","🎄","🏍","👾","🦁","🐿","🔥","🌘","🍕","⚽️","🥁","🧀","🛩","📸","🎁","🍏","🐩","🐓","🍁",
             "🌈","🦈","🛏","📚","🗿","🎭","🍿","🥥","🍆","🦔","🎮️","🌶","🐘","🚔","🎡","🏔","🚄","🎬","🐙","🍄","🌵","🐢","👑","🧞","👻","🧤","🎓","🎪","🐶","🐲","🍓","🏆","🎰" };
+    private int cutEmoji = 0;
 
     public String getEmoji(Card card) {
         if (emoji.get(card.identifier) == null && emojiTypes.length > 0) {
-            int randomIndex = (int)(Math.random()*(emojiTypes.length - howShorter));
+            int randomIndex = (int)(Math.random()*(emojiTypes.length - cutEmoji));
             emoji.put(card.identifier, emojiTypes[randomIndex]);
             if (emojiTypes.length - 1 - randomIndex >= 0)
                 System.arraycopy(emojiTypes, randomIndex + 1, emojiTypes, randomIndex, emojiTypes.length - 1 - randomIndex);
-            howShorter++;
+            cutEmoji++;
         }
 
         if (emoji.get(card.identifier) != null)

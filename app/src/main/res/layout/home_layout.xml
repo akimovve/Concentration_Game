@@ -27,9 +27,8 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="256dp"
-            android:layout_weight="1"
             android:contentDescription="@string/todo"
-            app:srcCompat="@mipmap/logo_focus" />
+            app:srcCompat="@mipmap/logo_game" />
 
         <TextView
             android:id="@+id/lvlTextView"

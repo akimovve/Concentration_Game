@@ -69,10 +69,10 @@ public class ResultsActivity extends AppCompatActivity {
 
 
         final SQLiteDatabase db;
-        db = openOrCreateDatabase("TableResultsChallenge", Context.MODE_PRIVATE, null);
+        db = openOrCreateDatabase("GameRes", Context.MODE_PRIVATE, null);
 
         try {
-            final Cursor c = db.query("TableResultsChallenge", null, null, null, null, null, null);
+            final Cursor c = db.query("GameRes", null, null, null, null, null, null);
             if (c.moveToFirst()) {
                 isEmpty = false;
                 int nameColIndex = c.getColumnIndex("Name");
@@ -112,7 +112,8 @@ public class ResultsActivity extends AppCompatActivity {
                         for (index = 0; index < size; index++) {
                             if (v.getId() == buts.get(index).getId()) break;
                         }
-                        displayInformation(sortList.get(index).getKey(), arrayFlips.get(sortList.get(index).getKey()), arrayPoints.get(sortList.get(index).getKey()));
+                        String sorted = sortList.get(index).getKey();
+                        displayInformation(sorted, arrayFlips.get(sorted), arrayPoints.get(sorted));
                     }
                 };
                 for (int i = 0; i < size; i++)

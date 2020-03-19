@@ -35,15 +35,12 @@ public class ChallengeGameActivity extends GameAlgorithm {
 
     OnClickListener buttonClicks;
     TextView stopWatchText;
-    DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "TableResultsChallenge", null, 1);
+    DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "GameRes", null, 1);
     Handler handler;
     long startTime, buffTime = 0L, resetTime, millisecTime;
     int seconds, minutes, milliSecs;
     private int flipCount = 0;
     private static int amountOfFlips = 0, allMistakes = 0;
-    private boolean flag = true, homeButtonIsPressed = false;
-    private static boolean pressedRestart = false;
-    private final String LOG_TAG = "myLogs";
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -52,33 +49,23 @@ public class ChallengeGameActivity extends GameAlgorithm {
         setContentView(R.layout.gameplay_layout);
 
         Bundle bundle = getIntent().getExtras();
-        int connect = 0;
-        if (bundle != null) {
-            connect = bundle.getInt("whichLevel");
-            flag = bundle.getBoolean("levelUp");
-        }
-
-        if (pressedRestart) {
-            pressedRestart = false;
-            flag = false;
-        }
-
+        assert bundle != null;
+        final boolean reset = bundle.getBoolean("reset_game");
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         final int levelNumber;
-        if (homeButtonIsPressed) {
+        if (reset) {
             levelNumber = Literals.getLevelNumber(false);
             numberOfCards = Literals.getNumberOFButtons(false);
-        } else {
-            levelNumber = Literals.getLevelNumber(flag);
-            numberOfCards = Literals.getNumberOFButtons(flag);
-        }
-        gameLogic = new SimilarGame((numberOfCards + 1) / 2);
-
-        if (!flag || homeButtonIsPressed) {
             Literals.points = 0;
             amountOfFlips = 0;
             allMistakes = 0;
+            speed = 0;
+        } else {
+            levelNumber = Literals.getLevelNumber(true);
+            numberOfCards = Literals.getNumberOFButtons(true);
+            speed = bundle.getInt("speed");
         }
+        gameLogic = new QuickEyeGame((numberOfCards + 1) / 2);
 
         init();
         levelNumTextView.setText("Level " + levelNumber);
@@ -86,7 +73,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
         setClick(false,1); // time for becoming cards not clickable
         appearanceOfCards(); // cards start to appear one by one
         openCardsRandomly(); // cards start opening randomly
-        setClick(true, literals.delayForFirstAppearance + connect); // delay of start of the game
+        setClick(true, literals.delayForFirstAppearance + speed); // delay of start of the game
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -94,7 +81,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
                 handler.postDelayed(runnable, 0);
                 startTime = SystemClock.uptimeMillis();
             }
-        }, literals.delayForFirstAppearance + connect);
+        }, literals.delayForFirstAppearance + speed);
 
 
         menuButton.setOnClickListener(new OnClickListener() {
@@ -102,7 +89,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
                 Intent intent = new Intent(ChallengeGameActivity.this, HomeActivity.class);
-                intent.putExtra("homeButtonIsPressed", true);
+                intent.putExtra("reset_game", true);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
@@ -111,9 +98,9 @@ public class ChallengeGameActivity extends GameAlgorithm {
         restartButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                pressedRestart = true;
                 Intent intent = getIntent();
                 finish();
+                intent.putExtra("reset_game", true);
                 startActivity(intent);
             }
         });
@@ -139,6 +126,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
                         buffTime += millisecTime;
                         handler.removeCallbacks(runnable);
                         Intent intent = new Intent(ChallengeGameActivity.this, LevelUpActivity.class);
+                        intent.putExtra("reset_game", reset);
                         intent.putExtra("flips", flipCount);
                         intent.putExtra("points", gameLogic.mistakePoints);
                         overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
@@ -159,9 +147,8 @@ public class ChallengeGameActivity extends GameAlgorithm {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void init() {
-        homeButtonIsPressed = false;
-        flag = true;
         menuButton = findViewById(R.id.menuButton);
         restartButton = findViewById(R.id.restartButton);
         levelNumTextView = findViewById(R.id.levelTextView);
@@ -200,6 +187,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
 
 
     private Runnable runnable = new Runnable() {
+        @SuppressLint({"DefaultLocale", "SetTextI18n"})
         @Override
         public void run() {
             millisecTime = SystemClock.uptimeMillis() - startTime;
@@ -223,6 +211,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
     }
 
     private void showDialogModeSelector() {
+        final String LOG_TAG_DB = "DataBase";
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
@@ -244,18 +233,18 @@ public class ChallengeGameActivity extends GameAlgorithm {
                     SQLiteDatabase database = dataBaseHelper.getWritableDatabase();
                     switch (a) {
                         case 1: {
-                            Log.d(LOG_TAG, "--- INSERT in the table: ---");
+                            Log.d(LOG_TAG_DB, "--- INSERT in the table: ---");
                             contentValues.put("Name", name);
                             contentValues.put("Percents", round(Literals.points));
                             contentValues.put("Flips", amountOfFlips);
                             contentValues.put("Points", allMistakes);
-                            long rowID = database.insert("TableResultsChallenge", null, contentValues);
-                            Log.d(LOG_TAG, "row inserted, ID = " + rowID);
+                            long rowID = database.insert("GameRes", null, contentValues);
+                            Log.d(LOG_TAG_DB, "row inserted, ID = " + rowID);
                             break;
                         }
                         case 2: {
-                            Log.d(LOG_TAG, "--- READ the table: ---");
-                            Cursor cursor = database.query("TableResultsChallenge", null, null, null, null, null, null);
+                            Log.d(LOG_TAG_DB, "--- READ the table: ---");
+                            Cursor cursor = database.query("GameRes", null, null, null, null, null, null);
                             if (cursor.moveToFirst()) {
                                 int idColIndex = cursor.getColumnIndex("id");
                                 int nameColIndex = cursor.getColumnIndex("Name");
@@ -263,22 +252,21 @@ public class ChallengeGameActivity extends GameAlgorithm {
                                 int resultInFlips = cursor.getColumnIndex("Flips");
                                 int resultInPoints = cursor.getColumnIndex("Points");
                                 do {
-                                    Log.d(LOG_TAG, "ID = " + cursor.getInt(idColIndex)
+                                    Log.d(LOG_TAG_DB, "ID = " + cursor.getInt(idColIndex)
                                                         + ", Name = " + cursor.getString(nameColIndex)
                                                         + ", Percents = " + cursor.getDouble(resultInPercents)
                                                         + ", Flips = " + cursor.getInt(resultInFlips)
                                                         + ", Points = " + cursor.getInt(resultInPoints));
 
                                 } while (cursor.moveToNext());
-                            } else
-                                Log.d(LOG_TAG, "0 rows");
+                            } else Log.d(LOG_TAG_DB, "0 rows");
                             cursor.close();
                             break;
                         }
                         case 3: {
-                            Log.d(LOG_TAG, "--- DELETE the table: ---");
-                            int clear = database.delete("TableResultsChallenge", null, null);
-                            Log.d(LOG_TAG, "deleted rows count = " + clear);
+                            Log.d(LOG_TAG_DB, "--- DELETE the table: ---");
+                            int clear = database.delete("GameRes", null, null);
+                            Log.d(LOG_TAG_DB, "deleted rows count = " + clear);
                             break;
                         }
                     }

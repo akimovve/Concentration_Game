@@ -1,24 +1,29 @@
 package com.example.concentration.Info;
 
 public class Variables {
-    public int changeDelay;
-    private static int change = 100;
-    private static boolean flag;
-    private static int changeable = 0;
+    private static int change1 = 50, change2 = 60;
+    private static int res = 0;
 
-    public Variables(boolean flag) {
-        Variables.flag = flag;
-        this.changeDelay = getUniqueChange();
+    public Variables() {}
+
+    private static int getUniqueChange(boolean fl) {
+        if (fl) {
+            if (change1 <= 60) {
+                res += change1;
+                change1 += 10;
+            } else {
+                res = change2 == 60? (int) Math.round((Math.random() * 20) - 160) : res - change2;
+                change2 += 60;
+            }
+        } else {
+            res = 50;
+            change1 = 60;
+            change2 = 60;
+        }
+        return res;
     }
 
-    private static int getUniqueChange() {
-        if (flag) {
-            changeable += change;
-            change += 10;
-        } else {
-            changeable = 0;
-            change = 100;
-        }
-        return changeable;
+    public int setChange(boolean fl) {
+        return getUniqueChange(fl);
     }
 }

@@ -11,8 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.concentration.Game.ChallengeGameActivity;
-import com.example.concentration.Game.MajorGameActivity;
-import com.example.concentration.Info.Literals;
+import com.example.concentration.Game.MainGameActivity;
 import com.example.concentration.Info.Variables;
 
 public class LevelUpActivity extends Activity {
@@ -20,9 +19,8 @@ public class LevelUpActivity extends Activity {
     private Button nextButton, homeButton;
     private TextView levelPassedTextView;
     private Intent intent;
-    private Variables var;
+    private Variables var = new Variables();
     private boolean whichActivity;
-    private int flipsNum = 0, points = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -32,31 +30,15 @@ public class LevelUpActivity extends Activity {
         whichActivity = false;
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            whichActivity = bundle.getBoolean("activity");
-            flipsNum = bundle.getInt("flips");
-            points = bundle.getInt("points");
-        }
+        assert bundle != null;
+        final boolean reset = bundle.getBoolean("reset_game");
+        int flipsNum = bundle.getInt("flips");
+        int points = bundle.getInt("points");
+        whichActivity = bundle.getBoolean("activity");
 
         init();
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
         levelPassedTextView.setText("MATCHED!\n" + flipsNum + " flips\n" + points + " points");
-
-        OnClickListener onButtonClick = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                boolean flag = true;
-                var = new Variables(flag); // check if the user tapped "next" or "previous" for changing level number and delay
-                if (whichActivity) {
-                    intent = new Intent(LevelUpActivity.this, MajorGameActivity.class);
-                } else intent = new Intent(LevelUpActivity.this, ChallengeGameActivity.class);
-                intent.putExtra("whichLevel", var.changeDelay);
-                intent.putExtra("levelUp",flag);
-                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
-                startActivity(intent);
-            }
-        };
 
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +46,24 @@ public class LevelUpActivity extends Activity {
                 v.startAnimation(animAlpha);
                 Intent intent = new Intent(LevelUpActivity.this, HomeActivity.class);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+                intent.putExtra("reset_game", true);
                 startActivity(intent);
             }
         });
-        nextButton.setOnClickListener(onButtonClick);
+
+        nextButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(animAlpha);
+                if (whichActivity) {
+                    intent = new Intent(LevelUpActivity.this, MainGameActivity.class);
+                } else intent = new Intent(LevelUpActivity.this, ChallengeGameActivity.class);
+                intent.putExtra("speed", var.setChange(!reset));
+                intent.putExtra("levelUp",true);
+                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+                startActivity(intent);
+            }
+        });
     }
 
     private void init() {

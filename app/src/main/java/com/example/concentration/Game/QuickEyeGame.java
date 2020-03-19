@@ -4,14 +4,14 @@ import com.example.concentration.Info.Literals;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class SimilarGame {
+class QuickEyeGame {
 
     ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Integer> openedCards = new ArrayList<>();
-    private int indexOfOneAndOnlyFaceUpCard = -1;
+    private int idOfFaceUpCard = -1;
     int mistakePoints = 0;
 
-    SimilarGame(int numberOfPairsOfCards) {
+    QuickEyeGame(int numberOfPairsOfCards) {
         for (int i = 0; i < numberOfPairsOfCards * 2; i++) {
             Card card = new Card();
             cards.add(card);
@@ -25,7 +25,7 @@ class SimilarGame {
 
     void chooseCard(int index) {
         if (!cards.get(index).isMatched) {
-            int matchIndex = indexOfOneAndOnlyFaceUpCard;
+            int matchIndex = idOfFaceUpCard;
             if (matchIndex != -1 && matchIndex != index) {
                 if (cards.get(matchIndex).identifier == cards.get(index).identifier) {
                     cards.get(matchIndex).isMatched = true;
@@ -42,11 +42,11 @@ class SimilarGame {
                     openedCards.add(matchIndex);
                 }
                 cards.get(index).isFaceUp = true;
-                indexOfOneAndOnlyFaceUpCard = -1;
+                idOfFaceUpCard = -1;
             } else {
                 for (Card value : cards) value.isFaceUp = false;
                 cards.get(index).isFaceUp = true;
-                indexOfOneAndOnlyFaceUpCard = index;
+                idOfFaceUpCard = index;
             }
         }
     }

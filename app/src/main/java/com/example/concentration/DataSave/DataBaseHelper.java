@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    private static String TABLE_NAME = "TableResultsChallenge";
+    private static String TABLE_NAME = "GameRes";
 
     public DataBaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

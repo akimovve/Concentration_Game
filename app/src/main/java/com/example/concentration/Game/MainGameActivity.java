@@ -15,7 +15,7 @@ import com.example.concentration.LevelUpActivity;
 import com.example.concentration.DataSave.PreferencesUtil;
 import com.example.concentration.R;
 
-public class MajorGameActivity extends GameAlgorithm {
+public class MainGameActivity extends GameAlgorithm {
 
     OnClickListener buttonClicks;
     private int flipCount = 0;
@@ -28,7 +28,7 @@ public class MajorGameActivity extends GameAlgorithm {
         setContentView(R.layout.gameplay_layout);
 
         numberOfCards = 16;
-        gameLogic = new SimilarGame((numberOfCards + 1) / 2);
+        gameLogic = new QuickEyeGame((numberOfCards + 1) / 2);
 
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         init();
@@ -38,14 +38,13 @@ public class MajorGameActivity extends GameAlgorithm {
         setClick(false,1); // time for becoming cards not clickable
         appearanceOfCards(); // cards start to appear one by one
         openCardsRandomly(); // cards start opening randomly
-        setClick(true, literals.delayForFirstAppearance + connect); // delay of start of the game
+        setClick(true, literals.delayForFirstAppearance); // delay of start of the game
 
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
-                Intent intent = new Intent(MajorGameActivity.this, HomeActivity.class);
-                intent.putExtra("homeButtonIsPressed", true);
+                Intent intent = new Intent(MainGameActivity.this, HomeActivity.class);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
@@ -61,15 +60,14 @@ public class MajorGameActivity extends GameAlgorithm {
                 }
                 flipsCountView.setText("Flips: " + flipCount);
                 pointsView.setText("Points: " + gameLogic.mistakePoints);
-
                 gameLogic.chooseCard(getIndex(v.getId()));
                 System.out.println(gameLogic.mistakePoints);
                 updateViewFromModel();
 
                 if (gameLogic.checkForAllMatchedCards()) {
                     levelNumber += 1;
-                    PreferencesUtil.saveUserLevel(MajorGameActivity.this, levelNumber);
-                    Intent intent = new Intent(MajorGameActivity.this, LevelUpActivity.class);
+                    PreferencesUtil.saveUserLevel(MainGameActivity.this, levelNumber);
+                    Intent intent = new Intent(MainGameActivity.this, LevelUpActivity.class);
                     intent.putExtra("flips", flipCount);
                     intent.putExtra("points", gameLogic.mistakePoints);
                     intent.putExtra("activity", true);

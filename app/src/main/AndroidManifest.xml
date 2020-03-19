@@ -5,9 +5,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/concentration_launcher"
+        android:icon="@mipmap/game_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/concentration_launcher"
+        android:roundIcon="@mipmap/game_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".HomeActivity"
@@ -24,7 +24,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
 
-        <activity android:name=".Game.MajorGameActivity"
+        <activity android:name=".Game.MainGameActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
 
