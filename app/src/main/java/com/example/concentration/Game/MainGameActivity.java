@@ -33,7 +33,7 @@ public class MainGameActivity extends GameAlgorithm {
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         init();
         levelNumber = PreferencesUtil.getUserLevel(this);
-        levelNumTextView.setText("Level "+ levelNumber);
+        levelNumTextView.setText(getResources().getText(R.string.lvl) + " " + levelNumber);
 
         setClick(false,1); // time for becoming cards not clickable
         appearanceOfCards(); // cards start to appear one by one
@@ -84,12 +84,15 @@ public class MainGameActivity extends GameAlgorithm {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void init() {
         menuButton = findViewById(R.id.menuButton);
         restartButton = findViewById(R.id.restartButton);
         levelNumTextView = findViewById(R.id.levelTextView);
         flipsCountView = findViewById(R.id.flipsCountView);
         pointsView = findViewById(R.id.pointsView);
+        flipsCountView.setText(getResources().getText(R.string.flips_0) + " 0");
+        pointsView.setText(getResources().getText(R.string.points_0) + " 0");
         cards.add((Button)findViewById(R.id.button_00));
         cards.add((Button)findViewById(R.id.button_01));
         cards.add((Button)findViewById(R.id.button_02));

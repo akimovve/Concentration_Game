@@ -14,7 +14,7 @@
     <string name="results">RESULTS</string>
     <string name="challenge">challenge</string>
     <string name="play">play</string>
-    <string name="score_0">SCORE 0</string>
+    <string name="score_0">SCORE</string>
     <string name="todo">TODO</string>
     <string name="settings">SETTINGS</string>
     <string name="cooperate_with_your_friend">Cooperate with your friend</string>
@@ -31,6 +31,11 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
-    <string name="flips_0">Flips: 0</string>
-    <string name="points_0">Points: 0</string>
+    <string name="flips_0">Flips:</string>
+    <string name="points_0">Points:</string>
+    <string name="lvl">Level</string>
+    <string name="complexity">Complexity</string>
+    <string name="matched_text1">MATCHED!</string>
+    <string name="matched_text2">flips</string>
+    <string name="matched_text3">points</string>
 </resources>

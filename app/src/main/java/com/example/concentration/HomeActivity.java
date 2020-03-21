@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         final boolean reset = bundle != null;
         readDB();
         String lvl = String.valueOf(levelNumber);
-        lvlTextView.setText("SCORE " + lvl);
+        lvlTextView.setText(getResources().getText(R.string.score_0) + "  " + lvl);
 
         tableOfRecordsButton.setOnClickListener(new OnClickListener() {
             @Override

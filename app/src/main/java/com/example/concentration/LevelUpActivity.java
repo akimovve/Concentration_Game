@@ -38,7 +38,9 @@ public class LevelUpActivity extends Activity {
 
         init();
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
-        levelPassedTextView.setText("MATCHED!\n" + flipsNum + " flips\n" + points + " points");
+        levelPassedTextView.setText(getResources().getText(R.string.matched_text1) + "\n" + flipsNum + " "
+                                    + getResources().getText(R.string.matched_text2) + "\n" + points + " "
+                                    + getResources().getText(R.string.matched_text3));
 
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override

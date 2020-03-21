@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Quick Eye</string>
+    <string name="new_game">Старт</string>
+    <string name="resume_buttontitle">Продолжить</string>
+    <string name="pause_buttontitle">Пауза</string>
+    <string name="level_passed">Уровень пройден!</string>
+    <string name="restart">Начать заново</string>
+    <string name="next">Далее</string>
+    <string name="menu">Меню</string>
+    <string name="you_won">Победа!</string>
+    <string name="enter_your_name">Введитие свое имя:</string>
+    <string name="name">Имя</string>
+    <string name="ok">OK</string>
+    <string name="results">Результаты</string>
+    <string name="challenge">С другом</string>
+    <string name="play">Старт</string>
+    <string name="score_0">УРОВЕНЬ</string>
+    <string name="todo">TODO</string>
+    <string name="settings">Настройки</string>
+    <string name="cooperate_with_your_friend">Cooperate with your friend</string>
+    <string name="competition_text_preview">
+        Welcome to the competition mode!\n
+        In this mode you and your friend(s) will understand\n
+        who is the most concentration person of you\n
+        Your goal is to complete \n
+        5 levels of matching cards\n
+        In the end their will be a winner!\n
+        Good luck!
+    </string>
+    <string name="start">Начать</string>
+    <string name="easy">Легкий</string>
+    <string name="medium">Средний</string>
+    <string name="hard">Сложный</string>
+    <string name="flips_0">Показ:</string>
+    <string name="points_0">Очки:</string>
+    <string name="lvl">Уровень</string>
+    <string name="complexity">Уровень сложности</string>
+    <string name="matched_text1">Победа!</string>
+    <string name="matched_text2">открытия</string>
+    <string name="matched_text3">балла</string>
+</resources>

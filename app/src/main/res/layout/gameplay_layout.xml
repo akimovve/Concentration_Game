@@ -36,7 +36,6 @@
                 android:layout_marginEnd="22dp"
                 android:fontFamily="@font/sf_pro_font"
                 android:gravity="right"
-                android:text="@string/flips_0"
                 android:textColor="@color/whiteColor"
                 android:textSize="21sp"
                 tools:ignore="RtlHardcoded" />
@@ -48,7 +47,6 @@
                 android:layout_marginEnd="22dp"
                 android:fontFamily="@font/sf_pro_font"
                 android:gravity="right"
-                android:text="@string/points_0"
                 android:textColor="@color/whiteColor"
                 android:textSize="21sp"
                 tools:ignore="RtlHardcoded" />

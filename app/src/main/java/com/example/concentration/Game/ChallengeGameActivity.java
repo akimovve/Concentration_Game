@@ -68,7 +68,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
         gameLogic = new QuickEyeGame((numberOfCards + 1) / 2);
 
         init();
-        levelNumTextView.setText("Level " + levelNumber);
+        levelNumTextView.setText(getResources().getText(R.string.lvl) + " " + levelNumber);
 
         setClick(false,1); // time for becoming cards not clickable
         appearanceOfCards(); // cards start to appear one by one
@@ -114,8 +114,8 @@ public class ChallengeGameActivity extends GameAlgorithm {
                     amountOfFlips += 1;
                     id = v.getId();
                 }
-                flipsCountView.setText("Flips: " + flipCount);
-                pointsView.setText("Points: " + gameLogic.mistakePoints);
+                flipsCountView.setText(getResources().getText(R.string.flips_0) + " " + flipCount);
+                pointsView.setText(getResources().getText(R.string.points_0) + " " + gameLogic.mistakePoints);
                 gameLogic.chooseCard(getIndex(v.getId()));
                 updateViewFromModel();
 
@@ -155,6 +155,8 @@ public class ChallengeGameActivity extends GameAlgorithm {
         flipsCountView = findViewById(R.id.flipsCountView);
         stopWatchText = findViewById(R.id.stopWatchText);
         pointsView = findViewById(R.id.pointsView);
+        flipsCountView.setText(getResources().getText(R.string.flips_0) + " 0");
+        pointsView.setText(getResources().getText(R.string.points_0) + " 0");
         cards.add((Button)findViewById(R.id.button_00));
         cards.add((Button)findViewById(R.id.button_01));
         cards.add((Button)findViewById(R.id.button_02));
