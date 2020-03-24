@@ -10,12 +10,12 @@
 
     <Button
         android:id="@+id/menuButton"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_gravity="start"
         android:layout_marginStart="24dp"
         android:layout_marginTop="22dp"
-        android:background="@mipmap/settings" />
+        android:background="@drawable/ic_settings_black_24dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

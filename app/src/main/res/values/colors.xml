@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimaryDark">#151520</color>
+    <color name="colorSecondaryDark">#1D1D2B</color>
+    <color name="less_white">#7C7B7B</color>
     <color name="greenColor">#2D9416</color>
     <color name="whiteColor">#FFFFFF</color>
     <color name="buttonsColor">#56AFCC</color>

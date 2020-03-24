@@ -87,7 +87,16 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
             }
         };
-        rewardsButton.setOnClickListener(onClickListener);
+        //rewardsButton.setOnClickListener(onClickListener);
+
+        rewardsButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
+                startActivity(intent);
+
+            }
+        });
         presentsButton.setOnClickListener(onClickListener);
     }
 

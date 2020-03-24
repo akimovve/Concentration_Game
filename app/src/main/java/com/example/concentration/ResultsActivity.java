@@ -17,6 +17,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.concentration.DataSave.DataBaseHelper;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,6 +40,7 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.results_layout);
+
 
         backButton = findViewById(R.id.backButton);
         init();
@@ -68,6 +72,7 @@ public class ResultsActivity extends AppCompatActivity {
 
 
 
+
         final SQLiteDatabase db;
         db = openOrCreateDatabase("GameRes", Context.MODE_PRIVATE, null);
 
@@ -87,6 +92,7 @@ public class ResultsActivity extends AppCompatActivity {
                 } while (c.moveToNext());
             } else isEmpty = true;
             c.close();
+
 
             if (!isEmpty) {
 

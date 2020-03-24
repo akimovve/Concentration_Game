@@ -38,4 +38,10 @@
     <string name="matched_text1">MATCHED!</string>
     <string name="matched_text2">flips</string>
     <string name="matched_text3">points</string>
+    <string name="menu_phone">Phone</string>
+    <string name="menu_local">Network</string>
+    <string name="menu_user">Profile</string>
+    <string name="sign_in">Sign in</string>
+
+    <string name="facebook_app_id">351314819122579</string>
 </resources>

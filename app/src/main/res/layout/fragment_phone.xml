@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/title_res"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:fontFamily="@font/sf_pro_medium"
+        android:gravity="center"
+        android:text="@string/results"
+        android:textColor="@android:color/white"
+        android:textSize="36sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:layout_below="@id/title_res"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal">
+
+        <TableLayout
+            android:id="@+id/resTable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

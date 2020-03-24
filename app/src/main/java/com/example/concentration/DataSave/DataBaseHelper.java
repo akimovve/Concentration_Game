@@ -13,22 +13,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super(context, name, factory, version);
     }
 
+    private String COLUMN_ID = "id";
+    private String COLUMN_NAME = "Name";
+    private String COLUMN_PERCENTS = "Percents";
+    private String COLUMN_FLIPS = "Flips";
+    private String COLUMN_POINTS = "Points";
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query;
-        {
-            String COLUMN_ID = "id";
-            String COLUMN_NAME = "Name";
-            String COLUMN_PERCENTS = "Percents";
-            String COLUMN_FLIPS = "Flips";
-            String COLUMN_POINTS = "Points";
-            query = "CREATE TABLE " + TABLE_NAME
-                    + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + COLUMN_NAME + " TEXT UNIQUE, "
-                    + COLUMN_PERCENTS + " REAL, "
-                    + COLUMN_FLIPS + " INTEGER, "
-                    + COLUMN_POINTS + " INTEGER);";
-        }
+
+        query = "CREATE TABLE " + TABLE_NAME + "("
+                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_NAME + " TEXT UNIQUE, "
+                + COLUMN_PERCENTS + " REAL, "
+                + COLUMN_FLIPS + " INTEGER, "
+                + COLUMN_POINTS + " INTEGER);";
+
         db.execSQL(query);
     }
 

@@ -17,9 +17,9 @@
 
         <Button
             android:id="@+id/backButton"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:background="@mipmap/back_button" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_chevron_left_black_24dp" />
 
         <TextView
             android:id="@+id/textView5"

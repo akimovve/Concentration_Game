@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_phone"
+        android:enabled="true"
+        android:icon="@drawable/ic_phone_iphone_black_24dp"
+        android:title="@string/menu_phone"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/nav_network"
+        android:enabled="true"
+        android:icon="@drawable/ic_public_black_24dp"
+        android:title="@string/menu_local"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/nav_profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="@string/menu_user"
+        app:showAsAction="ifRoom"/>
+
+</menu>
