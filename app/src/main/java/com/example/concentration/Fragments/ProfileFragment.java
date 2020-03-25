@@ -3,6 +3,7 @@ package com.example.concentration.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.io.File;
+import java.net.URL;
+import java.util.logging.Logger;
 
 import bolts.Task;
 
@@ -96,7 +101,7 @@ public class ProfileFragment extends Fragment {
                 userPic.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_background));
             } else {
                 Glide.with(ProfileFragment.this.getActivity())
-                        .load(String.valueOf(personPhoto))
+                        .load(personPhoto)
                         .into(userPic);
             }
             userPic.setVisibility(View.VISIBLE);
