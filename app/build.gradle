@@ -31,7 +31,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-config:17.0.0'
     implementation 'com.google.firebase:firebase-database:17.0.0'
     implementation 'com.google.firebase:firebase-storage:17.0.0'
-    implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
     implementation 'com.google.firebase:firebase-crash:9.4.0'
 
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'

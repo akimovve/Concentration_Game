@@ -120,10 +120,10 @@ public class SignInFragment extends Fragment {
                     .replace(R.id.fragment_container, new ProfileFragment())
                     .addToBackStack(null)
                     .commit();
-            //firebaseAuthViaGoogle(acc);
+            firebaseAuthViaGoogle(acc);
         } catch (ApiException e) {
             Toast.makeText(getActivity(), "Sing In Failed", Toast.LENGTH_SHORT).show();
-            //firebaseAuthViaGoogle(null);
+            firebaseAuthViaGoogle(null);
         }
     }
 
@@ -171,19 +171,19 @@ public class SignInFragment extends Fragment {
     // [END Google Sign In]
 
 
-    /*private void firebaseAuthViaGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthViaGoogle(GoogleSignInAccount acct) {
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(authCredential)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    //updateUI(user);
-                }
-                //else updateUI(null);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //updateUI(user);
+                        }
+                        //else updateUI(null);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -191,5 +191,4 @@ public class SignInFragment extends Fragment {
             }
         });
     }
-     */
 }
