@@ -10,8 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 
-import com.example.concentration.HomeActivity;
-import com.example.concentration.LevelUpActivity;
+import com.example.concentration.Activities.HomeActivity;
+import com.example.concentration.Activities.LevelUpActivity;
 import com.example.concentration.DataSave.PreferencesUtil;
 import com.example.concentration.R;
 

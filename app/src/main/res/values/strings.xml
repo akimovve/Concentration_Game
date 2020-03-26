@@ -43,5 +43,7 @@
     <string name="menu_user">Profile</string>
     <string name="sign_in">Sign in</string>
 
+    <string name="change_name">Create a nickname:</string>
     <string name="facebook_app_id">351314819122579</string>
+    <string name="create">Create</string>
 </resources>

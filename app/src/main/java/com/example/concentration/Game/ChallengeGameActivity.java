@@ -20,19 +20,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.concentration.DataSave.DataBaseHelper;
-import com.example.concentration.HomeActivity;
+import com.example.concentration.Activities.HomeActivity;
 import com.example.concentration.Info.Literals;
-import com.example.concentration.LevelUpActivity;
+import com.example.concentration.Activities.LevelUpActivity;
+import com.example.concentration.Info.Post;
+import com.example.concentration.Info.User;
 import com.example.concentration.R;
-import com.example.concentration.ResultsActivity;
+import com.example.concentration.Activities.ResultsActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ChallengeGameActivity extends GameAlgorithm {
 
+    private static final String LOG_TAG = ChallengeGameActivity.class.getSimpleName();
     OnClickListener buttonClicks;
     TextView stopWatchText;
     DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "GameRes", null, 1);
@@ -42,11 +55,16 @@ public class ChallengeGameActivity extends GameAlgorithm {
     private int flipCount = 0;
     private static int amountOfFlips = 0, allMistakes = 0;
 
+    private DatabaseReference mDatabase;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameplay_layout);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
@@ -217,7 +235,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
-        dialog.setContentView(R.layout.form_filling_layout);
+        dialog.setContentView(R.layout.endgame_dialog);
 
         final EditText nameEditText = dialog.findViewById(R.id.nameEditText);
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -227,11 +245,15 @@ public class ChallengeGameActivity extends GameAlgorithm {
             public void onClick(View v) {
                 int a = 1; // 1 - add, 2 - show, 3 - clear Data Base
                 ContentValues contentValues = new ContentValues();
-                String name = nameEditText.getText().toString();
+                final String name = nameEditText.getText().toString();
 
                 if (name.equals("")) {
                     Toast.makeText(getApplicationContext(), "Enter your name", Toast.LENGTH_SHORT).show();
                 } else {
+
+                    final String uid = getUid();
+                    addPost(uid, name);
+
                     SQLiteDatabase database = dataBaseHelper.getWritableDatabase();
                     switch (a) {
                         case 1: {
@@ -281,5 +303,44 @@ public class ChallengeGameActivity extends GameAlgorithm {
             }
         });
         dialog.show();
+    }
+
+    private void addPost(final String userId, final String username) {
+        mDatabase.child("users").child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+
+                if (user == null) {
+                    Log.e(LOG_TAG, "User " + userId + " is unexpectedly null");
+                    Toast.makeText(ChallengeGameActivity.this, "Error: could not fetch user.",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    writeNewPost(userId, username, String.valueOf(round(Literals.points)));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(LOG_TAG, "getUser:onCancelled", databaseError.toException());
+            }
+        });
+    }
+
+    private void writeNewPost(String userId, String name, String percents) {
+        String key = mDatabase.child("posts").push().getKey();
+        Post post = new Post(userId, name, percents);
+        Map<String, Object> postValues = post.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/posts/" + key, postValues);
+        childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+
+        mDatabase.updateChildren(childUpdates);
+        Log.d(LOG_TAG, String.valueOf(postValues));
+    }
+
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 }

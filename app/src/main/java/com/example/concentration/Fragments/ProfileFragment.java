@@ -1,9 +1,7 @@
 package com.example.concentration.Fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,21 +17,11 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.concentration.R;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.io.File;
-import java.net.URL;
-import java.util.logging.Logger;
-
-import bolts.Task;
 
 public class ProfileFragment extends Fragment {
 
@@ -41,7 +29,6 @@ public class ProfileFragment extends Fragment {
     private TextView userName, userEmail;
     private ImageView userPic;
     private GoogleSignInClient mGoogleSignInClient;
-
 
 
     @Nullable
@@ -59,7 +46,7 @@ public class ProfileFragment extends Fragment {
 
         userName = view.findViewById(R.id.user_name);
         userEmail = view.findViewById(R.id.user_email);
-        userPic = view.findViewById(R.id.user_pic);
+        userPic = view.findViewById(R.id.profile_image);
 
         initFireBaseGoogleSignIn();
 
@@ -86,12 +73,10 @@ public class ProfileFragment extends Fragment {
 
     private void updateUI() {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
+
         if (acct != null) {
-            String personName = acct.getDisplayName();
             String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
             String personEmail = acct.getEmail();
-            String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
 
             userName.setText(String.valueOf(personGivenName));
@@ -105,8 +90,14 @@ public class ProfileFragment extends Fragment {
                         .into(userPic);
             }
             userPic.setVisibility(View.VISIBLE);
+        } else {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new SignInFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
     }
+
 
     private void signOut() {
         mGoogleSignInClient.signOut().addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
