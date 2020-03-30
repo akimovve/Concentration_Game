@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/sf_pro_medium"
             android:text="@string/results"
-            android:textColor="@color/whiteColor"
+            android:textColor="@android:color/white"
             android:layout_marginStart="67dp"
             android:textSize="36sp" />
     </LinearLayout>
@@ -37,8 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/line"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/todo" />
+        android:layout_margin="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -193,7 +193,7 @@ public class GameAlgorithm extends AppCompatActivity {
             if (!card.isMatched) {
                 button.getBackground().setColorFilter(getColorOfButtons(getIndex(button.getId())),PorterDuff.Mode.MULTIPLY);
             } else {
-                button.getBackground().setColorFilter(getResources().getColor(R.color.noColor), PorterDuff.Mode.MULTIPLY);
+                button.getBackground().setColorFilter(getResources().getColor(R.color.no_color), PorterDuff.Mode.MULTIPLY);
                 button.setEnabled(false);
             }
         }

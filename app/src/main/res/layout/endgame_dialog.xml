@@ -15,7 +15,7 @@
         android:fontFamily="@font/sf_pro_bold"
         android:gravity="center"
         android:text="@string/you_won"
-        android:textColor="@color/whiteColor"
+        android:textColor="@android:color/white"
         android:textSize="30sp"
         tools:layout_conversion_absoluteHeight="21dp"
         tools:layout_conversion_absoluteWidth="411dp"
@@ -29,7 +29,7 @@
         android:fontFamily="@font/sf_pro_medium"
         android:gravity="center"
         android:text="@string/enter_your_name"
-        android:textColor="@color/whiteColor"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 
     <EditText
@@ -44,7 +44,6 @@
         android:gravity="center"
         android:hint="@string/name"
         android:inputType="textPersonName"
-        android:textColor="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimaryDark"
         android:textSize="18sp" />
 
@@ -56,7 +55,6 @@
         android:background="@drawable/button_round"
         android:fontFamily="@font/sf_pro_medium"
         android:gravity="center"
-
         android:text="@string/ok"
         android:textSize="18sp" />
 

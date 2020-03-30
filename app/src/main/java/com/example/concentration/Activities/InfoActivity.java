@@ -64,7 +64,6 @@ public class InfoActivity extends AppCompatActivity {
                                     new ProfileFragment()).commit();
                             break;
                     }
-
                     return true;
                 }
             };

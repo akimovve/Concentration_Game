@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Quick Eye</string>
-    <string name="new_game">Старт</string>
-    <string name="resume_buttontitle">Продолжить</string>
-    <string name="pause_buttontitle">Пауза</string>
     <string name="level_passed">Уровень пройден!</string>
     <string name="restart">Начать заново</string>
     <string name="next">Далее</string>
@@ -15,7 +12,6 @@
     <string name="challenge">С другом</string>
     <string name="play">Старт</string>
     <string name="score_0">УРОВЕНЬ</string>
-    <string name="todo">TODO</string>
     <string name="settings">Настройки</string>
     <string name="cooperate_with_your_friend">Cooperate with your friend</string>
     <string name="competition_text_preview">
@@ -27,7 +23,6 @@
         In the end their will be a winner!\n
         Good luck!
     </string>
-    <string name="start">Начать</string>
     <string name="easy">Легкий</string>
     <string name="medium">Средний</string>
     <string name="hard">Сложный</string>
@@ -42,7 +37,6 @@
     <string name="menu_local">В сети</string>
     <string name="menu_user">Аккаунт</string>
     <string name="sign_in">Sign in</string>
-
     <string name="change_name">Введите никнейм:</string>
     <string name="facebook_app_id">351314819122579</string>
     <string name="create">Создать</string>

@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -22,11 +23,11 @@ import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = HomeActivity.class.getSimpleName();
     private int levelNumber = 1;
     private TextView lvlTextView;
-    LinearLayout layout;
     private AnimationDrawable mAnimationDrawable;
-    boolean reset = false;
+    private static boolean reset = false;
 
 
     @Override
@@ -34,11 +35,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
 
-        init();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             reset = bundle.getBoolean("game_reset");
         }
+
+        init();
         readDB();
         String lvl = String.valueOf(levelNumber);
         lvlTextView.setText(getResources().getText(R.string.score_0) + "  " + lvl);
@@ -103,7 +105,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        layout = findViewById(R.id.main_linear);
+        LinearLayout layout = findViewById(R.id.main_linear);
         mAnimationDrawable = (AnimationDrawable) layout.getBackground();
         mAnimationDrawable.setEnterFadeDuration(100);
         mAnimationDrawable.setExitFadeDuration(4000);

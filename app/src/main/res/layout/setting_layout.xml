@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/sf_pro_medium"
             android:text="@string/settings"
-            android:textColor="@color/whiteColor"
+            android:textColor="@android:color/white"
             android:layout_marginStart="58dp"
             android:textSize="36sp" />
     </LinearLayout>
@@ -39,8 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/line"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/todo" />
+        android:layout_margin="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/complexity"
-            android:textColor="@color/whiteColor"
+            android:textColor="@android:color/white"
             android:gravity="center"
             android:textSize="30sp"
             android:fontFamily="@font/sf_pro_medium"/>
@@ -85,7 +84,7 @@
                     android:text="@string/easy"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
-                    android:backgroundTint="@color/whiteColor"/>
+                    android:backgroundTint="@android:color/white"/>
 
                 <Button
                     android:id="@+id/mediumComplBut"
@@ -96,7 +95,7 @@
                     android:text="@string/medium"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
-                    android:backgroundTint="@color/whiteColor"/>
+                    android:backgroundTint="@android:color/white"/>
 
                 <Button
                     android:id="@+id/hardComplBut"
@@ -107,7 +106,7 @@
                     android:text="@string/hard"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
-                    android:backgroundTint="@color/whiteColor"/>
+                    android:backgroundTint="@android:color/white"/>
 
                 <View
                     android:layout_width="5dp"

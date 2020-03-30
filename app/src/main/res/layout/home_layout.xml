@@ -28,7 +28,6 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="256dp"
-            android:contentDescription="@string/todo"
             app:srcCompat="@mipmap/logo_game" />
 
         <TextView
@@ -39,7 +38,7 @@
             android:fontFamily="@font/sf_pro_bold"
             android:gravity="center"
             android:text="@string/score_0"
-            android:textColor="@color/whiteColor"
+            android:textColor="@android:color/white"
             android:textSize="24sp" />
 
     </LinearLayout>
@@ -60,7 +59,7 @@
             android:onClick="startChallengeGame"
             android:fontFamily="@font/sf_pro_bold"
             android:text="@string/challenge"
-            android:textColor="@color/whiteColor"
+            android:textColor="@android:color/white"
             android:textSize="18sp" />
 
         <Button
@@ -73,7 +72,7 @@
             android:onClick="startSingleGame"
             android:fontFamily="@font/sf_pro_bold"
             android:text="@string/play"
-            android:textColor="@color/whiteColor"
+            android:textColor="@android:color/white"
             android:textSize="24sp" />
 
     </LinearLayout>

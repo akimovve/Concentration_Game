@@ -1,5 +1,6 @@
 package com.example.concentration.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -35,15 +36,16 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         OnClickListener onClickListener = new OnClickListener() {
+            @SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < complexity.size(); i++) {
                     if (complexity.get(i).getId() == v.getId()) {
-                        complexity.get(i).getBackground().setColorFilter(getResources().getColor(R.color.redColor), PorterDuff.Mode.MULTIPLY);
+                        complexity.get(i).getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.MULTIPLY);
                         complexity.get(i).setTextColor(Color.WHITE);
                         PreferencesUtil.saveComplexity(SettingsActivity.this, i);
                     } else {
-                        complexity.get(i).getBackground().setColorFilter(getResources().getColor(R.color.whiteColor), PorterDuff.Mode.MULTIPLY);
+                        complexity.get(i).getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                         complexity.get(i).setTextColor(Color.BLACK);
                     }
                 }
@@ -61,7 +63,7 @@ public class SettingsActivity extends AppCompatActivity {
         complexity.add((Button)findViewById(R.id.mediumComplBut));
         complexity.add((Button)findViewById(R.id.hardComplBut));
         int index = PreferencesUtil.getComplexity(this);
-        complexity.get(index).getBackground().setColorFilter(getResources().getColor(R.color.redColor), PorterDuff.Mode.MULTIPLY);
+        complexity.get(index).getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.MULTIPLY);
         complexity.get(index).setTextColor(Color.WHITE);
     }
 }

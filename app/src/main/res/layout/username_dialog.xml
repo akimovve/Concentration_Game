@@ -13,7 +13,7 @@
         android:fontFamily="@font/sf_pro_bold"
         android:gravity="center"
         android:text="@string/change_name"
-        android:textColor="@color/whiteColor"
+        android:textColor="@android:color/white"
         android:textSize="30sp" />
 
     <EditText

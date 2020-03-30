@@ -13,7 +13,7 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/sf_pro_bold"
         android:text="@string/cooperate_with_your_friend"
-        android:textColor="@color/whiteColor"
+        android:textColor="@android:color/white"
         android:textSize="20sp"/>
 
     <TextView
@@ -26,7 +26,7 @@
         android:fontFamily="@font/sf_pro_font"
         android:gravity="center"
         android:text="@string/competition_text_preview"
-        android:textColor="@color/whiteColor" />
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/startCompetition"
@@ -36,6 +36,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/button_round"
-        android:text="@string/start" />
+        android:text="@string/play" />
 
 </LinearLayout>
