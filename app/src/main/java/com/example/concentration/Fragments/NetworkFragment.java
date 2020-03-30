@@ -55,21 +55,14 @@ public class NetworkFragment extends Fragment {
             }
 
             @Override
-            public void DataIsInserted() {
-
-            }
+            public void DataIsInserted() { }
 
             @Override
-            public void DataIsUpdated() {
-
-            }
+            public void DataIsUpdated() { }
 
             @Override
-            public void DataIsDeleted() {
-
-            }
+            public void DataIsDeleted() { }
         });
-
         return view;
     }
 
@@ -90,12 +83,9 @@ public class NetworkFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
     }
-
 
 
     @Override
