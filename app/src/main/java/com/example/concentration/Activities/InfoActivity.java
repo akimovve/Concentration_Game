@@ -44,9 +44,6 @@ public class InfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

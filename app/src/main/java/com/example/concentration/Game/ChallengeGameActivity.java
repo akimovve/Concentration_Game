@@ -46,18 +46,51 @@ import java.util.Objects;
 public class ChallengeGameActivity extends GameAlgorithm {
 
     private static final String LOG_TAG = ChallengeGameActivity.class.getSimpleName();
-    OnClickListener buttonClicks;
-    TextView stopWatchText;
-    DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "GameRes", null, 1);
     Handler handler;
-    long startTime, buffTime = 0L, resetTime, millisecTime;
-    int seconds, minutes, milliSecs;
-    private int flipCount = 0;
+    long buffTime = 0L, millisecTime;
+    private int levelNumber, flipCount = 0;
     private static int amountOfFlips = 0, allMistakes = 0;
-
+    private boolean isReset = false;
     private DatabaseReference mDatabase;
 
-    @SuppressLint("SetTextI18n")
+    OnClickListener onCardsPushed = new OnClickListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onClick(View v) {
+            Animation animAlpha = AnimationUtils.loadAnimation(ChallengeGameActivity.this, R.anim.alpha);
+            v.startAnimation(animAlpha);
+            if (id != v.getId()) {
+                flipCount += 1;
+                amountOfFlips += 1;
+                id = v.getId();
+            }
+            flipsCountView.setText(getResources().getText(R.string.flips_0) + " " + flipCount);
+            pointsView.setText(getResources().getText(R.string.points_0) + " " + gameLogic.mistakePoints);
+            gameLogic.chooseCard(getIndex(v.getId()));
+            updateViewFromModel();
+
+            if (gameLogic.checkForAllMatchedCards()) {
+                Literals.points += Math.abs(gameLogic.mistakePoints) + flipCount;
+                allMistakes += gameLogic.mistakePoints;
+                if (levelNumber < Literals.maxLevel) {
+                    buffTime += millisecTime;
+                    handler.removeCallbacks(runnable);
+                    Intent intent = new Intent(ChallengeGameActivity.this, LevelUpActivity.class);
+                    intent.putExtra("game_reset", isReset);
+                    intent.putExtra("flips", flipCount);
+                    intent.putExtra("points", gameLogic.mistakePoints);
+                    overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+                    startActivity(intent);
+                } else {
+                    buffTime += millisecTime;
+                    handler.removeCallbacks(runnable);
+                    showDialogModeSelector();
+                }
+            }
+        }
+    };
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +98,18 @@ public class ChallengeGameActivity extends GameAlgorithm {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
         Bundle bundle = getIntent().getExtras();
-        assert bundle != null;
-        final boolean reset = bundle.getBoolean("reset_game");
-        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        final int levelNumber;
+        if (bundle != null) isReset = bundle.getBoolean("game_reset");
+
+        gameReset(isReset, bundle);
+        gameLogic = new QuickEyeGame((numberOfCards + 1) / 2);
+        init();
+        gameSetUp();
+        startTimer();
+        initButtonsOnClick();
+    }
+
+    private void gameReset(boolean reset, Bundle bundle) {
         if (reset) {
             levelNumber = Literals.getLevelNumber(false);
             numberOfCards = Literals.getNumberOFButtons(false);
@@ -81,17 +120,18 @@ public class ChallengeGameActivity extends GameAlgorithm {
         } else {
             levelNumber = Literals.getLevelNumber(true);
             numberOfCards = Literals.getNumberOFButtons(true);
-            speed = bundle.getInt("speed");
+            if (bundle != null) speed = bundle.getInt("speed");
         }
-        gameLogic = new QuickEyeGame((numberOfCards + 1) / 2);
+    }
 
-        init();
-        levelNumTextView.setText(getResources().getText(R.string.lvl) + " " + levelNumber);
-
+    private void gameSetUp() {
         setClick(false,1); // time for becoming cards not clickable
         appearanceOfCards(); // cards start to appear one by one
         openCardsRandomly(); // cards start opening randomly
         setClick(true, literals.delayForFirstAppearance + speed); // delay of start of the game
+    }
+
+    private void startTimer() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -100,75 +140,22 @@ public class ChallengeGameActivity extends GameAlgorithm {
                 startTime = SystemClock.uptimeMillis();
             }
         }, literals.delayForFirstAppearance + speed);
+    }
 
-
-        menuButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                Intent intent = new Intent(ChallengeGameActivity.this, HomeActivity.class);
-                intent.putExtra("reset_game", true);
-                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
-                startActivity(intent);
-            }
-        });
-
-        restartButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = getIntent();
-                finish();
-                intent.putExtra("reset_game", true);
-                startActivity(intent);
-            }
-        });
-
-        buttonClicks = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                if (id != v.getId()) {
-                    flipCount += 1;
-                    amountOfFlips += 1;
-                    id = v.getId();
-                }
-                flipsCountView.setText(getResources().getText(R.string.flips_0) + " " + flipCount);
-                pointsView.setText(getResources().getText(R.string.points_0) + " " + gameLogic.mistakePoints);
-                gameLogic.chooseCard(getIndex(v.getId()));
-                updateViewFromModel();
-
-                if (gameLogic.checkForAllMatchedCards()) {
-                    Literals.points += Math.abs(gameLogic.mistakePoints) + flipCount;
-                    allMistakes += gameLogic.mistakePoints;
-                    if (levelNumber < Literals.maxLevel) {
-                        buffTime += millisecTime;
-                        handler.removeCallbacks(runnable);
-                        Intent intent = new Intent(ChallengeGameActivity.this, LevelUpActivity.class);
-                        intent.putExtra("reset_game", reset);
-                        intent.putExtra("flips", flipCount);
-                        intent.putExtra("points", gameLogic.mistakePoints);
-                        overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
-                        startActivity(intent);
-                    } else {
-                        buffTime += millisecTime;
-                        handler.removeCallbacks(runnable);
-                        showDialogModeSelector();
-                    }
-                }
-            }
-        };
-
-        for (int index = 0; index < numberOfCards; index++) {
-            Button btn = cards.get(index);
-            if (btn.getId() - convertIdToIndex == index)
-                btn.setOnClickListener(buttonClicks);
+    private void initButtonsOnClick() {
+        for (int i = 0; i < numberOfCards; i++) {
+            Button btn = cards.get(i);
+            if (btn.getId() - convertIdToIndex == i)
+                btn.setOnClickListener(onCardsPushed);
         }
     }
 
-    @SuppressLint("SetTextI18n")
+
+    TextView stopWatchText;
+    int seconds, minutes, milliSecs;
+    long startTime, resetTime;
+
     private void init() {
-        menuButton = findViewById(R.id.menuButton);
-        restartButton = findViewById(R.id.restartButton);
         levelNumTextView = findViewById(R.id.levelTextView);
         flipsCountView = findViewById(R.id.flipsCountView);
         stopWatchText = findViewById(R.id.stopWatchText);
@@ -195,16 +182,25 @@ public class ChallengeGameActivity extends GameAlgorithm {
         cards.add((Button)findViewById(R.id.button_17));
         cards.add((Button)findViewById(R.id.button_18));
         cards.add((Button)findViewById(R.id.button_19));
-        millisecTime = 0L;
-        startTime = 0L;
-        buffTime = 0L;
-        resetTime = 0L;
-        seconds = 0;
-        minutes = 0;
-        milliSecs = 0;
+        millisecTime = 0L; startTime = 0L; buffTime = 0L; resetTime = 0L;
+        seconds = 0; minutes = 0; milliSecs = 0;
         stopWatchText.setText("00:00:00");
+        levelNumTextView.setText(getResources().getText(R.string.lvl) + " " + levelNumber);
     }
 
+    public void openHomeMenu(View view) {
+        Intent replyIntent = new Intent(ChallengeGameActivity.this, HomeActivity.class);
+        finish();
+        replyIntent.putExtra("game_reset", true);
+        startActivity(replyIntent);
+    }
+
+    public void restartGame(View view) {
+        Intent intent = getIntent();
+        finish();
+        intent.putExtra("game_reset", true);
+        startActivity(intent);
+    }
 
     private Runnable runnable = new Runnable() {
         @SuppressLint({"DefaultLocale", "SetTextI18n"})
@@ -229,6 +225,9 @@ public class ChallengeGameActivity extends GameAlgorithm {
         int roundRes = (int) Math.round(result);
         return (double) roundRes/100;
     }
+
+
+    DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "GameRes", null, 1);
 
     private void showDialogModeSelector() {
         final String LOG_TAG_DB = "DataBase";

@@ -1,6 +1,5 @@
 package com.example.concentration.Activities;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -8,11 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,89 +23,59 @@ import java.util.Objects;
 public class HomeActivity extends AppCompatActivity {
 
     private int levelNumber = 1;
-    private Button rewardsButton, challengeButton, tableOfRecordsButton, settingsButton, mainPlayButton, presentsButton;
     private TextView lvlTextView;
     LinearLayout layout;
     private AnimationDrawable mAnimationDrawable;
+    boolean reset = false;
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
-        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha3);
 
         init();
         Bundle bundle = getIntent().getExtras();
-        final boolean reset = bundle != null;
+        if (bundle != null) {
+            reset = bundle.getBoolean("game_reset");
+        }
         readDB();
         String lvl = String.valueOf(levelNumber);
         lvlTextView.setText(getResources().getText(R.string.score_0) + "  " + lvl);
-
-        tableOfRecordsButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                Intent intent = new Intent(HomeActivity.this, ResultsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        challengeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                showDialogModeSelector(reset);
-            }
-        });
-
-        mainPlayButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                Intent intent = new Intent(HomeActivity.this, MainGameActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        settingsButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        OnClickListener onClickListener = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
-            }
-        };
-        //rewardsButton.setOnClickListener(onClickListener);
-
-        rewardsButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        presentsButton.setOnClickListener(onClickListener);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mAnimationDrawable.start();
+    }
+
+    public void startChallengeGame(View view) {
+        showDialogModeSelector(reset);
+    }
+
+    public void startSingleGame(View view) {
+        Intent intent = new Intent(HomeActivity.this, MainGameActivity.class);
+        startActivity(intent);
+    }
+
+    public void openRewardsView(View view) {
+        Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
+        startActivity(intent);
+    }
+
+    public void openRecordsView(View view) {
+        Intent intent = new Intent(HomeActivity.this, ResultsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openPresentsView(View view) {
+        Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
+    }
+
+    public void openSettingsView(View view) {
+        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     private void showDialogModeSelector(final boolean fl) {
@@ -123,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(HomeActivity.this, ChallengeGameActivity.class);
-                intent.putExtra("reset_game", fl);
+                intent.putExtra("game_reset", fl);
                 overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -142,12 +107,6 @@ public class HomeActivity extends AppCompatActivity {
         mAnimationDrawable = (AnimationDrawable) layout.getBackground();
         mAnimationDrawable.setEnterFadeDuration(100);
         mAnimationDrawable.setExitFadeDuration(4000);
-        rewardsButton = findViewById(R.id.rewardsButton);
-        challengeButton = findViewById(R.id.challengeButton);
-        tableOfRecordsButton = findViewById(R.id.tableOfRecordsButton);
-        settingsButton = findViewById(R.id.menuButton);
-        presentsButton = findViewById(R.id.presentsButton);
-        mainPlayButton = findViewById(R.id.mainPlayButton);
         lvlTextView = findViewById(R.id.lvlTextView);
     }
 
