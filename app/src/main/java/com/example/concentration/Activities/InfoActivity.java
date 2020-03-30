@@ -29,10 +29,22 @@ public class InfoActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
-        if (savedInstanceState == null) { // for not to delete data with rotation of device
+        Bundle bundle = getIntent().getExtras();
+        boolean sign = false;
+        if (bundle != null) {
+            sign = bundle.getBoolean("sign_up");
+        }
+
+        if (sign) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new PhoneFragment()).commit();
-            bottomNavigationView.setSelectedItemId(R.id.nav_phone);
+            bottomNavigationView.setSelectedItemId(R.id.nav_profile);
+        } else {
+            if (savedInstanceState == null) { // for not to delete data with rotation of device
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PhoneFragment()).commit();
+                bottomNavigationView.setSelectedItemId(R.id.nav_phone);
+            }
         }
 
         backBut = findViewById(R.id.backBut);

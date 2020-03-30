@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.concentration.Info.Literals;
-import com.example.concentration.DataSave.PreferencesUtil;
+import com.example.concentration.DataSave.SharedPreferencesUtil;
 import com.example.concentration.R;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +32,7 @@ public class GameAlgorithm extends AppCompatActivity {
 
     private void setComplexity() {
         int numColors = 1;
-        int difficultyLevel = PreferencesUtil.getComplexity(this);
+        int difficultyLevel = SharedPreferencesUtil.getComplexity(this);
         int[] buttonColors = getResources().getIntArray(R.array.buttoncolors);
         ArrayList<Integer> arrayOfColors = new ArrayList<>();
         for (int a : buttonColors) arrayOfColors.add(a);
@@ -92,7 +92,7 @@ public class GameAlgorithm extends AppCompatActivity {
             }, literals.delayForFirstAppearance - 200);
             literals.delayForFirstAppearance += literals.delayBetweenAppearance;
         }
-        if (PreferencesUtil.getComplexity(this) == 2) circleCards();
+        if (SharedPreferencesUtil.getComplexity(this) == 2) circleCards();
     }
 
     public void openCardsRandomly() {
@@ -165,7 +165,7 @@ public class GameAlgorithm extends AppCompatActivity {
             }, literals.delayForFirstAppearance); // default. DO NOT TOUCH!
             literals.delayForFirstAppearance += literals.timeCardIsOpen; // time between closed and next opened card
         }
-        if (PreferencesUtil.getComplexity(this) == 2) circleCards();
+        if (SharedPreferencesUtil.getComplexity(this) == 2) circleCards();
     }
 
     public Button pressedButton(int index) {

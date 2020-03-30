@@ -14,12 +14,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.concentration.DataSave.PreferencesUtil;
+import com.example.concentration.DataSave.SharedPreferencesUtil;
 import com.example.concentration.Game.ChallengeGameActivity;
 import com.example.concentration.Game.MainGameActivity;
 import com.example.concentration.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -53,7 +58,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void startChallengeGame(View view) {
-        showDialogModeSelector(reset);
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        Log.d(LOG_TAG, String.valueOf(acct));
+        if (acct == null) showDialogToSignUp();
+        else startGame(reset);
     }
 
     public void startSingleGame(View view) {
@@ -80,25 +88,30 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void showDialogModeSelector(final boolean fl) {
+    private void startGame(boolean reset) {
+        final Intent intent = new Intent(HomeActivity.this, ChallengeGameActivity.class);
+        intent.putExtra("game_reset", reset);
+        overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent);
+            }
+        },100);
+    }
+
+    private void showDialogToSignUp() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
-        dialog.setContentView(R.layout.precompetition_layout);
+        dialog.setContentView(R.layout.pre_game_dialog);
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.findViewById(R.id.startCompetition).setOnClickListener(new View.OnClickListener(){
+        dialog.findViewById(R.id.signIn_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(HomeActivity.this, ChallengeGameActivity.class);
-                intent.putExtra("game_reset", fl);
-                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(intent);
-                        dialog.dismiss();
-                    }
-                },100);
+                Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
+                intent.putExtra("sign_up", true);
+                startActivity(intent);
             }
         });
         dialog.show();
@@ -113,6 +126,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void readDB() {
-        levelNumber = PreferencesUtil.getUserLevel(this);
+        levelNumber = SharedPreferencesUtil.getUserLevel(this);
     }
 }

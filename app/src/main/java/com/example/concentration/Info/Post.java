@@ -9,9 +9,9 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class Post {
 
-    private String uid;
-    private String username;
-    private String percents;
+    public String uid;
+    public String username;
+    public String percents;
 
     public Post() { }
 
@@ -31,4 +31,19 @@ public class Post {
         return result;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPercents() {
+        return percents;
+    }
+
+    public void setPercents(String percents) {
+        this.percents = percents;
+    }
 }

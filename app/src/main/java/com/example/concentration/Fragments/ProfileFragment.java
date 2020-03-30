@@ -16,16 +16,18 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.concentration.Info.User;
 import com.example.concentration.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileFragment extends Fragment {
 
-    private Button signOutButton;
     private TextView userName, userEmail;
     private ImageView userPic;
     private GoogleSignInClient mGoogleSignInClient;
@@ -35,7 +37,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        signOutButton = view.findViewById(R.id.sign_out_button);
+        Button signOutButton = view.findViewById(R.id.sign_out_button);
 
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override

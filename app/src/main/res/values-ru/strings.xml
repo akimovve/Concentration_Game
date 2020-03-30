@@ -13,15 +13,9 @@
     <string name="play">Старт</string>
     <string name="score_0">УРОВЕНЬ</string>
     <string name="settings">Настройки</string>
-    <string name="cooperate_with_your_friend">Cooperate with your friend</string>
-    <string name="competition_text_preview">
-        Welcome to the competition mode!\n
-        In this mode you and your friend(s) will understand\n
-        who is the most concentration person of you\n
-        Your goal is to complete \n
-        5 levels of matching cards\n
-        In the end their will be a winner!\n
-        Good luck!
+    <string name="pre_game_title">Перед началом</string>
+    <string name="pre_game_set">Для того, чтобы попробовать этот режим игры,\n
+        зарегестрируйтесь под своим Google аккаунтом
     </string>
     <string name="easy">Легкий</string>
     <string name="medium">Средний</string>

@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.example.concentration.Activities.HomeActivity;
 import com.example.concentration.Activities.LevelUpActivity;
-import com.example.concentration.DataSave.PreferencesUtil;
+import com.example.concentration.DataSave.SharedPreferencesUtil;
 import com.example.concentration.R;
 
 public class MainGameActivity extends GameAlgorithm {
@@ -32,7 +32,7 @@ public class MainGameActivity extends GameAlgorithm {
 
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         init();
-        levelNumber = PreferencesUtil.getUserLevel(this);
+        levelNumber = SharedPreferencesUtil.getUserLevel(this);
         levelNumTextView.setText(getResources().getText(R.string.lvl) + " " + levelNumber);
 
         setClick(false,1); // time for becoming cards not clickable
@@ -66,7 +66,6 @@ public class MainGameActivity extends GameAlgorithm {
 
                 if (gameLogic.checkForAllMatchedCards()) {
                     levelNumber += 1;
-                    PreferencesUtil.saveUserLevel(MainGameActivity.this, levelNumber);
                     Intent intent = new Intent(MainGameActivity.this, LevelUpActivity.class);
                     intent.putExtra("flips", flipCount);
                     intent.putExtra("points", gameLogic.mistakePoints);
@@ -84,7 +83,12 @@ public class MainGameActivity extends GameAlgorithm {
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferencesUtil.saveUserLevel(MainGameActivity.this, levelNumber);
+    }
+
     private void init() {
         menuButton = findViewById(R.id.menuButton);
         restartButton = findViewById(R.id.restartButton);

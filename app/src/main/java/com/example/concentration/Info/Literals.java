@@ -2,7 +2,7 @@ package com.example.concentration.Info;
 
 public class Literals {
 
-    public static final short maxLevel = 2;
+    public static final short maxLevel = 5;
     private static int levelNumber = 0;
     private static int numberOfBut = 0;
 

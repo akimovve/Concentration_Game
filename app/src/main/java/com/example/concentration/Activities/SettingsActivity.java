@@ -1,24 +1,19 @@
 package com.example.concentration.Activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RadioButton;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.concentration.DataSave.PreferencesUtil;
+import com.example.concentration.DataSave.SharedPreferencesUtil;
 import com.example.concentration.R;
-
-import java.util.ArrayList;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private Button backButton;
-    private ArrayList<Button> complexity = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,36 +29,57 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        OnClickListener onClickListener = new OnClickListener() {
-            @SuppressLint("ResourceType")
-            @Override
-            public void onClick(View v) {
-                for (int i = 0; i < complexity.size(); i++) {
-                    if (complexity.get(i).getId() == v.getId()) {
-                        complexity.get(i).getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.MULTIPLY);
-                        complexity.get(i).setTextColor(Color.WHITE);
-                        PreferencesUtil.saveComplexity(SettingsActivity.this, i);
-                    } else {
-                        complexity.get(i).getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
-                        complexity.get(i).setTextColor(Color.BLACK);
-                    }
-                }
-            }
-        };
-
-        for (int i = 0; i < complexity.size(); i++) {
-            complexity.get(i).setOnClickListener(onClickListener);
-        }
     }
 
     private void init() {
         backButton = findViewById(R.id.backButton);
-        complexity.add((Button)findViewById(R.id.easyComplBut));
-        complexity.add((Button)findViewById(R.id.mediumComplBut));
-        complexity.add((Button)findViewById(R.id.hardComplBut));
-        int index = PreferencesUtil.getComplexity(this);
-        complexity.get(index).getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.MULTIPLY);
-        complexity.get(index).setTextColor(Color.WHITE);
+        int index = SharedPreferencesUtil.getComplexity(this);
+        radioDefaultSelect(index);
+    }
+
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        byte chosen = -1;
+        switch (view.getId()) {
+            case R.id.easy_compl:
+                if (checked)
+                    chosen = 0;
+                break;
+            case R.id.normal_compl:
+                if (checked)
+                    chosen = 1;
+                break;
+            case R.id.hard_compl:
+                if (checked)
+                    chosen = 2;
+                break;
+            default:
+                break;
+        }
+        try {
+            SharedPreferencesUtil.saveComplexity(SettingsActivity.this, chosen);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void radioDefaultSelect(int i) {
+        RadioButton easy = findViewById(R.id.easy_compl);
+        RadioButton normal = findViewById(R.id.normal_compl);
+        RadioButton hard = findViewById(R.id.hard_compl);
+
+        switch (i) {
+            case 0:
+                easy.setChecked(true);
+                break;
+            case 1:
+                normal.setChecked(true);
+                break;
+            case 2:
+                hard.setChecked(true);
+                break;
+            default:
+                break;
+        }
     }
 }

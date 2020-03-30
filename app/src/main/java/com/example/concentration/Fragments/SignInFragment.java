@@ -1,6 +1,7 @@
 package com.example.concentration.Fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,10 +39,6 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 public class SignInFragment extends Fragment {
 
     private static final String LOG_TAG = SignInFragment.class.getSimpleName();
-
-    private SignInButton googleSignInButton;
-    private LoginButton facebookSignInButton;
-    private TwitterLoginButton twitterSignInButton;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -86,9 +83,9 @@ public class SignInFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
-        googleSignInButton = view.findViewById(R.id.google_sign_in_button);
-        facebookSignInButton = view.findViewById(R.id.facebook_sign_in_button);
-        twitterSignInButton = view.findViewById(R.id.twitter_sign_in_button);
+        SignInButton googleSignInButton = view.findViewById(R.id.google_sign_in_button);
+        LoginButton facebookSignInButton = view.findViewById(R.id.facebook_sign_in_button);
+        TwitterLoginButton twitterSignInButton = view.findViewById(R.id.twitter_sign_in_button);
 
         googleSignInButton.setOnClickListener(mOnClickListener);
         facebookSignInButton.setOnClickListener(mOnClickListener);
@@ -151,11 +148,12 @@ public class SignInFragment extends Fragment {
     private void onAuthSuccess(final FirebaseUser user) {
         DatabaseReference userNameRef = mDatabase.child("users").child(user.getUid());
 
+
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    writeNewUser(user.getUid(), user.getDisplayName(), user.getEmail());
+                    writeNewUser(user.getUid(), user.getDisplayName(), user.getEmail(), user.getPhotoUrl());
                 }
             }
 
@@ -167,9 +165,9 @@ public class SignInFragment extends Fragment {
         userNameRef.addListenerForSingleValueEvent(eventListener);
     }
 
-    private void writeNewUser(String userId, String name, String email) {
+    private void writeNewUser(String userId, String name, String email, Uri userPhoto) {
 
-        User user = new User(name, email);
+        User user = new User(name, email, userPhoto);
         mDatabase.child("users").child(userId).setValue(user);
         Log.d(LOG_TAG, String.valueOf(user));
     }
