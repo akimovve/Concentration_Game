@@ -20,11 +20,8 @@ import com.example.concentration.Game.MainGameActivity;
 import com.example.concentration.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -70,12 +67,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void openRewardsView(View view) {
-        Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
-        startActivity(intent);
+        Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
     }
 
     public void openRecordsView(View view) {
-        Intent intent = new Intent(HomeActivity.this, ResultsActivity.class);
+        Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
         startActivity(intent);
     }
 

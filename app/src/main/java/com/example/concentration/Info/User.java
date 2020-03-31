@@ -11,6 +11,9 @@ public class User {
     public String email;
     public Uri urlPhoto;
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public User() { }
 

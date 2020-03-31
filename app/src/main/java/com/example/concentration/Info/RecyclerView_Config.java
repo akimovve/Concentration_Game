@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.concentration.R;
 
 import java.util.List;
+import java.util.Map;
 
 public class RecyclerView_Config {
 
@@ -19,29 +20,31 @@ public class RecyclerView_Config {
     private UsersAdapter mUsersAdapter;
 
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<Post> users, List<String> keys) {
+    public void setConfig(RecyclerView recyclerView, Context context, List<Post> users, List<String> keys, Map<Post, Integer> positions) {
         mContext = context;
-        mUsersAdapter = new UsersAdapter(users, keys);
+        mUsersAdapter = new UsersAdapter(users, keys, positions);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(mUsersAdapter);
     }
 
     class UserItemView extends RecyclerView.ViewHolder {
+        private TextView mIncrement;
         private TextView mUsername;
         private TextView mPercents;
-
         private String key;
 
         public UserItemView(ViewGroup parent) {
             super(LayoutInflater.from(mContext).inflate(R.layout.user_list_item, parent, false));
 
+            mIncrement = itemView.findViewById(R.id.increment_num_txtView);
             mUsername = itemView.findViewById(R.id.username_txtView);
             mPercents = itemView.findViewById(R.id.percents_txtView);
         }
 
-        public void bind(Post post, String key) {
+        public void bind(Post post, String key, int increment) {
+            mIncrement.setText(String.valueOf(increment));
             mUsername.setText(post.getUsername());
-            mPercents.setText(post.getPercents());
+            mPercents.setText(post.getPercents() + " %");
             this.key = key;
 
         }
@@ -50,10 +53,13 @@ public class RecyclerView_Config {
     class UsersAdapter extends RecyclerView.Adapter<UserItemView> {
         private List<Post> mUserList;
         private List<String> mKeys;
+        private Map<Post, Integer> mPositions;
 
-        public UsersAdapter(List<Post> mUserList, List<String> mKeys) {
+        public UsersAdapter(List<Post> mUserList, List<String> mKeys, Map<Post, Integer> mPositions) {
             this.mUserList = mUserList;
             this.mKeys = mKeys;
+            this.mPositions = mPositions;
+
         }
 
         @NonNull
@@ -64,8 +70,7 @@ public class RecyclerView_Config {
 
         @Override
         public void onBindViewHolder(@NonNull UserItemView holder, int position) {
-            holder.bind(mUserList.get(position), mKeys.get(position));
-
+            holder.bind(mUserList.get(position), mKeys.get(position), mPositions.get(mUserList.get(position)));
         }
 
         @Override

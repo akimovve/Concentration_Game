@@ -4,7 +4,7 @@
 
     <TextView
         android:id="@+id/id"
-        android:layout_width="20dp"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sf_pro_font"
         android:textColor="@android:color/white"

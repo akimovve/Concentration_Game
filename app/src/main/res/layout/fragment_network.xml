@@ -10,7 +10,7 @@
         android:layout_height="60dp"
         android:fontFamily="@font/sf_pro_medium"
         android:gravity="center"
-        android:text="All users"
+        android:text="@string/all_users_title"
         android:textColor="@android:color/white"
         android:textSize="36sp" />
 

@@ -5,7 +5,7 @@
     <string name="next">Далее</string>
     <string name="menu">Меню</string>
     <string name="you_won">Победа!</string>
-    <string name="enter_your_name">Введитие свое имя:</string>
+    <string name="enter_your_name">Введитие свое имя или используйте сущетвующий:</string>
     <string name="name">Имя</string>
     <string name="ok">OK</string>
     <string name="results">Результаты</string>
@@ -30,8 +30,10 @@
     <string name="menu_phone">На телефоне</string>
     <string name="menu_local">В сети</string>
     <string name="menu_user">Аккаунт</string>
-    <string name="sign_in">Sign in</string>
-    <string name="change_name">Введите никнейм:</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_out">Выйти</string>
+    <string name="change_name">Изменить имя</string>
     <string name="facebook_app_id">351314819122579</string>
     <string name="create">Создать</string>
+    <string name="all_users_title">ВСЕ ИГРОКИ</string>
 </resources>

@@ -21,6 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +54,15 @@ public class NetworkFragment extends Fragment {
         readUsers(new DataStatus() {
             @Override
             public void DataIsLoaded(List<Post> usersInfo, List<String> keys) {
-                new RecyclerView_Config().setConfig(mRecyclerView, getActivity(), usersInfo, keys);
+                Collections.sort(usersInfo);
+
+                Map<Post, Integer> positions = new HashMap<>();
+                int increment = 1;
+                for (Post p : usersInfo) {
+                    positions.put(p, increment++);
+                }
+
+                new RecyclerView_Config().setConfig(mRecyclerView, getActivity(), usersInfo, keys, positions);
             }
 
             @Override

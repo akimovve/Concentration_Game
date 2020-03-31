@@ -4,17 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="?android:attr/listSeparatorTextViewStyle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/increment_num_txtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:fontFamily="@font/sf_pro_font"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/username_txtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="5dp"
-        android:text="TextView"
+        android:fontFamily="@font/sf_pro_bold"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,13 +35,12 @@
         android:id="@+id/percents_txtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:layout_marginEnd="10dp"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_txtView" />
+        android:textSize="25sp"
+        android:fontFamily="@font/sf_pro_font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

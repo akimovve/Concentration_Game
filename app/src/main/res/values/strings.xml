@@ -5,7 +5,7 @@
     <string name="next">Next</string>
     <string name="menu">Menu</string>
     <string name="you_won">You won!</string>
-    <string name="enter_your_name">Enter your name:</string>
+    <string name="enter_your_name">Enter your name or use default:</string>
     <string name="name">Name</string>
     <string name="ok">OK</string>
     <string name="results">RESULTS</string>
@@ -31,7 +31,9 @@
     <string name="menu_local">Network</string>
     <string name="menu_user">Profile</string>
     <string name="sign_in">Sign in</string>
-    <string name="change_name">Create a nickname:</string>
+    <string name="sign_out">Sign out</string>
+    <string name="change_name">Change nickname</string>
     <string name="facebook_app_id">351314819122579</string>
     <string name="create">Create</string>
+    <string name="all_users_title">ALL USERS</string>
 </resources>

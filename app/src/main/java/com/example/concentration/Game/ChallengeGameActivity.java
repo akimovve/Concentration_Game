@@ -1,8 +1,10 @@
 package com.example.concentration.Game;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,6 +27,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.concentration.Activities.InfoActivity;
 import com.example.concentration.DataSave.DataBaseHelper;
 import com.example.concentration.Activities.HomeActivity;
 import com.example.concentration.Info.Literals;
@@ -31,8 +35,8 @@ import com.example.concentration.Activities.LevelUpActivity;
 import com.example.concentration.Info.Post;
 import com.example.concentration.Info.User;
 import com.example.concentration.R;
-import com.example.concentration.Activities.ResultsActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -84,6 +88,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
                 } else {
                     buffTime += millisecTime;
                     handler.removeCallbacks(runnable);
+
                     showDialogModeSelector();
                 }
             }
@@ -231,74 +236,55 @@ public class ChallengeGameActivity extends GameAlgorithm {
 
     private void showDialogModeSelector() {
         final String LOG_TAG_DB = "DataBase";
+
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
+        dialog.setCancelable(false);
         dialog.setContentView(R.layout.endgame_dialog);
 
         final EditText nameEditText = dialog.findViewById(R.id.nameEditText);
+
+        nameEditText.requestFocus();
+        InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        manager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            nameEditText.setHint(user.getDisplayName());
+        }
+
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         dialog.findViewById(R.id.okButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int a = 1; // 1 - add, 2 - show, 3 - clear Data Base
+                String name = nameEditText.getText().toString().isEmpty()?
+                        user.getDisplayName() : nameEditText.getText().toString();
+
+                final String uid = getUid();
+
+                addPost(uid, name);
+
                 ContentValues contentValues = new ContentValues();
-                final String name = nameEditText.getText().toString();
+                SQLiteDatabase database = dataBaseHelper.getWritableDatabase();
 
-                if (name.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Enter your name", Toast.LENGTH_SHORT).show();
-                } else {
+                Log.d(LOG_TAG_DB, "--- INSERT in the table: ---");
+                contentValues.put("Name", name);
+                contentValues.put("Percents", round(Literals.points));
+                contentValues.put("Flips", amountOfFlips);
+                contentValues.put("Points", allMistakes);
+                long rowID = database.insert("GameRes", null, contentValues);
+                Log.d(LOG_TAG_DB, "row inserted, ID = " + rowID);
 
-                    final String uid = getUid();
-                    addPost(uid, name);
+                nameEditText.clearFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                    SQLiteDatabase database = dataBaseHelper.getWritableDatabase();
-                    switch (a) {
-                        case 1: {
-                            Log.d(LOG_TAG_DB, "--- INSERT in the table: ---");
-                            contentValues.put("Name", name);
-                            contentValues.put("Percents", round(Literals.points));
-                            contentValues.put("Flips", amountOfFlips);
-                            contentValues.put("Points", allMistakes);
-                            long rowID = database.insert("GameRes", null, contentValues);
-                            Log.d(LOG_TAG_DB, "row inserted, ID = " + rowID);
-                            break;
-                        }
-                        case 2: {
-                            Log.d(LOG_TAG_DB, "--- READ the table: ---");
-                            Cursor cursor = database.query("GameRes", null, null, null, null, null, null);
-                            if (cursor.moveToFirst()) {
-                                int idColIndex = cursor.getColumnIndex("id");
-                                int nameColIndex = cursor.getColumnIndex("Name");
-                                int resultInPercents = cursor.getColumnIndex("Percents");
-                                int resultInFlips = cursor.getColumnIndex("Flips");
-                                int resultInPoints = cursor.getColumnIndex("Points");
-                                do {
-                                    Log.d(LOG_TAG_DB, "ID = " + cursor.getInt(idColIndex)
-                                                        + ", Name = " + cursor.getString(nameColIndex)
-                                                        + ", Percents = " + cursor.getDouble(resultInPercents)
-                                                        + ", Flips = " + cursor.getInt(resultInFlips)
-                                                        + ", Points = " + cursor.getInt(resultInPoints));
-
-                                } while (cursor.moveToNext());
-                            } else Log.d(LOG_TAG_DB, "0 rows");
-                            cursor.close();
-                            break;
-                        }
-                        case 3: {
-                            Log.d(LOG_TAG_DB, "--- DELETE the table: ---");
-                            int clear = database.delete("GameRes", null, null);
-                            Log.d(LOG_TAG_DB, "deleted rows count = " + clear);
-                            break;
-                        }
-                    }
-                    dataBaseHelper.close();
-                    Intent intent = new Intent(ChallengeGameActivity.this, ResultsActivity.class);
-                    intent.putExtra("Results", true);
-                    startActivity(intent);
-                    dialog.dismiss();
-                }
+                dataBaseHelper.close();
+                Intent intent = new Intent(ChallengeGameActivity.this, InfoActivity.class);
+                intent.putExtra("Results", true);
+                startActivity(intent);
+                dialog.dismiss();
             }
         });
         dialog.show();
