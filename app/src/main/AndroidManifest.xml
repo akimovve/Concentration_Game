@@ -41,7 +41,7 @@
 
         <activity android:name=".Activities.InfoActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity"/>
 
         <activity android:name=".Game.GameAlgorithm"
             android:screenOrientation="portrait"

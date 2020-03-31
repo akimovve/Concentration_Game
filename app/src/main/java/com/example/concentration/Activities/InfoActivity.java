@@ -23,7 +23,6 @@ public class InfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.results_data_layout);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -57,6 +56,7 @@ public class InfoActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

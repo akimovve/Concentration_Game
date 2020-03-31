@@ -2,7 +2,6 @@
 
 <resources>
     <!-- Base application theme. -->
-
     <style name="MainWindowAppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/dark_blue_green</item>

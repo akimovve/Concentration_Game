@@ -2,17 +2,19 @@ package com.example.concentration.Activities;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 
 import com.example.concentration.DataSave.SharedPreferencesUtil;
 import com.example.concentration.Game.ChallengeGameActivity;
@@ -28,14 +30,15 @@ public class HomeActivity extends AppCompatActivity {
     private static final String LOG_TAG = HomeActivity.class.getSimpleName();
     private int levelNumber = 1;
     private TextView lvlTextView;
-    private AnimationDrawable mAnimationDrawable;
     private static boolean reset = false;
-
+    private GestureDetectorCompat mGestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_layout);
+        setContentView(R.layout.main_layout);
+
+        mGestureDetector = new GestureDetectorCompat(this, new GestureListener());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -48,10 +51,23 @@ public class HomeActivity extends AppCompatActivity {
         lvlTextView.setText(getResources().getText(R.string.score_0) + "  " + lvl);
     }
 
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e2.getY() < e1.getY() && Math.abs(e1.getX() - e2.getX()) <= 50) {
+                Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+            return super.onFling(e1, e2, velocityX, velocityY);
+        }
+    }
+
     @Override
-    protected void onResume() {
-        super.onResume();
-        mAnimationDrawable.start();
+    public boolean onTouchEvent(MotionEvent event) {
+        mGestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
     public void startChallengeGame(View view) {
@@ -114,10 +130,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        LinearLayout layout = findViewById(R.id.main_linear);
-        mAnimationDrawable = (AnimationDrawable) layout.getBackground();
-        mAnimationDrawable.setEnterFadeDuration(100);
-        mAnimationDrawable.setExitFadeDuration(4000);
         lvlTextView = findViewById(R.id.lvlTextView);
     }
 
