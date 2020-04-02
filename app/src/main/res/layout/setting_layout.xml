@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,58 +7,46 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <LinearLayout
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_chevron_left_black_24dp" />
+
+    <TextView
+        android:id="@+id/title_set"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        android:gravity="center_vertical">
-
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/ic_chevron_left_black_24dp" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sf_pro_medium"
-            android:text="@string/settings"
-            android:textColor="@android:color/white"
-            android:layout_marginStart="58dp"
-            android:textSize="36sp" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/line"
-        android:layout_margin="10dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:fontFamily="@font/sf_pro_medium"
         android:gravity="center"
-        android:orientation="vertical">
+        android:text="@string/settings"
+        android:background="@color/colorSecondaryDark"
+        android:textColor="@android:color/white"
+        android:textSize="36sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:baselineAligned="false"
+        android:layout_below="@id/title_set"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/complexity"
             android:textColor="@android:color/white"
-            android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="22sp"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/sf_pro_medium"/>
 
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="15dp">
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp">
 
             <RadioButton
                 android:id="@+id/easy_compl"
@@ -69,7 +57,7 @@
                 android:buttonTint="@color/orange"
                 android:text="@string/easy"
                 android:textColor="@android:color/white"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/normal_compl"
@@ -79,9 +67,9 @@
                 android:onClick="onRadioButtonClicked"
                 android:buttonTint="@color/orange"
                 android:text="@string/medium"
-                android:layout_marginTop="5dp"
                 android:textColor="@android:color/white"
-                android:textSize="25sp"/>
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"/>
 
             <RadioButton
                 android:id="@+id/hard_compl"
@@ -91,12 +79,12 @@
                 android:onClick="onRadioButtonClicked"
                 android:buttonTint="@color/orange"
                 android:text="@string/hard"
-                android:layout_marginTop="5dp"
                 android:textColor="@android:color/white"
-                android:textSize="25sp" />
+                android:layout_marginStart="10dp"
+                android:textSize="20sp" />
         </RadioGroup>
 
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

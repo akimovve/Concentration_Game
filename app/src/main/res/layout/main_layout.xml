@@ -1,75 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/gradient_animation_list">
-
-    <Button
-        android:id="@+id/menuButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_settings_black_24dp"
-        android:onClick="openSettingsView" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:layout_centerInParent="true"
-        app:srcCompat="@mipmap/logo_game"
-        android:layout_below="@id/menuButton"/>
+    android:background="@mipmap/quick_eye">
 
     <TextView
-        android:id="@+id/lvlTextView"
+        android:id="@+id/lvlTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="350dp"
         android:fontFamily="@font/sf_pro_bold"
         android:text="@string/score_0"
         android:textColor="@android:color/white"
         android:textSize="30sp"
-        android:layout_below="@id/imageView"/>
-
-
-    <Button
-        android:id="@+id/challengeButton"
-        style="@style/TextAppearance.AppCompat.Widget.Button"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/lvlTextView"
-        android:layout_marginStart="30dp"
-        android:background="@drawable/challenge_button"
-        android:onClick="startChallengeGame"
-        android:fontFamily="@font/sf_pro_bold"
-        android:text="@string/challenge"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/mainPlayButton"
-        style="@style/TextAppearance.AppCompat.Widget.Button"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/lvlTextView"
-        android:layout_marginEnd="30dp"
+        android:id="@+id/play_button"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="450dp"
         android:background="@drawable/play_button"
-        android:onClick="startSingleGame"
         android:fontFamily="@font/sf_pro_bold"
+        android:onClick="startSingleGame"
         android:text="@string/play"
-        android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/challenge_button"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/play_button"
+        android:fontFamily="@font/sf_pro_bold"
+        android:onClick="startChallengeGame"
+        android:text="@string/challenge"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/ic_settings_black_24dp"
+        android:fontFamily="@font/sf_pro_bold"
+        android:onClick="openSettingsView"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/play_button" />
+
+    <Button
+        android:id="@+id/info_button"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/ic_view_list_black_24dp"
+        android:fontFamily="@font/sf_pro_bold"
+        android:onClick="openRecordsView"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/challenge_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

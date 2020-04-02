@@ -11,6 +11,7 @@
         android:fontFamily="@font/sf_pro_medium"
         android:gravity="center"
         android:text="@string/all_users_title"
+        android:background="@color/colorSecondaryDark"
         android:textColor="@android:color/white"
         android:textSize="36sp" />
 

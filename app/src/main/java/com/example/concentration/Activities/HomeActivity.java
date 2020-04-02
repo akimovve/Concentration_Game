@@ -6,11 +6,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,14 +28,11 @@ public class HomeActivity extends AppCompatActivity {
     private int levelNumber = 1;
     private TextView lvlTextView;
     private static boolean reset = false;
-    private GestureDetectorCompat mGestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
-
-        mGestureDetector = new GestureDetectorCompat(this, new GestureListener());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -49,25 +43,6 @@ public class HomeActivity extends AppCompatActivity {
         readDB();
         String lvl = String.valueOf(levelNumber);
         lvlTextView.setText(getResources().getText(R.string.score_0) + "  " + lvl);
-    }
-
-    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (e2.getY() < e1.getY() && Math.abs(e1.getX() - e2.getX()) <= 50) {
-                Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-            }
-            return super.onFling(e1, e2, velocityX, velocityY);
-        }
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        mGestureDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
     }
 
     public void startChallengeGame(View view) {
@@ -82,17 +57,9 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openRewardsView(View view) {
-        Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
-    }
-
     public void openRecordsView(View view) {
         Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
         startActivity(intent);
-    }
-
-    public void openPresentsView(View view) {
-        Toast.makeText(getApplicationContext(), "Will be available later", Toast.LENGTH_SHORT).show();
     }
 
     public void openSettingsView(View view) {
@@ -130,7 +97,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        lvlTextView = findViewById(R.id.lvlTextView);
+        lvlTextView = findViewById(R.id.lvlTextView2);
     }
 
     private void readDB() {

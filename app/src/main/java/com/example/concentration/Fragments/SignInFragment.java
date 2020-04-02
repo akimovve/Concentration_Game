@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.concentration.Info.User;
 import com.example.concentration.R;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -34,7 +33,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import java.util.Objects;
 
@@ -53,14 +51,8 @@ public class SignInFragment extends Fragment {
         @Override
         public void onClick(View v) {
             int id = v.getId();
-            switch (id) {
-                case R.id.google_sign_in_button:
-                    signInViaGoogle();
-                    break;
-                case R.id.facebook_sign_in_button:
-                    break;
-                case R.id.twitter_sign_in_button:
-                    break;
+            if (id == R.id.google_sign_in_button) {
+                signInViaGoogle();
             }
         }
     };
@@ -85,13 +77,8 @@ public class SignInFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
         SignInButton googleSignInButton = view.findViewById(R.id.google_sign_in_button);
-        LoginButton facebookSignInButton = view.findViewById(R.id.facebook_sign_in_button);
-        TwitterLoginButton twitterSignInButton = view.findViewById(R.id.twitter_sign_in_button);
 
         googleSignInButton.setOnClickListener(mOnClickListener);
-        facebookSignInButton.setOnClickListener(mOnClickListener);
-        twitterSignInButton.setOnClickListener(mOnClickListener);
-
         return view;
     }
 
