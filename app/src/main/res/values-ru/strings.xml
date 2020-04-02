@@ -9,8 +9,8 @@
     <string name="name">Имя</string>
     <string name="ok">OK</string>
     <string name="results">Результаты</string>
-    <string name="challenge">Выиграй!</string>
-    <string name="play">Старт</string>
+    <string name="challenge">Пробуй!</string>
+    <string name="play">Играть</string>
     <string name="score_0">УРОВЕНЬ</string>
     <string name="settings">Настройки</string>
     <string name="pre_game_title">Перед началом</string>
@@ -24,6 +24,7 @@
     <string name="points_0">Очки:</string>
     <string name="lvl">Уровень</string>
     <string name="complexity">Уровень сложности</string>
+    <string name="theme">Тема</string>
     <string name="matched_text1">Победа!</string>
     <string name="matched_text2">открытия</string>
     <string name="matched_text3">балла</string>
@@ -35,5 +36,9 @@
     <string name="change_name">Изменить имя</string>
     <string name="facebook_app_id">351314819122579</string>
     <string name="create">Создать</string>
-    <string name="all_users_title">ВСЕ ИГРОКИ</string>
+    <string name="all_users_title">Все игроки</string>
+    <string name="animals">Животные</string>
+    <string name="cars">Машины</string>
+    <string name="Food">Еда</string>
+    <string name="Random">Случайно</string>
 </resources>

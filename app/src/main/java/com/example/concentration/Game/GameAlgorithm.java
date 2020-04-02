@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.concentration.Info.Literals;
 import com.example.concentration.DataSave.SharedPreferencesUtil;
+import com.example.concentration.Info.Theme;
 import com.example.concentration.R;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -200,11 +201,27 @@ public class GameAlgorithm extends AppCompatActivity {
     }
 
     private Map<Integer, String> emoji = new HashMap<>();
-    private String[] emojiTypes = {"🏰","🐨","🐝","🦂","🦖","⛄️","🛸","💻","🏁","💂","💍","🐒","🐊","🎄","🏍","👾","🦁","🐿","🔥","🌘","🍕","⚽️","🥁","🧀","🛩","📸","🎁","🍏","🐩","🐓","🍁",
-            "🌈","🦈","🛏","📚","🗿","🎭","🍿","🥥","🍆","🦔","🎮️","🌶","🐘","🚔","🎡","🏔","🚄","🎬","🐙","🍄","🌵","🐢","👑","🧞","👻","🧤","🎓","🎪","🐶","🐲","🍓","🏆","🎰" };
+
+    private String[] animals = {"🐶", "🐱", "🐼", "🦊", "🦁", "🐯", "🐨", "🐮", "🐷", "🐵"};
+    private String[] cars = {"🚔", "🏎", "🚕", "🚚", "🚜", "🚛", "🚑", "🚎", "🚙", "🚒"};
+    private String[] food = {"🍇", "🍌", "🍔", "🎂", "🌽", "🍉", "🍎", "🥕", "🌶", "🍕"};
+    private String[] random = {"🏰","🐨","🐝","🦂","🦖","⛄️","🛸","💻","🏁","💂","💍","🐒",
+            "🐊","🎄","🏍","👾","🦁","🐿","🔥","🌘","🍕","⚽️","🥁","🧀","🛩","📸","🎁","🍏",
+            "🐩","🐓","🍁", "🌈","🦈","🛏","📚","🗿","🎭","🍿","🥥","🍆","🦔","🎮️","🌶","🐘",
+            "🚔","🎡","🏔","🚄","🎬","🐙","🍄","🌵","🐢","👑","🧞","👻","🕶","🎓","🎪","🐶",
+            "🐲","🍓","🏆","🎰" };
+
+    private Theme[] themes = {
+            new Theme(animals),
+            new Theme(cars),
+            new Theme(food),
+            new Theme(random)
+    };
+
     private int cutEmoji = 0;
 
     public String getEmoji(Card card) {
+        String[] emojiTypes = themes[SharedPreferencesUtil.getTheme(this)].emojis;
         if (emoji.get(card.identifier) == null && emojiTypes.length > 0) {
             int randomIndex = (int)(Math.random()*(emojiTypes.length - cutEmoji));
             emoji.put(card.identifier, emojiTypes[randomIndex]);

@@ -56,6 +56,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
     private static int amountOfFlips = 0, allMistakes = 0;
     private boolean isReset = false;
     private DatabaseReference mDatabase;
+    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     OnClickListener onCardsPushed = new OnClickListener() {
         @SuppressLint("SetTextI18n")
@@ -294,7 +295,6 @@ public class ChallengeGameActivity extends GameAlgorithm {
         mDatabase.child("users").child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
 
                 if (user == null) {
                     Log.e(LOG_TAG, "User " + userId + " is unexpectedly null");

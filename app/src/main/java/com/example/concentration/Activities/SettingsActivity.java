@@ -18,7 +18,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting_layout);
+        setContentView(R.layout.settings_layout);
 
         init();
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -33,11 +33,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void init() {
         backButton = findViewById(R.id.backButton);
-        int index = SharedPreferencesUtil.getComplexity(this);
-        radioDefaultSelect(index);
+        int complexity = SharedPreferencesUtil.getComplexity(this);
+        int theme = SharedPreferencesUtil.getTheme(this);
+        radioDefaultSelect(complexity, theme);
     }
 
-    public void onRadioButtonClicked(View view) {
+    public void changeComplexity(View view) {
         boolean checked = ((RadioButton) view).isChecked();
         byte chosen = -1;
         switch (view.getId()) {
@@ -63,12 +64,17 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    private void radioDefaultSelect(int i) {
+    private void radioDefaultSelect(int compl, int theme) {
         RadioButton easy = findViewById(R.id.easy_compl);
         RadioButton normal = findViewById(R.id.normal_compl);
         RadioButton hard = findViewById(R.id.hard_compl);
 
-        switch (i) {
+        RadioButton animals = findViewById(R.id.animals);
+        RadioButton cars = findViewById(R.id.cars);
+        RadioButton food = findViewById(R.id.food);
+        RadioButton random = findViewById(R.id.everything);
+
+        switch (compl) {
             case 0:
                 easy.setChecked(true);
                 break;
@@ -80,6 +86,53 @@ public class SettingsActivity extends AppCompatActivity {
                 break;
             default:
                 break;
+        }
+
+        switch (theme) {
+            case 0:
+                animals.setChecked(true);
+                break;
+            case 1:
+                cars.setChecked(true);
+                break;
+            case 2:
+                food.setChecked(true);
+                break;
+            case 3:
+                random.setChecked(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void changeTheme(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        byte chosen = -1;
+        switch (view.getId()) {
+            case R.id.animals:
+                if (checked)
+                    chosen = 0;
+                break;
+            case R.id.cars:
+                if (checked)
+                    chosen = 1;
+                break;
+            case R.id.food:
+                if (checked)
+                    chosen = 2;
+                break;
+            case R.id.everything:
+                if (checked)
+                    chosen = 3;
+                break;
+            default:
+                break;
+        }
+        try {
+            SharedPreferencesUtil.saveTheme(SettingsActivity.this, chosen);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

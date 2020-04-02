@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_chevron_left_black_24dp" />
+
+    <TextView
+        android:id="@+id/title_set"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:fontFamily="@font/sf_pro_medium"
+        android:gravity="center"
+        android:text="@string/settings"
+        android:background="@color/colorSecondaryDark"
+        android:textColor="@android:color/white"
+        android:textSize="36sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/compl_layout"
+        android:baselineAligned="false"
+        android:layout_below="@id/title_set"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/complexity"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/sf_pro_medium"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp">
+
+            <RadioButton
+                android:id="@+id/easy_compl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_medium"
+                android:onClick="changeComplexity"
+                android:buttonTint="@color/orange"
+                android:text="@string/easy"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/normal_compl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_medium"
+                android:onClick="changeComplexity"
+                android:buttonTint="@color/orange"
+                android:text="@string/medium"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"/>
+
+            <RadioButton
+                android:id="@+id/hard_compl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_medium"
+                android:onClick="changeComplexity"
+                android:buttonTint="@color/orange"
+                android:text="@string/hard"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:baselineAligned="false"
+        android:layout_below="@id/compl_layout"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/theme"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/sf_pro_medium"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp">
+
+            <RadioButton
+                android:id="@+id/animals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_medium"
+                android:onClick="changeTheme"
+                android:buttonTint="@color/orange"
+                android:text="@string/animals"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/cars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_medium"
+                android:onClick="changeTheme"
+                android:buttonTint="@color/orange"
+                android:text="@string/cars"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"/>
+
+            <RadioButton
+                android:id="@+id/food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_medium"
+                android:onClick="changeTheme"
+                android:buttonTint="@color/orange"
+                android:text="@string/Food"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/everything"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_medium"
+                android:onClick="changeTheme"
+                android:buttonTint="@color/orange"
+                android:text="@string/Random"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </RadioGroup>
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

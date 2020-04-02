@@ -2,6 +2,7 @@ package com.example.concentration.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,8 @@ import com.example.concentration.Fragments.PhoneFragment;
 import com.example.concentration.Fragments.ProfileFragment;
 import com.example.concentration.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -33,6 +36,7 @@ public class InfoActivity extends AppCompatActivity {
         if (bundle != null) {
             sign = bundle.getBoolean("sign_up");
         }
+
 
         if (sign) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

@@ -24,6 +24,7 @@
     <string name="points_0">Points:</string>
     <string name="lvl">Level</string>
     <string name="complexity">Complexity</string>
+    <string name="theme">Theme</string>
     <string name="matched_text1">MATCHED!</string>
     <string name="matched_text2">flips</string>
     <string name="matched_text3">points</string>
@@ -36,4 +37,8 @@
     <string name="facebook_app_id">351314819122579</string>
     <string name="create">Create</string>
     <string name="all_users_title">ALL USERS</string>
+    <string name="animals">Animals</string>
+    <string name="cars">Cars</string>
+    <string name="Food">Food</string>
+    <string name="Random">Random</string>
 </resources>
