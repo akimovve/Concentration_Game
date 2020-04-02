@@ -3,4 +3,4 @@ Everyone knows adout the game, where your goal is to match two same cards. So, I
 ## Overview
 In this application besides of game logic, there're some different types of coding things. This game was created because I would like to get acquainted with developing apps for Android using Android Studio in Samsung Academy courses. So, this is my first product which I've created on my own. Check this out!
 # Download
-Nothing yet.
+Nothing yet
