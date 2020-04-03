@@ -19,7 +19,7 @@ public class LevelUpActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.levelup_layout);
+        setContentView(R.layout.nextlvl_layout);
 
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;

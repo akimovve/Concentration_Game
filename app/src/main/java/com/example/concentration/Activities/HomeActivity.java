@@ -9,9 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GestureDetectorCompat;
 
 import com.example.concentration.DataSave.SharedPreferencesUtil;
 import com.example.concentration.Game.ChallengeGameActivity;
@@ -39,8 +38,9 @@ public class HomeActivity extends AppCompatActivity {
             reset = bundle.getBoolean("game_reset");
         }
 
-        init();
-        readDB();
+
+        lvlTextView = findViewById(R.id.lvlTextView2);
+        levelNumber = SharedPreferencesUtil.getUserLevel(this);
         String lvl = String.valueOf(levelNumber);
         lvlTextView.setText(getResources().getText(R.string.score_0) + "  " + lvl);
     }
@@ -70,7 +70,6 @@ public class HomeActivity extends AppCompatActivity {
     private void startGame(boolean reset) {
         final Intent intent = new Intent(HomeActivity.this, ChallengeGameActivity.class);
         intent.putExtra("game_reset", reset);
-        overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -83,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
-        dialog.setContentView(R.layout.pre_game_dialog);
+        dialog.setContentView(R.layout.dialog_authentication);
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.findViewById(R.id.signIn_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,13 +93,5 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         dialog.show();
-    }
-
-    private void init() {
-        lvlTextView = findViewById(R.id.lvlTextView2);
-    }
-
-    private void readDB() {
-        levelNumber = SharedPreferencesUtil.getUserLevel(this);
     }
 }

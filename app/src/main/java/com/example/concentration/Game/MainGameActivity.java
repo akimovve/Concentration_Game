@@ -30,7 +30,6 @@ public class MainGameActivity extends GameAlgorithm {
         numberOfCards = 16;
         gameLogic = new QuickEyeGame((numberOfCards + 1) / 2);
 
-        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         init();
         levelNumber = SharedPreferencesUtil.getUserLevel(this);
         levelNumTextView.setText(getResources().getText(R.string.lvl) + " " + levelNumber);
@@ -43,9 +42,7 @@ public class MainGameActivity extends GameAlgorithm {
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(animAlpha);
                 Intent intent = new Intent(MainGameActivity.this, HomeActivity.class);
-                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
         });
@@ -53,7 +50,6 @@ public class MainGameActivity extends GameAlgorithm {
         buttonClicks = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(animAlpha);
                 if (id != v.getId()) {
                     flipCount += 1;
                     id = v.getId();
@@ -70,7 +66,6 @@ public class MainGameActivity extends GameAlgorithm {
                     intent.putExtra("flips", flipCount);
                     intent.putExtra("points", gameLogic.mistakePoints);
                     intent.putExtra("activity", true);
-                    overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                     startActivity(intent);
                 }
             }

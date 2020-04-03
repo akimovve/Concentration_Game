@@ -234,7 +234,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="30dp">
 
         <TextView
             android:id="@+id/stopWatchText"
@@ -253,7 +253,7 @@
             android:layout_width="102dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="22dp"
-            android:background="@drawable/challenge_button"
+            android:background="@drawable/button_style01"
             android:onClick="openHomeMenu"
             android:text="@string/menu"
             android:textSize="14sp" />

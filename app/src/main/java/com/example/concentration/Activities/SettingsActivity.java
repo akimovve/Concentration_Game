@@ -25,7 +25,6 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, HomeActivity.class);
-                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
         });
@@ -35,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         int complexity = SharedPreferencesUtil.getComplexity(this);
         int theme = SharedPreferencesUtil.getTheme(this);
+
         radioDefaultSelect(complexity, theme);
     }
 

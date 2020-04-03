@@ -2,7 +2,6 @@ package com.example.concentration.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +15,6 @@ import com.example.concentration.Fragments.PhoneFragment;
 import com.example.concentration.Fragments.ProfileFragment;
 import com.example.concentration.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -26,7 +23,7 @@ public class InfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.results_data_layout);
+        setContentView(R.layout.info_layout);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
@@ -55,7 +52,6 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent  = new Intent(InfoActivity.this, HomeActivity.class);
-                overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                 startActivity(intent);
             }
         });

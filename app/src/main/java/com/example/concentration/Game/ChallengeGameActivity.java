@@ -1,12 +1,10 @@
 package com.example.concentration.Game;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,8 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +29,6 @@ import com.example.concentration.Activities.HomeActivity;
 import com.example.concentration.Info.Literals;
 import com.example.concentration.Activities.LevelUpActivity;
 import com.example.concentration.Info.Post;
-import com.example.concentration.Info.User;
 import com.example.concentration.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,8 +57,6 @@ public class ChallengeGameActivity extends GameAlgorithm {
         @SuppressLint("SetTextI18n")
         @Override
         public void onClick(View v) {
-            Animation animAlpha = AnimationUtils.loadAnimation(ChallengeGameActivity.this, R.anim.alpha);
-            v.startAnimation(animAlpha);
             if (id != v.getId()) {
                 flipCount += 1;
                 amountOfFlips += 1;
@@ -84,7 +77,6 @@ public class ChallengeGameActivity extends GameAlgorithm {
                     intent.putExtra("game_reset", isReset);
                     intent.putExtra("flips", flipCount);
                     intent.putExtra("points", gameLogic.mistakePoints);
-                    overridePendingTransition(R.anim.activity_down_up_enter, R.anim.slow_appear);
                     startActivity(intent);
                 } else {
                     buffTime += millisecTime;
@@ -241,7 +233,7 @@ public class ChallengeGameActivity extends GameAlgorithm {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
-        dialog.setContentView(R.layout.endgame_dialog);
+        dialog.setContentView(R.layout.dialog_win);
 
         final EditText nameEditText = dialog.findViewById(R.id.nameEditText);
 
