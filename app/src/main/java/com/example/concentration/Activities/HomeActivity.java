@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.concentration.DataSave.SharedPreferencesUtil;

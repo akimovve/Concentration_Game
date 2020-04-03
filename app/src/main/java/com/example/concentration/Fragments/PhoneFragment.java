@@ -33,7 +33,6 @@ public class PhoneFragment extends Fragment {
     private Map<String, Integer> arrayFlips = new HashMap<>();
     private Map<String, Integer> arrayPoints = new HashMap<>();
     private List<Map.Entry<String, Double>> sortList;
-
     private TableLayout resultsTableLayout;
 
     @Nullable
