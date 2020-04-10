@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activities.HomeActivity"
+        <activity android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
 
@@ -26,30 +26,30 @@
         </activity>
 
 
-        <activity android:name=".Game.ChallengeGameActivity"
+        <activity android:name=".game.ChallengeGameActivity"
             android:screenOrientation="portrait"
             android:theme="@style/GameTheme"
             tools:ignore="InnerclassSeparator,LockedOrientationActivity" />
 
-        <activity android:name=".Game.MainGameActivity"
+        <activity android:name=".game.MainGameActivity"
             android:screenOrientation="portrait"
             android:theme="@style/GameTheme"
             tools:ignore="InnerclassSeparator,LockedOrientationActivity" />
 
-        <activity android:name=".Activities.InfoActivity"
+        <activity android:name=".activities.InfoActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
 
-        <activity android:name=".Game.GameAlgorithm"
+        <activity android:name=".game.GameAlgorithm"
             android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator,LockedOrientationActivity" />
 
-        <activity android:name=".Activities.LevelUpActivity"
+        <activity android:name=".activities.LevelUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/GameTheme"
             tools:ignore="LockedOrientationActivity" />
 
-        <activity android:name=".Activities.SettingsActivity"
+        <activity android:name=".activities.SettingsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 

@@ -25,6 +25,7 @@
     <color name="blue_grey">#607dbb</color>
     <color name="background_dialog">#f7f7f7</color>
     <color name="text">#a3a3a3</color>
+    <color name="bottom_nav">#3F3B59</color>
 
     
     <integer-array name="buttoncolors">
