@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.concentration.info.User;
 import com.example.concentration.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -140,7 +143,8 @@ public class SignInFragment extends Fragment {
         };
         userNameRef.addListenerForSingleValueEvent(eventListener);
 
-        getActivity().getSupportFragmentManager().beginTransaction()
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
                 .replace(R.id.fragment_container, new ProfileFragment())
                 .addToBackStack(null)
                 .commit();
