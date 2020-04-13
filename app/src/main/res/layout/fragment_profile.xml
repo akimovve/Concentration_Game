@@ -2,14 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:gravity="center">
+    android:background="@color/colorPrimaryDark">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_centerInParent="true" />
+    <RelativeLayout
+        android:id="@+id/rel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/colorSecondaryDark"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="85dp" />
+    </RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/user_name"
@@ -17,20 +30,20 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:textSize="30sp"
-        android:fontFamily="@font/sf_pro_font"
+        android:fontFamily="@font/sf_pro_bold"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/profile_image" />
+        android:layout_below="@id/rel_layout" />
 
     <EditText
         android:id="@+id/enter_new_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_image"
+        android:layout_below="@id/rel_layout"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimaryDark"
-        android:fontFamily="@font/sf_pro_font"
+        android:fontFamily="@font/sf_pro_bold"
         android:textColor="@android:color/white"
         android:textColorHint="@color/grey"
         android:textCursorDrawable="@android:color/white"
@@ -39,12 +52,14 @@
 
     <Button
         android:id="@+id/ok_new_button"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profile_image"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/rel_layout"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
+        android:background="@drawable/button_background_main"
+        android:textColor="@android:color/white"
         android:textSize="15sp"
         android:visibility="invisible"
         android:text="@string/ok" />
@@ -66,9 +81,9 @@
         android:layout_below="@id/user_email"
         android:layout_centerInParent="true"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/button_style01"
+        android:background="@drawable/button_background_main"
         android:text="@string/change_name"
         android:textColor="@android:color/white"
         android:textSize="15sp" />
@@ -82,7 +97,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/button_style02"
+        android:background="@drawable/button_background_red"
         android:text="@string/sign_out"
         android:textColor="@android:color/white"
         android:textSize="15sp" />

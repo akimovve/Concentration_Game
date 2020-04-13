@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -132,7 +134,7 @@ public class SignInFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    writeNewUser(user.getUid(), user.getDisplayName(), user.getEmail(), user.getPhotoUrl());
+                    writeNewUser(user.getUid(), user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString());
                 }
             }
 
@@ -150,7 +152,7 @@ public class SignInFragment extends Fragment {
                 .commit();
     }
 
-    private void writeNewUser(String userId, String name, String email, Uri userPhoto) {
+    private void writeNewUser(String userId, String name, String email, String userPhoto) {
         User user = new User(name, email, userPhoto);
 
         mDatabase.child("users").child(userId).setValue(user);

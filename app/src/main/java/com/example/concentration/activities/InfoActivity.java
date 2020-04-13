@@ -15,10 +15,14 @@ import com.example.concentration.fragments.PhoneFragment;
 import com.example.concentration.fragments.ProfileFragment;
 import com.example.concentration.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class InfoActivity extends AppCompatActivity {
 
     Button backBut;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +31,8 @@ public class InfoActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+
+        mAuth = FirebaseAuth.getInstance();
 
         Bundle bundle = getIntent().getExtras();
         boolean sign = false;
@@ -57,7 +63,6 @@ public class InfoActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

@@ -117,7 +117,8 @@ public class ProfileFragment extends Fragment {
              */
             userPic.setVisibility(View.VISIBLE);
         } else {
-            getActivity().getSupportFragmentManager().beginTransaction()
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
                     .replace(R.id.fragment_container, new SignInFragment())
                     .addToBackStack(null)
                     .commit();

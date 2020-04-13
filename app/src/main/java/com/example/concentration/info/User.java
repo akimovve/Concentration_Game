@@ -9,7 +9,7 @@ public class User {
 
     public String username;
     public String email;
-    public Uri urlPhoto;
+    public String urlPhoto;
 
     public void setUsername(String username) {
         this.username = username;
@@ -17,7 +17,7 @@ public class User {
 
     public User() { }
 
-    public User(String username, String email, Uri urlPhoto) {
+    public User(String username, String email, String urlPhoto) {
         this.username = username;
         this.email = email;
         this.urlPhoto = urlPhoto;
