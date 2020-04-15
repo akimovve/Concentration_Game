@@ -16,6 +16,7 @@ import com.example.concentration.data.SharedPreferencesUtil;
 import com.example.concentration.game.ChallengeGameActivity;
 import com.example.concentration.game.MainGameActivity;
 import com.example.concentration.R;
+import com.facebook.AccessToken;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
@@ -47,9 +48,15 @@ public class HomeActivity extends AppCompatActivity {
 
     public void startChallengeGame(View view) {
         view.startAnimation(myAnim);
+        // GOOGLE
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         Log.d(LOG_TAG, String.valueOf(acct));
-        if (acct == null) showDialogToSignUp();
+
+        // FACEBOOK
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+
+        if (acct == null && !isLoggedIn) showDialogToSignUp();
         else startGame(reset);
     }
 

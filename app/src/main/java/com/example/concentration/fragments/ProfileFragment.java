@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.concentration.R;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -52,7 +53,6 @@ public class ProfileFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
-
     }
 
     @Override
@@ -95,6 +95,7 @@ public class ProfileFragment extends Fragment {
 
 
     private void updateUI(FirebaseUser user) {
+        Log.d(LOG_TAG, String.valueOf(user));
         if (user != null) {
             String personGivenName = user.getDisplayName();
             String personEmail = user.getEmail();
@@ -107,14 +108,6 @@ public class ProfileFragment extends Fragment {
                     .load(personPhoto)
                     .into(userPic);
 
-            /*if (personPhoto == null) {
-                userPic.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_launcher_background));
-            } else {
-                Glide.with(ProfileFragment.this.getActivity())
-                        .load(personPhoto)
-                        .into(userPic);
-            }
-             */
             userPic.setVisibility(View.VISIBLE);
         } else {
             getActivity().getSupportFragmentManager()
@@ -137,6 +130,8 @@ public class ProfileFragment extends Fragment {
                         .commit();
             }
         });
+        // FACEBOOK
+        LoginManager.getInstance().logOut();
     }
 
     private void setNewName() {

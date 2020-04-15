@@ -1,4 +1,8 @@
 <resources>
+    <!-- FACEBOOK -->
+    <string name="facebook_app_id">351314819122579</string>
+    <string name="fb_login_protocol_scheme">fb351314819122579</string>
+
     <string name="app_name">Quick Eye</string>
     <string name="level_passed">Level passed!</string>
     <string name="restart">Restart</string>
@@ -34,7 +38,6 @@
     <string name="sign_in">Sign in</string>
     <string name="sign_out">Sign out</string>
     <string name="change_name">Change nickname</string>
-    <string name="facebook_app_id">351314819122579</string>
     <string name="create">Create</string>
     <string name="all_users_title">ALL USERS</string>
     <string name="animals">Animals</string>

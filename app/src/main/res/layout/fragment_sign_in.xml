@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryDark">
 
     <RelativeLayout
@@ -32,12 +34,39 @@
         android:fontFamily="@font/sf_pro_bold"
         android:layout_centerInParent="true" />
 
-    <com.google.android.gms.common.SignInButton
+    <Button
         android:id="@+id/google_sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="Sign in with Google"
+        android:textColor="@color/google_text_color"
+        android:textSize="15sp"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_google_button"
+        android:drawableStart="@drawable/ic_google_icon"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp"
         android:layout_below="@id/label_signin"
         android:layout_centerInParent="true"
         android:layout_marginTop="50dp" />
+
+
+    <Button
+        android:id="@+id/facebook_sign_in_button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="Sign in with Facebook"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textAllCaps="false"
+        android:background="@drawable/custom_fb_button"
+        android:drawableStart="@drawable/ic_logo_facebook"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/google_sign_in_button"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        tools:ignore="RtlSymmetry" />
 
 </RelativeLayout>
