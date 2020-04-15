@@ -1,6 +1,5 @@
 package com.example.concentration.activities;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,7 +16,6 @@ import com.example.concentration.fragments.ProfileFragment;
 import com.example.concentration.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class InfoActivity extends AppCompatActivity {
 
