@@ -160,6 +160,7 @@ public class SignInFragment extends Fragment {
     }
 
 
+
     private void handleGoogleAccessToken(GoogleSignInAccount acct) {
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(authCredential)
@@ -181,6 +182,7 @@ public class SignInFragment extends Fragment {
             }
         });
     }
+
 
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -208,6 +210,8 @@ public class SignInFragment extends Fragment {
         });
     }
 
+
+
     private void onAuthSuccess(final FirebaseUser user) {
         DatabaseReference userNameRef = mDatabase.child("users").child(user.getUid());
         ValueEventListener eventListener = new ValueEventListener() {
@@ -232,11 +236,12 @@ public class SignInFragment extends Fragment {
                 .commit();
     }
 
+
+
     private void writeNewUser(String userId, String name, String email, String userPhoto) {
         User user = new User(name, email, userPhoto);
 
         mDatabase.child("users").child(userId).setValue(user);
     }
-
 
 }

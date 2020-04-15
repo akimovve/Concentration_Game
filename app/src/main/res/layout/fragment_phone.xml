@@ -28,6 +28,17 @@
             android:id="@+id/resTable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/start_playButton"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:text="@string/play"
+        android:background="@drawable/button_background_play"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/sf_pro_bold"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:visibility="invisible" />
 </RelativeLayout>

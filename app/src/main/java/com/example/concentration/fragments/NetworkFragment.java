@@ -1,6 +1,9 @@
 package com.example.concentration.fragments;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +21,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class NetworkFragment extends Fragment {
 
@@ -31,6 +37,7 @@ public class NetworkFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private DatabaseReference mDatabase;
     private List<Post> usersInfo = new ArrayList<>();
+    private ProgressDialog progress;
 
 
     public interface DataStatus {
@@ -46,11 +53,14 @@ public class NetworkFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_network, container, false);
         mRecyclerView = view.findViewById(R.id.recyclerview_users);
 
+        showProgress();
+
         mDatabase = FirebaseDatabase.getInstance().getReference("posts");
 
         readUsers(new DataStatus() {
             @Override
             public void DataIsLoaded(List<Post> usersInfo, List<String> keys) {
+                progress.dismiss();
                 Collections.sort(usersInfo);
 
                 Map<Post, Integer> positions = new HashMap<>();
@@ -95,6 +105,13 @@ public class NetworkFragment extends Fragment {
         });
     }
 
+    private void showProgress() {
+        progress = new ProgressDialog(getActivity());
+        progress.setTitle("Loading data");
+        progress.setMessage("Please, wait...");
+        progress.setCancelable(false);
+        progress.show();
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

@@ -1,6 +1,7 @@
 package com.example.concentration.fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -8,6 +9,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -17,8 +21,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.example.concentration.activities.HomeActivity;
 import com.example.concentration.data.DataBaseHelper;
 import com.example.concentration.R;
+import com.example.concentration.game.MainGameActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,12 +40,16 @@ public class PhoneFragment extends Fragment {
     private Map<String, Integer> arrayPoints = new HashMap<>();
     private List<Map.Entry<String, Double>> sortList;
     private TableLayout resultsTableLayout;
+    private Button playButton;
+    private Animation myAnim;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_phone, container, false);
         resultsTableLayout = view.findViewById(R.id.resTable);
+        playButton = view.findViewById(R.id.start_playButton);
+        myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
 
         return view;
     }
@@ -83,6 +93,16 @@ public class PhoneFragment extends Fragment {
             for (int index = 1; index <= size; index++) {
                 addRow(index, sortList.get(index - 1).getKey(), arrayPercents.get(sortList.get(index - 1).getKey()));
             }
+        } else {
+            playButton.setVisibility(View.VISIBLE);
+            playButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.startAnimation(myAnim);
+                    Intent intent = new Intent(getActivity(), MainGameActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
     }
