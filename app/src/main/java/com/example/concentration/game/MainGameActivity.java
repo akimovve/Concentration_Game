@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 
@@ -48,6 +50,8 @@ public class MainGameActivity extends GameAlgorithm {
         buttonClicks = new OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Animation myAnim = AnimationUtils.loadAnimation(MainGameActivity.this, R.anim.alpha);
+                v.startAnimation(myAnim);
                 if (id != v.getId()) {
                     flipCount += 1;
                     id = v.getId();
