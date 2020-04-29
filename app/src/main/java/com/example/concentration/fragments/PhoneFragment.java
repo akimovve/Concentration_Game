@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.example.concentration.activities.HomeActivity;
 import com.example.concentration.data.DataBaseHelper;
 import com.example.concentration.R;
+import com.example.concentration.game.ChallengeGameActivity;
 import com.example.concentration.game.MainGameActivity;
 
 import java.util.ArrayList;
@@ -40,16 +41,15 @@ public class PhoneFragment extends Fragment {
     private Map<String, Integer> arrayPoints = new HashMap<>();
     private List<Map.Entry<String, Double>> sortList;
     private TableLayout resultsTableLayout;
-    private Button playButton;
-    private Animation myAnim;
+    private TextView txtData;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_phone, container, false);
         resultsTableLayout = view.findViewById(R.id.resTable);
-        playButton = view.findViewById(R.id.start_playButton);
-        myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
+        txtData = view.findViewById(R.id.text_data);
+        Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
 
         return view;
     }
@@ -93,18 +93,7 @@ public class PhoneFragment extends Fragment {
             for (int index = 1; index <= size; index++) {
                 addRow(index, sortList.get(index - 1).getKey(), arrayPercents.get(sortList.get(index - 1).getKey()));
             }
-        } else {
-            playButton.setVisibility(View.VISIBLE);
-            playButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    v.startAnimation(myAnim);
-                    Intent intent = new Intent(getActivity(), MainGameActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
-
+        } else txtData.setVisibility(View.VISIBLE);
     }
 
     private void addRow(final int id, String name, Double percents) {

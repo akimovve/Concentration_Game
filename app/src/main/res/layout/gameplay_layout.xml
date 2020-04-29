@@ -234,7 +234,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="20dp">
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/stopWatchText"
@@ -251,7 +252,7 @@
         <Button
             android:id="@+id/menuButton"
             android:layout_width="105dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="22dp"
             android:background="@drawable/button_background_menu"
             android:onClick="openHomeMenu"
@@ -262,7 +263,7 @@
         <Button
             android:id="@+id/restartButton"
             android:layout_width="105dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:background="@drawable/button_background_restart"
             android:onClick="restartGame"
