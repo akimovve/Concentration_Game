@@ -1,6 +1,4 @@
-package com.example.concentration.info;
-
-import android.net.Uri;
+package com.example.concentration.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

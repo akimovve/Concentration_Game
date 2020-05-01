@@ -39,7 +39,6 @@ public class HomeActivity extends AppCompatActivity {
             reset = bundle.getBoolean("game_reset");
         }
 
-
         TextView lvlTextView = findViewById(R.id.lvlTextView2);
         int levelNumber = SharedPreferencesUtil.getUserLevel(this);
         String lvl = String.valueOf(levelNumber);
@@ -56,8 +55,14 @@ public class HomeActivity extends AppCompatActivity {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
-        if (acct == null && !isLoggedIn) showDialogToSignUp();
-        else startGame(reset);
+        if (acct == null && !isLoggedIn) {
+            Log.d(LOG_TAG, "not logged in yet");
+            showDialogToSignUp();
+        }
+        else {
+            Log.d(LOG_TAG, "signed in -> start game");
+            startGame(reset);
+        }
     }
 
     public void startSingleGame(View view) {

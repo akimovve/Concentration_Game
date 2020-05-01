@@ -1,8 +1,10 @@
 package com.example.concentration.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.example.concentration.game.ChallengeGameActivity;
@@ -12,6 +14,7 @@ import com.example.concentration.R;
 
 public class LevelUpActivity extends Activity {
 
+    private static final String LOG_TAG = LevelUpActivity.class.getSimpleName();
     private Variables var = new Variables();
     private boolean whichActivity = false;
     private boolean isReset = false;
@@ -31,6 +34,7 @@ public class LevelUpActivity extends Activity {
         init(flipsNum, points);
     }
 
+    @SuppressLint("SetTextI18n")
     private void init(int flipsNum, int points) {
         TextView levelPassedTextView = findViewById(R.id.levelPassedTextView);
         levelPassedTextView.setText(getResources().getText(R.string.matched_text1) + "\n"
@@ -48,8 +52,12 @@ public class LevelUpActivity extends Activity {
     public void nextLevel(View view) {
         Intent intent;
         if (whichActivity) {
+            Log.d(LOG_TAG, "main game mode opened");
             intent = new Intent(LevelUpActivity.this, MainGameActivity.class);
-        } else intent = new Intent(LevelUpActivity.this, ChallengeGameActivity.class);
+        } else {
+            Log.d(LOG_TAG, "challenge game mode opened");
+            intent = new Intent(LevelUpActivity.this, ChallengeGameActivity.class);
+        }
         intent.putExtra("speed", var.setChange(!isReset));
         intent.putExtra("levelUp",true);
         startActivity(intent);

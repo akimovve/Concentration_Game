@@ -3,17 +3,13 @@ package com.example.concentration.info;
 public class Literals {
 
     public static final short maxLevel = 5;
-    private static int levelNumber = 0;
-    private static int numberOfBut = 0;
+    private static int levelNumber = 0, numberOfBut = 0;
 
-    public final static int match = 2;
-    public final static int miss = 1;
+    public final static int match = 2, miss = 1;
     public static int points = 0;
 
-    public int delayForFirstAppearance = 350;
-    public int delayBetweenAppearance = 80;
-    public int timeCardIsOpen = 300;
-    public int timeCardIsClose = 250;
+    public int delayForFirstAppearance = 350, delayBetweenAppearance = 80;
+    public int timeCardIsOpen = 300, timeCardIsClose = 250;
 
     public static double getMaximumPoints() {
         int res = 0, c = 4;

@@ -1,13 +1,12 @@
-package com.example.concentration.game;
+package com.example.concentration.models;
 
-class Card {
+public class Card {
 
-    boolean isFaceUp = false;
-    boolean isMatched = false;
-    int identifier;
+    public boolean isFaceUp = false, isMatched = false;
+    public int identifier;
     private static int idCreator = 0;
 
-    Card() {
+    public Card() {
         this.identifier = getUniqueIdentifier();
     }
 

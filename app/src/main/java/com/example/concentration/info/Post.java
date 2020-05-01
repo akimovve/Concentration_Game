@@ -29,7 +29,6 @@ public class Post implements Comparable<Post> {
         result.put("uid", uid);
         result.put("username", username);
         result.put("percents", percents);
-
         return result;
     }
 
@@ -50,5 +49,4 @@ public class Post implements Comparable<Post> {
     public String getPercents() {
         return percents;
     }
-
 }

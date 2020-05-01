@@ -1,6 +1,8 @@
 package com.example.concentration.game;
 
 import com.example.concentration.info.Literals;
+import com.example.concentration.models.Card;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -18,7 +20,7 @@ class QuickEyeGame {
         }
 
         for (int j = numberOfPairsOfCards * 2 - 1; j >= 0; j -= 2) {
-            cards.get(j).identifier = cards.get(j-1).identifier;
+            cards.get(j).identifier = cards.get(j - 1).identifier;
         }
         Collections.shuffle(cards);
     }

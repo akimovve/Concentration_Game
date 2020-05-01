@@ -3,6 +3,7 @@ package com.example.concentration.game;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -17,7 +18,8 @@ import com.example.concentration.R;
 
 public class MainGameActivity extends GameAlgorithm {
 
-    OnClickListener buttonClicks;
+    private static final String LOG_TAG = MainGameActivity.class.getSimpleName();
+
     private int flipCount = 0;
     private static int levelNumber;
 
@@ -26,6 +28,7 @@ public class MainGameActivity extends GameAlgorithm {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameplay_layout);
+        Log.d(LOG_TAG, "onCreate");
 
         numberOfCards = 16;
         gameLogic = new QuickEyeGame((numberOfCards + 1) / 2);
@@ -47,7 +50,7 @@ public class MainGameActivity extends GameAlgorithm {
             }
         });
 
-        buttonClicks = new OnClickListener() {
+        OnClickListener buttonClicks = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Animation myAnim = AnimationUtils.loadAnimation(MainGameActivity.this, R.anim.alpha);
@@ -59,7 +62,6 @@ public class MainGameActivity extends GameAlgorithm {
                 flipsCountView.setText("Flips: " + flipCount);
                 pointsView.setText("Points: " + gameLogic.mistakePoints);
                 gameLogic.chooseCard(getIndex(v.getId()));
-                System.out.println(gameLogic.mistakePoints);
                 updateViewFromModel();
 
                 if (gameLogic.checkForAllMatchedCards()) {
@@ -83,6 +85,7 @@ public class MainGameActivity extends GameAlgorithm {
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(LOG_TAG, "onPause");
         SharedPreferencesUtil.saveUserLevel(MainGameActivity.this, levelNumber);
     }
 

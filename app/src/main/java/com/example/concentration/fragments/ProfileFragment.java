@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -46,8 +45,10 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(LOG_TAG, "onCreate");
+        String idToken = "922738481147-a328d75if7kk2k0gfbblqrua2fvkk4f9.apps.googleusercontent.com";
+        //String idToken = getString(R.string.default_web_client_id);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(idToken)
                 .requestEmail()
                 .build();
 
@@ -93,7 +94,6 @@ public class ProfileFragment extends Fragment {
         updateUI(currentUser);
     }
 
-
     private void updateUI(FirebaseUser user) {
         Log.d(LOG_TAG, String.valueOf(user));
         if (user != null) {
@@ -120,6 +120,7 @@ public class ProfileFragment extends Fragment {
 
     private void signOut() {
         mAuth.signOut();
+        // GOOGLE
         mGoogleSignInClient.signOut().addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {

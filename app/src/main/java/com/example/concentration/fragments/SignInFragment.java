@@ -12,24 +12,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.concentration.info.User;
+import com.example.concentration.models.User;
 import com.example.concentration.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.login.Login;
-import com.facebook.login.LoginBehavior;
-import com.facebook.login.LoginFragment;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,13 +45,13 @@ import java.util.Arrays;
 public class SignInFragment extends Fragment {
 
     private static final String LOG_TAG = SignInFragment.class.getSimpleName();
+
     private static final int RC_SIGN_IN = 9001;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private GoogleSignInClient mGoogleSignInClient; // Google
-    private CallbackManager mCallbackManager;
-
+    private CallbackManager mCallbackManager; // Facebook
 
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
@@ -69,8 +63,6 @@ public class SignInFragment extends Fragment {
         }
     };
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +72,10 @@ public class SignInFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // GOOGLE
+        String idToken = "922738481147-a328d75if7kk2k0gfbblqrua2fvkk4f9.apps.googleusercontent.com";
+        //String idToken = getString(R.string.default_web_client_id);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(idToken)
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
@@ -89,8 +83,6 @@ public class SignInFragment extends Fragment {
         // FACEBOOK
         mCallbackManager = CallbackManager.Factory.create();
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -117,7 +109,7 @@ public class SignInFragment extends Fragment {
                     }
                     @Override
                     public void onCancel() {
-                        Log.d(LOG_TAG, "facebook:onCancel");
+                        Log.d(LOG_TAG, "facebook:onCanceled");
                     }
 
                     @Override
@@ -127,18 +119,13 @@ public class SignInFragment extends Fragment {
                 });
             }
         });
-
         return view;
     }
-
-
 
     private void signInGoogle() {
         Intent intent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(intent, RC_SIGN_IN);
     }
-
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -150,16 +137,14 @@ public class SignInFragment extends Fragment {
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 handleGoogleAccessToken(account);
-                Toast.makeText(getActivity(), "Singed In Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Signed In Successfully", Toast.LENGTH_SHORT).show();
             } catch (ApiException e) {
                 Log.w(LOG_TAG, "Google sign in failed", e);
-                Toast.makeText(getActivity(), "Sing In Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Sign In Failed", Toast.LENGTH_SHORT).show();
             }
         }
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
-
 
     private void handleGoogleAccessToken(GoogleSignInAccount acct) {
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -182,8 +167,6 @@ public class SignInFragment extends Fragment {
             }
         });
     }
-
-
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(LOG_TAG, "handleFacebookAccessToken:" + token);
@@ -210,8 +193,6 @@ public class SignInFragment extends Fragment {
         });
     }
 
-
-
     private void onAuthSuccess(final FirebaseUser user) {
         DatabaseReference userNameRef = mDatabase.child("users").child(user.getUid());
         ValueEventListener eventListener = new ValueEventListener() {
@@ -236,12 +217,9 @@ public class SignInFragment extends Fragment {
                 .commit();
     }
 
-
-
     private void writeNewUser(String userId, String name, String email, String userPhoto) {
         User user = new User(name, email, userPhoto);
 
         mDatabase.child("users").child(userId).setValue(user);
     }
-
 }

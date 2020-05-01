@@ -19,7 +19,6 @@ public class RecyclerView_Config {
     private Context mContext;
     private UsersAdapter mUsersAdapter;
 
-
     public void setConfig(RecyclerView recyclerView, Context context, List<Post> users, List<String> keys, Map<Post, Integer> positions) {
         mContext = context;
         mUsersAdapter = new UsersAdapter(users, keys, positions);
@@ -46,7 +45,6 @@ public class RecyclerView_Config {
             mUsername.setText(post.getUsername());
             mPercents.setText(post.getPercents() + " %");
             this.key = key;
-
         }
     }
 
@@ -59,7 +57,6 @@ public class RecyclerView_Config {
             this.mUserList = mUserList;
             this.mKeys = mKeys;
             this.mPositions = mPositions;
-
         }
 
         @NonNull

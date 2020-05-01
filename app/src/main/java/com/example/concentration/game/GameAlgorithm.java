@@ -9,8 +9,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.concentration.info.Literals;
 import com.example.concentration.data.SharedPreferencesUtil;
-import com.example.concentration.info.Theme;
+import com.example.concentration.models.Theme;
 import com.example.concentration.R;
+import com.example.concentration.models.Card;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -201,7 +203,6 @@ public class GameAlgorithm extends AppCompatActivity {
     }
 
     private Map<Integer, String> emoji = new HashMap<>();
-
     private String[] animals = {"🐶", "🐱", "🐼", "🦊", "🦁", "🐯", "🐨", "🐮", "🐷", "🐵"};
     private String[] cars = {"🚔", "🏎", "🚕", "🚚", "🚜", "🚛", "🚑", "🚎", "🚙", "🚒"};
     private String[] food = {"🍇", "🍌", "🍔", "🎂", "🌽", "🍉", "🍎", "🥕", "🌶", "🍕"};

@@ -1,6 +1,7 @@
 package com.example.concentration.info;
 
 public class Variables {
+
     private static int change1 = 50, change2 = 60;
     private static int res = 0;
 

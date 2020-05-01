@@ -2,6 +2,7 @@ package com.example.concentration.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class InfoActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = InfoActivity.class.getSimpleName();
     Button backBut;
 
     FirebaseAuth mAuth;
@@ -26,6 +28,7 @@ public class InfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(LOG_TAG, "onCreate");
         setContentView(R.layout.info_layout);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -39,12 +42,13 @@ public class InfoActivity extends AppCompatActivity {
             sign = bundle.getBoolean("sign_up");
         }
 
-
         if (sign) {
+            Log.d(LOG_TAG, "signed in");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new PhoneFragment()).commit();
             bottomNavigationView.setSelectedItemId(R.id.nav_profile);
         } else {
+            Log.d(LOG_TAG, "not signed in");
             if (savedInstanceState == null) { // for not to delete data with rotation of device
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new PhoneFragment()).commit();

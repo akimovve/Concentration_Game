@@ -1,9 +1,8 @@
 package com.example.concentration.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class NetworkFragment extends Fragment {
 
@@ -39,12 +35,8 @@ public class NetworkFragment extends Fragment {
     private List<Post> usersInfo = new ArrayList<>();
     private ProgressDialog progress;
 
-
     public interface DataStatus {
         void DataIsLoaded(List<Post> usersInfo, List<String> keys);
-        void DataIsInserted();
-        void DataIsUpdated();
-        void DataIsDeleted();
     }
 
     @Nullable
@@ -71,15 +63,6 @@ public class NetworkFragment extends Fragment {
 
                 new RecyclerView_Config().setConfig(mRecyclerView, getActivity(), usersInfo, keys, positions);
             }
-
-            @Override
-            public void DataIsInserted() { }
-
-            @Override
-            public void DataIsUpdated() { }
-
-            @Override
-            public void DataIsDeleted() { }
         });
         return view;
     }
@@ -88,6 +71,7 @@ public class NetworkFragment extends Fragment {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(LOG_TAG, "onDataChange");
                 usersInfo.clear();
 
                 List<String> keys = new ArrayList<>();
@@ -96,12 +80,11 @@ public class NetworkFragment extends Fragment {
                     Post post = keyNode.getValue(Post.class);
                     usersInfo.add(post);
                 }
-
                 dataStatus.DataIsLoaded(usersInfo, keys);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
     }
 
@@ -116,6 +99,5 @@ public class NetworkFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
     }
 }

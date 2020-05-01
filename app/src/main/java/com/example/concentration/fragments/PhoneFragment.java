@@ -1,17 +1,16 @@
 package com.example.concentration.fragments;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -21,11 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.example.concentration.activities.HomeActivity;
 import com.example.concentration.data.DataBaseHelper;
 import com.example.concentration.R;
-import com.example.concentration.game.ChallengeGameActivity;
-import com.example.concentration.game.MainGameActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 
 public class PhoneFragment extends Fragment {
+
+    private static final String LOG_TAG = PhoneFragment.class.getSimpleName();
 
     private Map<String, Double> arrayPercents = new HashMap<>();
     private Map<String, Integer> arrayFlips = new HashMap<>();
@@ -49,8 +47,6 @@ public class PhoneFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_phone, container, false);
         resultsTableLayout = view.findViewById(R.id.resTable);
         txtData = view.findViewById(R.id.text_data);
-        Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
-
         return view;
     }
 
@@ -61,8 +57,8 @@ public class PhoneFragment extends Fragment {
         SQLiteOpenHelper dbHelper = new DataBaseHelper(getActivity(), "GameRes", null, 1);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor c = db.query("GameRes", null, null, null, null, null, null);
-
         boolean isEmpty;
+
         if (c.moveToFirst()) {
             isEmpty = false;
             int nameColIndex = c.getColumnIndex("Name");
@@ -80,7 +76,6 @@ public class PhoneFragment extends Fragment {
         c.close();
 
         if (!isEmpty) {
-
             sortList = new ArrayList(arrayPercents.entrySet());
             Collections.sort(sortList, new Comparator<Map.Entry<String, Double>>() {
                 @Override
@@ -93,7 +88,11 @@ public class PhoneFragment extends Fragment {
             for (int index = 1; index <= size; index++) {
                 addRow(index, sortList.get(index - 1).getKey(), arrayPercents.get(sortList.get(index - 1).getKey()));
             }
-        } else txtData.setVisibility(View.VISIBLE);
+            Log.d(LOG_TAG, "list is not empty");
+        } else {
+            txtData.setVisibility(View.VISIBLE);
+            Log.d(LOG_TAG, "list is empty");
+        }
     }
 
     private void addRow(final int id, String name, Double percents) {
@@ -110,11 +109,11 @@ public class PhoneFragment extends Fragment {
         tr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(id-1);
                 String sorted = sortList.get(id - 1).getKey();
                 displayInformation(sorted, arrayFlips.get(sorted), arrayPoints.get(sorted));
             }
         });
+        Log.d(LOG_TAG, "row added");
     }
 
     private void displayInformation(String name, int flips, int points) {
@@ -131,5 +130,4 @@ public class PhoneFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 }

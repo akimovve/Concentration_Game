@@ -47,8 +47,9 @@ import java.util.Objects;
 public class ChallengeGameActivity extends GameAlgorithm {
 
     private static final String LOG_TAG = ChallengeGameActivity.class.getSimpleName();
-    Handler handler;
-    long buffTime = 0L, millisecTime;
+
+    private Handler handler;
+    private long buffTime = 0L, millisecTime;
     private int levelNumber, flipCount = 0;
     private static int amountOfFlips = 0, allMistakes = 0;
     private boolean isReset = false;
@@ -61,8 +62,8 @@ public class ChallengeGameActivity extends GameAlgorithm {
         public void onClick(View v) {
             final Animation myAnim = AnimationUtils.loadAnimation(ChallengeGameActivity.this, R.anim.alpha);
             if (id != v.getId()) {
-                flipCount += 1;
-                amountOfFlips += 1;
+                flipCount++;
+                amountOfFlips++;
                 id = v.getId();
             }
             flipsCountView.setText(getResources().getText(R.string.flips_0) + " " + flipCount);
@@ -91,7 +92,6 @@ public class ChallengeGameActivity extends GameAlgorithm {
             }
         }
     };
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -152,10 +152,9 @@ public class ChallengeGameActivity extends GameAlgorithm {
         }
     }
 
-
-    TextView stopWatchText;
-    int seconds, minutes, milliSecs;
-    long startTime, resetTime;
+    private TextView stopWatchText;
+    private int seconds, minutes, milliSecs;
+    private long startTime, resetTime;
 
     private void init() {
         levelNumTextView = findViewById(R.id.levelTextView);
@@ -228,7 +227,6 @@ public class ChallengeGameActivity extends GameAlgorithm {
         return (double) roundRes/100;
     }
 
-
     DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "GameRes", null, 1);
 
     private void showDialogModeSelector() {
@@ -238,7 +236,6 @@ public class ChallengeGameActivity extends GameAlgorithm {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.dialog_win);
-
         final EditText nameEditText = dialog.findViewById(R.id.nameEditText);
 
         nameEditText.requestFocus();

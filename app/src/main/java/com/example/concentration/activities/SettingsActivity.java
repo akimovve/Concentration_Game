@@ -2,6 +2,7 @@ package com.example.concentration.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -12,13 +13,13 @@ import com.example.concentration.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = SettingsActivity.class.getSimpleName();
     private Button backButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_layout);
-
         init();
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +60,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
         try {
             SharedPreferencesUtil.saveComplexity(SettingsActivity.this, chosen);
+            Log.d(LOG_TAG, "complexity changed");
         } catch (Exception e) {
+            Log.e(LOG_TAG, "complexity not changed");
             e.printStackTrace();
         }
     }
@@ -131,8 +134,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
         try {
             SharedPreferencesUtil.saveTheme(SettingsActivity.this, chosen);
+            Log.d(LOG_TAG, "theme chosen");
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e(LOG_TAG, "error in selecting theme");
         }
     }
 }

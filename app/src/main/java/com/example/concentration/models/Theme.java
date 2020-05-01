@@ -1,4 +1,4 @@
-package com.example.concentration.info;
+package com.example.concentration.models;
 
 public class Theme {
     public String[] emojis;
