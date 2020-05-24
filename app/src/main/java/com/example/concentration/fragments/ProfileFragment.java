@@ -46,7 +46,7 @@ public class ProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.d(LOG_TAG, "onCreate");
         String idToken = "922738481147-a328d75if7kk2k0gfbblqrua2fvkk4f9.apps.googleusercontent.com";
-        //String idToken = getString(R.string.default_web_client_id);
+        // String idToken = getString(R.string.default_web_client_id);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(idToken)
                 .requestEmail()

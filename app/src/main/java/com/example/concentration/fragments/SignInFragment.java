@@ -73,7 +73,8 @@ public class SignInFragment extends Fragment {
 
         // GOOGLE
         String idToken = "922738481147-a328d75if7kk2k0gfbblqrua2fvkk4f9.apps.googleusercontent.com";
-        //String idToken = getString(R.string.default_web_client_id);
+        // Так сделано по причине того, что при сборки проекта с github, сыпятся ошибки о соединении с google
+        // String idToken = getString(R.string.default_web_client_id);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(idToken)
                 .requestEmail()
