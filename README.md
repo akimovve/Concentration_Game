@@ -1,6 +1,23 @@
 # Quick Eye Game
-Everyone knows adout the game, where your goal is to match two same cards. So, I decided to create it on Android. Cards will open and close for some time. You have to remember all of them, open one and find the similar to it. Easy and simple.
-## Overview
-In this application besides of game logic, there're some different types of coding things. This game was created because I would like to get acquainted with developing apps for Android using Android Studio in Samsung Academy courses. So, this is my first product which I've created on my own. Check this out.
-## Download
-Here is .apk for you to download the game: [download](app/release/app-release.apk)
+## Введение
+Многие слышали о такой настольной игре, где перед человеком раскладываются карточки рубашкой вверх и периодически начинают открываться. Основная задача игрока - запомнить, где какая карточка находится и найти ей пару.
+
+Исходя из этого я решил создать подобное приложение для смартфона. Помимо того, что это просто игра для хорошего проведения времени, так она ещё очень полезна для людей, которым хочется улучшить реакцию и внимательность.
+
+*Согласитесь, это очень нужные и полезные черты для любого человека, особенно учитывая, что сейчас все мы находимся в практически неподвижном, наименее сконцентрированном состоянии.*
+## О себе
+Меня зовут **Акимов Валерий**, я студент 1-ого курса Российского технологического университета **МИРЭА**. Я прошёл курс мобильной разработки, предоставленный **Samsung IT академией**, по окончании которого реализовал данный проект.
+## Содержание архива
+1. Исходный код приложения
+2. Презентация проекта
+3. Видео, демонстрирующее работоспособность приложения
+4. APK файл приложения
+5. Пояснительная записка
+## Как запустить
+Для запуска приложения нужно открыть папку под названием *Quick-Eye-Game* в **Android Studio** и запустить выполнение программы.
+## Скачать
+Ссылка на **.apk** файл для установки игры: [скачать](https://github.com/akimovve/Quick-Eye-Game/blob/master/app/release/app-release.apk)
+## Полезные ссылки
+Репозиторий на **GitHub**: [github](https://github.com/akimovve/Quick-Eye-Game)
+## Рекомендации
+Для полноценного тестирования приложения рекомендуется запускать его либо на эмуляторе, либо на телефоне через Android Studio, а не путём установки .apk файла.
